@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="Les coneils utiles pour le BateauStop." />
+		<meta name="abstract" content="Les coneils utiles pour le BateauStop." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Les conseils utiles - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Conseils</f:facet>
+			<p>Pour commencer, il est important de consulter la page <s:link view="/static/datesEtLieux_fr.xhtml" value="des
+				dates et lieux de départs" propagation="none" style="margin-left:5px;"/> ainsi que celle concernant <s:link view="/static/diffBateaux_fr.xhtml" value="les différents
+				types de bateaux" propagation="none" style="margin-left:5px;"/>, avant de proposer vos services dans notre bourse
+				aux équipiers.</p>
+			<p>
+				Si vous doutez de pouvoir faire un bon équipier, consultez nos pages
+				sur:
+				<ul>
+					<li><s:link view="/static/compRequises_fr.xhtml" value="les compétences requises" propagation="none" />,</li>
+					<li><s:link view="/static/malDeMer_fr.xhtml" value="le mal de mer" propagation="none" />,</li>
+					<li><s:link view="/static/trouve_fr.xhtml" value="une fois le bateau trouvé" propagation="none" />.</li>
+				</ul>
+			</p>
+
+			<p>
+				Enfin, pensez à réviser vos classiques :
+				<ul>
+					<li><s:link view="/static/noeuds_fr.xhtml" value="les noeuds" propagation="none" />,</li>
+					<li><s:link view="/static/securite_fr.xhtml" value="la sécurité" propagation="none" />,</li>
+					<li><s:link view="/static/lexique_fr.xhtml" value="le lexique" propagation="none" />.</li>
+				</ul>
+			</p>
+		</rich:panel>
+
+	</ui:define>
+
+</ui:composition>

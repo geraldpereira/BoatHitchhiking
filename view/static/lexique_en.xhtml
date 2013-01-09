@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description" content="Le lexique de la voile." />
+		<meta name="abstract" content="Le lexique de la voile." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Le lexique - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<rich:panel>
+			<f:facet name="header">Vocabulaire</f:facet>
+			<p>
+				<ul>
+					<li><b>abattre</b> (EN : To bear away) : éloigner l'axe du
+						bateau du lit du vent.</li>
+					<li><b>accastillage</b> (EN : Deck fitting) : matériel utilisé
+						pour manœuvrer un voilier (poulies, winches, cordages ...).</li>
+					<li><b>affaler</b> (EN : Haul down) : enlever, descendre une
+						voile.</li>
+					<li><b>badord</b> (EN : Port) : côté gauche du bateau en
+						regardant vers l’avant.</li>
+					<li><b>border</b> (EN : To harden sheets, to sheet in, to trim
+						on) : tendre une écoute pour réduire sa longueur et ramener la
+						voile vers le bateau.</li>
+					<li><b>cap</b> (EN : Heading) : direction du voilier par
+						rapport au nord.</li>
+					<li><b>cape (mettre à la)</b> (EN : Heaving to) : allure
+						utilisée en cas de mauvais temps pour limiter les efforts sur le
+						bateau, il faut régler le cap et et l’allure par rapport à la mer
+						et à la houle pour permettre à l'équipage de se reposer ou pour
+						effectuer des travaux.</li>
+					<li><b>choquer</b> (EN : To ease off) : détendre ou relacher
+						une écoute pour augmenter sa longueur et éloigner la voile du
+						bateau.</li>
+					<li><b>dessaler</b> (EN : To capsize) : (utilisé pour les
+						dériveurs) chavirage du bateau dû à une gite trop importante
+						dépassant le point de stabilité.</li>
+					<li><b>empanner</b> (EN : To Gybe) : virer de bord en ayant le
+						vent par l’arrière du bateau.</li>
+					<li><b>étarquer</b> (EN : To harden up) : tendre au maximun
+						une corde ou un bout</li>
+					<li><b>gîter</b> (EN : Heeling) : angle entre l’axe du bateau
+						et l’horizontal.</li>
+					<li><b>hisser</b> (EN : Hoist): monter une voile</li>
+					<li><b>lofer</b> (EN : To luff up) : rapprocher l'axe du
+						bateau du lit du vent</li>
+					<li><b>louvoyer</b> (EN : Tacking) : virer de bord de près en
+						près pour remonter au vent</li>
+					<li><b>mou</b> : expression lorsqu’un bateau a tendance à
+						s'éloigner du vent.</li>
+					<li><b>près (au)</b> (EN : On the wind, close-hauled): allure
+						très rapprochée du vent, elle permet le gain au vent.</li>
+					<li><b>quart</b> (EN : To take the Watch) : faction de temps
+						pendant laquelle une partie de l’’équipage assure la veille et les
+						manoeuvres.</li>
+					<li><b>roulis</b> (EN : Roll) : mouvement oscillatoire
+						transversal du bateau.</li>
+					<li><b>sancir</b> (EN : To pitchpole) : chavirer le bateau par
+						l'avant, la proue s'enfonçant profondément dans l'eau provoquant
+						un retournement complèt. Cela arrive surtout aux dériveurs légers
+						par fort vent arrière.</li>
+					<li><b>tangage</b> (EN : To pitch) : mouvement oscillatoire dû
+						à la houle en mer.</li>
+					<li><b>tribord </b> (EN : Starboard) : côté droit du bateau en
+						regardant vers l’avant.</li>
+					<li><b>virer de bord</b> (EN : To tack) : tourner le bateau
+						pour que le vent arrive de l'autre bord du navire. Le devant du
+						bateau passe face au vent.</li>
+				</ul>
+			</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Bateau</f:facet>
+			<p>
+				<ul>
+					<li><b>barre</b> (EN : Tiller) : partie du gouvernail piloté
+						par le capitaine du navire, elle peut se constituer d’un manche
+						droit relié au safran ou roue à renvoi sur les plus gros bateaux.</li>
+					<li><b>bôme</b> (EN : Boom) :tube perpendiculaire au mât qui
+						tient le bord inférieur de la grand voile.</li>
+					<li><b>bout</b> (EN : Rope) : tout type de cordage sur un
+						bateau.</li>
+					<li><b>cockpit</b> (EN : Cockpit) : espace à l’arrière du
+						voilier où se tient le barreur.</li>
+					<li><b>coque</b> (EN : Hull) : partie inférieur du bateau
+						assurant la flottaison.</li>
+					<li><b>dérive</b> (EN : Drift) : partie immergée dépassant de
+						la coque en profondeur, pouvant être relevée, et destinée à
+						s'opposer aux forces transversales aux allures de près.</li>
+					<li><b>drisse</b> (EN : Halyard) : cordage permettant de
+						hisser les voiles.</li>
+					<li><b>écoute</b> (EN : Sheet) : cordage permettant de régler
+						l'angle d'une voile par rapport au vent.</li>
+					<li><b>étai</b> (EN : Stay, Forestay) : élément du gréement
+						d'un voiler, soutenant le mât sur l'avant.</li>
+					<li><b>gouvernail</b> (EN : Rudder ): dispositif mobile
+						permettant de diriger le voilier.</li>
+					<li><b>hauban</b> (EN : Shroud) : élément du gréement
+						soutenant le mât latéralement et vers l'arrière.</li>
+					<li><b>latte</b> (EN : batten) : Tiges enfilées dans la grand
+						voile permettant de rigidifier le tissu</li>
+					<li><b>mat</b> (EN : Mast ) : tube vertical qui tient les
+						voiles.</li>
+					<li><b>quille</b> (EN : keel) : partie fixe et immergée de la
+						coque sous le bateau, elle joue le role de dérive fixe et de
+						contrepoids à la gîte.</li>
+					<li><b>poupe</b> (EN : Stern) : arrière d’un bateau.</li>
+					<li><b>proue</b> (EN : Bow) : avant d’un bateau.</li>
+					<li><b>safran</b> (EN : Rudder) : partie du gouvernail
+						pivotante et immergée qui permet de changer la direction du
+						navire.</li>
+					<li><b>winch</b> (EN : Winch): treuil manuel ou électrique
+						permettant de régler la tension des écoutes ou des drisses.</li>
+				</ul>
+			</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Voiles</f:facet>
+			<p>
+				<ul>
+					<li><b>foc</b> (EN : Jib) : voile utilisée par grand voile,
+						elle se situe à l’avant du bateau.</li>
+					<li><b>génois</b> (EN : Genoa) : voile utilisée par vent
+						calme, elle est située à l’emplacement du grand foc.voile utilisée
+						par vent calme, elle est située à l’emplacement du grand foc.</li>
+					<li><b>grand voile</b> (EN : Mainsail) : voile principale du
+						voilier, elle est située entre la bôme et le mât.</li>
+					<li><b>spi/spinnaker</b> (EN : Spinnaker) : grande voile très
+						creuse située sur tout l’avant du bateau qui permet d’augmenter la
+						surface de voilure, utilisée par petit vent.</li>
+				</ul>
+			</p>
+		</rich:panel>
+
+
+
+
+	</ui:define>
+
+</ui:composition>

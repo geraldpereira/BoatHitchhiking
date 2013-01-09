@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BateauStop - Vous avez re&#231;u un nouveau message" />
+		<ui:param name="toName" value="#{contactEmailManager.mail.toPseudo}"/>
+		<ui:param name="toMail" value="#{contactEmailManager.mail.toMail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BateauStop"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="fr"/>
+				 	
+		<ui:define name="body">
+			<p>
+			Vous avez re&#231;u un nouveau message sur BateauStop.fr. Pour le lire, veuillez cliquer sur le lien suivant : 
+			</p>
+			<p>
+			<a href="#{proprieteFactory.getBasePath('fr')}messagerie/MPList.seam"><b>Ma bo&#238;te de r&#233;ception</b></a> 
+			</p>		
+		</ui:define>
+</ui:composition>
+
+
+

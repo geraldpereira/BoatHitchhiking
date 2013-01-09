@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+	<description>#{messages['breadcrumbs.bateau.list']}</description>
+
+	<action execute="#{bateauList.setMaxResults(20)}" on-postback="false" />
+	<action execute="#{bateauList.setPagesDisplayed(7)}"
+		on-postback="false" />
+	<action execute="#{bateauList.doFilterResultList()}"
+		on-postback="false" />
+
+	<param name="firstResult" value="#{bateauList.firstResult}" />
+	<param name="sort" value="#{bateauList.orderColumn}" />
+	<param name="dir" value="#{bateauList.orderDirection}" />
+
+	<param name="pseudonyme" value="#{bateauList.filters.pseudonyme}"
+		converter="#{trimConverter}" />
+
+	<param name="nom" value="#{bateauList.filters.nom}" converter="#{trimConverter}" />
+	<param name="marque" value="#{bateauList.filters.marque}"
+		converter="#{trimConverter}" />
+
+	<param name="anneeFrom" value="#{bateauList.filters.anneeFrom}"
+		converter="#{trimConverter}" />
+	<param name="anneeTo" value="#{bateauList.filters.anneeTo}"
+		converter="#{trimConverter}" />
+
+	<param name="tailleFrom" value="#{bateauList.filters.tailleFrom}"
+		converter="#{trimConverter}" />
+	<param name="tailleTo" value="#{bateauList.filters.tailleTo}"
+		converter="#{trimConverter}" />
+
+	<param name="typeCoque" value="#{bateauList.filters.typeCoque}"
+		converter="#{typeCoqueConverter}" />
+	<param name="greement" value="#{bateauList.filters.greement}"
+		converter="#{greementConverter}" />
+
+	<param name="avecPhoto" value="#{bateauList.filters.avecPhoto}"
+		converter="#{bsBooleanConverter}" />
+	<param name="nbCabine" value="#{bateauList.filters.nbCabine}"
+		converter="#{trimConverter}" />
+	<param name="nbSDB" value="#{bateauList.filters.nbSDB}"
+		converter="#{trimConverter}" />
+	<param name="nbWC" value="#{bateauList.filters.nbWC}" converter="#{trimConverter}" />
+	<param name="avecAnnexe" value="#{bateauList.filters.avecAnnexe}"
+		converter="#{bsBooleanConverter}" />
+	<param name="avecEquipement" value="#{bateauList.filters.avecEquipement}"
+		converter="#{bsBooleanConverter}" />
+
+</page>

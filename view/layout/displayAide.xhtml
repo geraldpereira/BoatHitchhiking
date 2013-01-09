@@ -1,0 +1,29 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:rich="http://richfaces.org/rich"
+                 xmlns:s="http://jboss.com/products/seam/taglib">
+
+    <div class="prop">
+    	<span class="nameAndDesc #{labelClass} #{allClass}" >
+         <span class="name">
+            <ui:insert name="label"/>
+        </span>
+		<br/>		
+		</span>
+    
+       
+        <span class="value #{allClass}">
+            <ui:insert/>
+        </span>
+        <span class="aide">
+			<h:graphicImage id="aideImage" value="/img/aide12_bleu.png" style="margin-bottom:-4px;"/>
+			<rich:toolTip for="aideImage" followMouse="true"> <ui:insert name="desc"/></rich:toolTip>
+		</span>
+        <span class="type #{allClass}">
+			<ui:insert name="type"/>
+		</span>
+    </div>
+
+</ui:composition>

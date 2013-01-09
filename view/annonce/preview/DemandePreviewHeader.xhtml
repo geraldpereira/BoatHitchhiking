@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<fc:cachingSet var="_currentURLDecorator" value="#{demandeHelper.escapeURL(annonce.titre)}">
+	<s:div>
+		<s:link id="demandeViewlink" style="float:left;"
+			view="/annonce/Demande.xhtml">
+			<f:param name="demandeNumAnnonce" value="#{annonce.numAnnonce}" />
+			<f:param name="urlDecorator" value="#{_currentURLDecorator}" />
+			<h:outputText value="#{annonce.titre}"/>
+		</s:link>
+		<div style="float: left; margin-left: 10px;">
+			<fc:star
+			id="noteDemande" ratingTitle="#{annonce.note}"
+			value="#{e:getNotePar5(annonce.note)}" minValue="1" maxValue="5" />
+		</div>
+		<s:link id="demandeViewEye" style="float:right;"
+			view="/annonce/Demande.xhtml">
+			<f:param name="demandeNumAnnonce" value="#{annonce.numAnnonce}" />
+			<f:param name="urlDecorator" value="#{_currentURLDecorator}" />
+			<h:graphicImage value="/img/view.png" style="border:0"
+				alt="#{messages['tooltip.view']}" />
+		</s:link>
+		<div style="clear: both;" />
+	</s:div>
+	</fc:cachingSet>
+</ui:composition>

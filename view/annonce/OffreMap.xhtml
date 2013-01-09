@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+	<m:map width="#{mapWidth}" height="#{mapHeight}" autoReshape="true">
+		<m:mapControl name="GLargeMapControl" />
+		<m:mapControl name="GMapTypeControl" />
+		<ui:repeat value="#{escaleManager.escalesOffre}" var="_escale">
+			<m:marker
+				address="#{_escale.lieu.ville} #{_escale.lieu.pays.libelle}">
+				<m:htmlInformationWindow
+					htmlText="#{messages['maps.escale']}#{messages['maps.date']} #{dateFormat.getDateFormattedShort(locale,_escale.date)} #{messages['maps.duree']} #{_escale.duree} #{messages['typeDuree.'.concat(_escale.typeDuree.name())]} #{messages['maps.lieu']} #{_escale.lieu.ville} (#{_escale.lieu.pays.libelle}) #{messages['maps.lieuFin']}" />
+				<m:icon imageURL="../img/drapeauEsc.png"
+				 shadowImageURL="../img/drapeauOmbre.png" />
+			</m:marker>
+		</ui:repeat>
+		<m:marker
+			address="#{offreView.instance.lieuDepart.pays.libelle} #{offreView.instance.lieuDepart.ville}">
+			<m:icon imageURL="../img/drapeauDep.png" 
+				 shadowImageURL="../img/drapeauOmbre.png" />
+			<m:htmlInformationWindow
+				htmlText="#{messages['maps.depart']}#{messages['maps.date']} #{dateFormat.getDateFormattedShort(locale,offreView.instance.dateDebut)} #{messages['maps.lieu']} #{offreView.instance.lieuDepart.ville} (#{offreView.instance.lieuDepart.pays.libelle}) #{messages['maps.lieuFin']}" />
+		</m:marker>
+
+		<m:marker
+			address="#{offreView.instance.lieuArrivee.pays.libelle} #{offreView.instance.lieuArrivee.ville}">
+			<m:htmlInformationWindow
+				htmlText="#{messages['maps.arrivee']}#{messages['maps.date']} #{dateFormat.getDateFormattedShort(locale,offreView.instance.dateFin)} #{messages['maps.lieu']} #{offreView.instance.lieuArrivee.ville} (#{offreView.instance.lieuArrivee.pays.libelle}) #{messages['maps.lieuFin']}" />
+			<m:icon imageURL="../img/drapeauArr.png" 
+				 shadowImageURL="../img/drapeauOmbre.png" />
+		</m:marker>
+
+		<m:polyline lineWidth="5" hexaColor="#FF910C" geodesic="true">
+			<s:fragment rendered="#{offreView.instance.lieuDepart.isRenderableOnMap()}">
+				<m:point latitude="#{offreView.instance.lieuDepart.latitude}"
+					longitude="#{offreView.instance.lieuDepart.longitude}" />
+			</s:fragment>
+			<ui:repeat value="#{escaleManager.escalesOffre}" var="_escale">
+				<s:fragment rendered="#{_escale.lieu.isRenderableOnMap()}">
+					<m:point latitude="#{_escale.lieu.latitude}"
+						longitude="#{_escale.lieu.longitude}" />
+				</s:fragment>
+			</ui:repeat>
+			<s:fragment rendered="#{offreView.instance.lieuArrivee.isRenderableOnMap()}">
+				<m:point latitude="#{offreView.instance.lieuArrivee.latitude}"
+					longitude="#{offreView.instance.lieuArrivee.longitude}" />
+			</s:fragment>
+		</m:polyline>
+	</m:map>
+</ui:composition>
+
+

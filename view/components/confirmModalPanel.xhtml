@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+	<a:region> 
+	<rich:modalPanel id="#{id}" autosized="true" width="#{width}" onbeforeshow="#{onbeforeshow}" onbeforehide="#{onbeforehide}">
+			<f:facet name="header">
+				<ui:insert name="headerMP">
+					<h:outputText value="Modal Panel Title" />
+				</ui:insert>
+			</f:facet>
+			<f:facet name="controls">
+				<ui:insert name="controlsMP"/>
+			</f:facet>
+			<a:form >
+			<div style="text-align:left">
+				<ui:insert name="bodyMP"/>
+			</div>
+			<div style="clear: both"/>
+			<div class="actionButtons">
+					<ui:insert name="actionMP"/>
+					<ui:insert name="annulerMP">
+					<h:commandButton
+						onclick="#{rich:component(id)}.hide();return false;"
+						value="#{messages['bouton.annuler']}" id="annuler"/>
+					</ui:insert>
+			</div>
+			</a:form>
+		</rich:modalPanel>
+	</a:region>
+</ui:composition>
+

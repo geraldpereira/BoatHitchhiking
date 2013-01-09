@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+	
+	<s:decorate template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['annonce.depart']}</ui:define>
+		<s:fragment
+			rendered="#{annonce.lieuDepart != null and annonce.lieuDepart.pays != null}">
+			<h:outputText value="#{messages['global.de']} " />
+			<ui:include src="/LieuPreview.xhtml">
+				<ui:param name="lieu" value="#{annonce.lieuDepart}" />
+			</ui:include>
+		</s:fragment>
+		<s:fragment rendered="#{annonce.dateDebut != null}">
+			<h:outputText value=" #{messages['annonce.depart']} "
+				rendered="#{annonce.lieuDepart == null or annonce.lieuDepart.pays == null}" />
+			<h:outputText value=" #{messages['global.le']} " />
+			<h:outputText value="#{annonce.dateDebut}">
+				<s:convertDateTime dateStyle="short" type="date" />
+			</h:outputText>
+		</s:fragment>
+	</s:decorate>
+	<s:decorate template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['annonce.arrivee']}</ui:define>
+		<s:fragment
+			rendered="#{annonce.lieuArrivee != null and annonce.lieuArrivee.pays != null}">
+			<h:outputText value="#{messages['global.a']} "
+				rendered="#{annonce.lieuArrivee != null}" />
+			<ui:include src="/LieuPreview.xhtml">
+				<ui:param name="lieu" value="#{annonce.lieuArrivee}" />
+			</ui:include>
+		</s:fragment>
+		<s:fragment rendered="#{annonce.dateFin != null}">
+			<h:outputText value=" #{messages['annonce.arrivee']} "
+				rendered="#{annonce.lieuArrivee == null or annonce.lieuArrivee.pays == null}" />
+			<h:outputText value=" #{messages['global.le']} " />
+			<h:outputText value="#{annonce.dateFin}">
+				<s:convertDateTime dateStyle="short" type="date" />
+			</h:outputText>
+		</s:fragment>
+	</s:decorate>
+	<s:decorate template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['annonce.financement']}</ui:define>
+		<h:outputText
+			value="#{messages['typePaiement.'.concat(annonce.contribFin.typePaiement.name())]}" /> ,
+				<h:outputText value="#{annonce.contribFin.montant} " />
+		<h:outputText
+			value="#{messages['monnaie.'.concat(annonce.contribFin.monnaie.idMonnaie)]} (#{annonce.contribFin.monnaie.code})" />
+	</s:decorate>
+
+</ui:composition>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+                
+<m:message xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:m="http://jboss.com/products/seam/mail"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	importance="normal">
+	
+	<m:header name="X-Composed-By" value="BYOB" />
+	<m:from name="#{fromName}" address="#{fromMail}" />
+	<m:replyTo address="#{replyTo}"/>
+	<m:to name="#{toName}">#{toMail}</m:to>
+	<m:subject>#{sujet}</m:subject>
+	<ui:insert name="copy"/>
+	<m:body>
+
+
+		<html>
+
+		<body
+			style="padding: 0; margin: 0; text-align: center; font: 100% arial, helvetica, sans-serif;">
+		<div
+			style="position: relative; margin-left: auto; margin-right: auto; width: 753px; height: 153px;">
+			<a href="#{proprieteFactory.getBasePath(userLocale)}" style="border:0;">			
+			<img src="#{proprieteFactory.getBasePath(userLocale)}img/enteteEmail_#{userLocale}.png" style="border:0;" /></a></div>
+		<div
+			style="	position: relative;	margin-left: auto;	margin-right: auto;border-top:1px solid #BFBA9C; border-left:1px solid #BFBA9C; border-right:1px solid #BFBA9C; width: 751px;	text-align: left; overflow: hidden;">
+				
+		<div
+			style="padding-left: 70px; padding-right: 70px; padding-top: 40px; padding-bottom: 40px; margin-left:3px; margin-right:3px; background-color:white;">
+
+		<ui:insert name="body">This is the default body, specified by the template.</ui:insert>
+		
+		</div>
+		</div>
+		<div
+			style="position: relative;	margin-left: auto;	margin-right: auto;	width: 753px;	height: 55px;">
+			<img src="#{proprieteFactory.getBasePath(userLocale)}img/piedDePageEmail.png" />
+		</div>
+
+		</body>
+		</html>
+	</m:body>
+</m:message>
+
+</ui:composition>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<s:decorate id="marqueField" template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['bateau.modele']}</ui:define>
+		<h:outputText id="marque" value="#{bateau.marque}" />
+	</s:decorate>
+
+	<s:decorate id="anneeField" template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['bateau.annee']}</ui:define>
+		<h:outputText id="annee" value="#{bateau.annee}" />
+	</s:decorate>
+
+	<s:decorate id="tailleField" template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['bateau.taille']}</ui:define>
+		<h:outputText id="taille" value="#{bateau.taille}" />
+		<ui:define name="type">#{messages['bateau.taille.type']}</ui:define>
+	</s:decorate>
+
+	<s:decorate id="coque" template="/layout/display.xhtml" rendered="#{bateau.typeCoque != null}">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['bateau.coque']}</ui:define>
+		<h:outputText id="coqueField"
+			value="#{messages['typeCoque.'.concat(bateau.typeCoque.name())]}" />
+	</s:decorate>
+	
+	<s:decorate id="greement" template="/layout/display.xhtml" rendered="#{bateau.greement != null}">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['bateau.greement']}</ui:define>
+		<h:outputText id="greementField"
+			value="#{messages['greement.'.concat(bateau.greement.name())]}" />
+	</s:decorate>
+
+</ui:composition>
+

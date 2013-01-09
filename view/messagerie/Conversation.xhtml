@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<s:div id="convDiv#{idList}">
+	<h:form>
+	<div class="retour" onclick="hidechargement#{idList}();retourConv#{idList}();" style="float:left;">#{messages['bouton.retour']}</div>
+	<div style="clear: both" />			
+		<rich:dataGrid  value="#{conversationListHandler.messagesCourant}" width="100%"   columnClasses="noPadding"
+			cellpadding="0" cellspacing="0" var="_message" rowKeyVar="indexMsg">
+			<f:facet name="header">
+				<s:span>
+           		<ui:include src="/messagerie/ConversationHeader.xhtml">
+					<ui:param name="conversation" value="#{conversationListHandler.conversationCourante}" />
+				</ui:include>
+				</s:span>          		
+       		</f:facet>
+			
+			<ui:include src="/messagerie/Message.xhtml" />
+		</rich:dataGrid>
+		<s:decorate id="reponse#{idList}Field" template="../layout/editSimple.xhtml">
+			 <rich:editor style="margin-top:5px;" id="reponse#{idList}" required="true" readonly="false" value="#{conversationListHandler.reponse.texte}" useSeamText="true" language="#{locale}" 
+                    width="612" height="250" >
+                   <!--  theme="advanced"  <f:param name="theme_advanced_toolbar_location" value="top"/> -->
+                  	<a:support event="onblur" reRender="reponse#{idList}Field" eventsQueue="conversationQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+                </rich:editor>
+		</s:decorate>
+
+	<div style="clear: both" />			
+	<div style="float:left;" onclick="javascript:showchargement#{idList}();retourConv#{idList}();" class="retour">#{messages['bouton.retour']}</div>
+	<div style="float:right;" onclick="javascript:showchargement#{idList}();supprimerConv#{idList}();" class="supprimer">#{messages['bouton.supprimer']}</div>
+	<div style="float:right;" onclick="javascript:showchargement#{idList}();repondreConv#{idList}();" class="editer">#{messages['bouton.repondre']}</div>	
+	
+	<a:jsFunction name="retourConv#{idList}"
+						ajaxSingle="true" oncomplete="hidechargement#{idList}();"
+						eventsQueue="conversationQueue"
+						reRender="convList#{idList}"
+						action="#{conversationListHandler.resetIndexCourant()}" />
+						
+	<a:jsFunction name="supprimerConv#{idList}"
+						ajaxSingle="true" oncomplete="hidechargement#{idList}();"
+						eventsQueue="conversationQueue"
+						reRender="convList#{idList}"
+						action="#{conversationListHandler.supprimerConversation()}" />
+						
+	<a:jsFunction name="repondreConv#{idList}"
+						ajaxSingle="false" oncomplete="hidechargement#{idList}();"
+						eventsQueue="conversationQueue"
+						reRender="convDiv#{idList}"
+						action="#{conversationListHandler.repondreConversation()}" />					
+	</h:form>
+	</s:div>
+</ui:composition>

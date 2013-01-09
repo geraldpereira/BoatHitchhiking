@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j">
+
+	<s:decorate template="/layout/displayAide.xhtml">
+		<ui:define name="label">#{messages['utilisateur.expGenerale']} </ui:define>
+		<ui:define name="desc">#{messages['global.selectionMultiple']}</ui:define>
+		<h:selectManyListbox id="xpGenerale"
+			value="#{curAnnonceList.filters.xpGenerale}">
+			<s:selectItems value="#{experiencesGenerales}" var="_curXpGenerale"
+				label="#{messages['xpGenerale.'.concat(_curXpGenerale.name())]}"
+				hideNoSelectionLabel="no" />
+			<s:convertEnum />
+		</h:selectManyListbox>
+	</s:decorate>
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['utilisateur.age'].concat(' ').concat(messages['global.entre'])}</ui:define>
+		<rich:inputNumberSpinner inputSize="3" minValue="0" maxValue="150"
+			style="width:60px;" value="#{curAnnonceList.filters.ageFrom}"
+			converter="#{trimConverter}" />
+	</s:decorate>
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">
+			<h:outputText value="#{messages['global.et']}"
+				style="margin-left:10px;" />
+		</ui:define>
+		<rich:inputNumberSpinner inputSize="3" minValue="0" maxValue="150"
+			style="width:60px;" value="#{curAnnonceList.filters.ageTo}"
+			converter="#{trimConverter}" />
+	</s:decorate>
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['utilisateur.sexe']} </ui:define>
+		<h:selectOneMenu id="sexe" value="#{curAnnonceList.filters.sexe}">
+			<s:selectItems value="#{sexes}" var="_curSexe"
+				label="#{messages['sexe.'.concat(_curSexe.name())]}"
+				noSelectionLabel=" " />
+			<s:convertEnum />
+		</h:selectOneMenu>
+	</s:decorate>
+	<s:decorate id="avecPhoto" template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['utilisateur.recherche.avecPhoto']}</ui:define>
+		<h:selectBooleanCheckbox value="#{curAnnonceList.filters.avecPhoto}" />
+	</s:decorate>
+</ui:composition>

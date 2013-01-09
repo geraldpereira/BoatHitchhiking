@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description" content="Les diff&eacute;rents types de bateaux pouvant embarquer un bateau-stoppeur." />
+		<meta name="abstract" content="Les diff&eacute;rents types de bateaux pouvant embarquer un bateau-stoppeur." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Les diff&eacute;rents types de bateaux - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Which kind of boat should I choose for a crossing ?</f:facet>
+			<p>Bateaustop focus on <s:link view="/recherche/BateauList.xhtml" value="sailboats" propagation="none" style="margin-left:5px;"/>. 
+			Indeed, these are the most common crafts.</p>
+			<p>Various reasons lead to publish <s:link view="/recherche/OffreList.xhtml" value="offers" propagation="none" style="margin-left:5px;"/> :</p>
+			<p>
+				- Offers published by amateur sailors<br /> Amateur sailors are most of the time both owners of a 
+				boat and skipper. Travelling is a hobby for them, and they regularly need the help of shipmates 
+				during long or difficult journeys.
+			</p>
+			<p>
+				- Yacht delivery<br /> Some boats'owners ask a skipper to bring their craft in a precise place. 
+				The skipper then employs shipmates to get help for this job. If the shipmates are skilled, 
+				they can be paid for it.
+			</p>
+			<p>
+				- Charters<br /> A charter is a boat rented to several people during a specific period 
+				(which usually lasts a week). These crossings are a way for passengers to spend holidays: 
+				they often take advantage of the fact that a skipper and a steward are on board. Therefore, 
+				you have to pay for this kind of offer. Nevertheless, it's also possible to get hired for 
+				crossings such as these ones (as a waiter, a chef...).
+			</p>
+
+			<p>
+				It's also possible to use motorboats to do a crossing.<br /> 
+				The boats transporting goods only accept the qualified hitchhikers. Nevertheless, sometimes cabins 
+				are specially equipped for passengers, but their cost is around 100&euro; per day! This is therefore 
+				conceivable only for short crossings, and only if you can't find a place or a period when sailboats 
+				are available. Furthermore, it's very rare when motorboats complete long crossings.
+			</p>
+		</rich:panel>
+
+	</ui:define>
+
+
+</ui:composition>

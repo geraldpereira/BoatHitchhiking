@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="1.2"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+
+	<component>
+        <component-type>cachingSet</component-type>
+        <component-class>fr.byob.bs.el.tag.UICachingSet</component-class>
+    </component>
+    
+   <application>
+      <locale-config>
+         <default-locale>en</default-locale>
+         <supported-locale>en</supported-locale>
+         <supported-locale>fr</supported-locale>         
+      </locale-config>
+      <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+   </application>
+    
+<!-- 
+ <lifecycle>
+	     <phase-listener>
+        	org.jboss.seam.jsf.TransactionalSeamPhaseListener
+   		</phase-listener>
+	</lifecycle>  
+ -->
+</faces-config>

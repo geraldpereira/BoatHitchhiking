@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	<ui:define name="meta"><meta name="robots" content="noindex,nofollow"/></ui:define>
+	<ui:define name="title">
+		<title>#{messages['utilisateur.contact.modal.title']} - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="body">
+		<h1>#{messages['utilisateur.contact.modal.title']}</h1>
+		<h:form id="utilisateur">
+			<rich:panel>
+			<f:facet name="header"></f:facet>		
+			
+			<s:decorate id="from"
+				template="../layout/display.xhtml">
+				<ui:define name="label">#{messages['utilisateur.contact.from']}</ui:define>
+				<h:outputText
+					value="#{contactManager.mail.fromPseudo} #{messages['global.inf']}#{contactManager.mail.fromMail}#{messages['global.sup']}" />
+			</s:decorate> <s:decorate id="To" template="../layout/display.xhtml">
+				<ui:define name="label">#{messages['utilisateur.contact.to']}</ui:define>
+				<h:outputText value="#{contactManager.mail.toPseudo}" />
+			</s:decorate> <s:decorate id="titleField" template="../layout/edit.xhtml">
+				<ui:define name="label">#{messages['utilisateur.contact.title']}</ui:define>
+				<h:inputText id="title" required="true"
+					style="width:450px!important;" value="#{contactManager.mail.title}">
+					<a:support event="onblur" reRender="titleField" ajaxSingle="true" eventsQueue="contactQueue" ignoreDupResponses="true"/>
+				</h:inputText>
+			</s:decorate> 
+			<s:decorate id="textField" template="../layout/edit.xhtml">
+				<ui:define name="label">#{messages['utilisateur.contact.text']}</ui:define>
+				 <rich:editor id ="text" required="true" readonly="false" value="#{contactManager.mail.text}" useSeamText="true" language="#{locale}"
+                    width="450" height="300">
+                  	<a:support event="onblur" reRender="textField" ajaxSingle="true" eventsQueue="contactQueue" ignoreDupResponses="true"/>
+                </rich:editor>
+			</s:decorate> <s:decorate id="copyField" template="../layout/edit.xhtml">
+				<ui:define name="label">#{messages['utilisateur.contact.copy']}</ui:define>
+				<h:selectBooleanCheckbox id="copy" value="#{contactManager.mail.copy}"/>
+			</s:decorate>
+			
+			</rich:panel>
+		
+			<div style="clear: both" />
+
+			<div class="actionButtons">
+			
+			<h:commandButton
+				id="send" value="#{messages['bouton.envoyer']}"
+				action="#{contactManager.send()}"/> 
+				
+				
+			<s:button
+				action="terminer"
+				id="cancel" value="#{messages['bouton.annuler']}" />	
+			
+			<!--<s:button id="cancelSend"
+				value="#{messages['bouton.annuler']}"			
+				action="cancel"/> 
+			
+			--></div>		
+				
+			</h:form>
+	</ui:define>
+
+</ui:composition>

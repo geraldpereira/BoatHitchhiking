@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description" content="Une fois le bateau trouvé." />
+		<meta name="abstract" content="Une fois le bateau trouvé." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Une fois le bateau trouvé - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Félicitations !</f:facet>
+			<p>Vous allez vivre de grands moments et partager des expériences
+				hors du commun. La première sortie en bateau-stop est un souvenir
+				impérissable.</p>
+			<p>
+				Avant d’embarquer, veillez à connaître :
+				<ul>
+					<!-- <li><s:link view="/static/dabou.xhtml" value="les techniques de base" propagation="none"/>, </li> -->
+					<li><s:link view="/static/noeuds_fr.xhtml" value="les noeuds" propagation="none"/>,</li>
+					<li><s:link view="/static/lexique_fr.xhtml" value="le vocabulaire" propagation="none"/>,</li>
+					<li><s:link view="/static/securite_fr.xhtml" value="la sécurité" propagation="none"/>.</li>
+				</ul>
+			</p>
+
+			<p>
+				Vous pouvez ensuite préparer votre valise. Concernant l’habillement,
+				veillez à prendre un imperméable suffisamment large pour pouvoir
+				enfiler plusieurs vêtements chauds en dessous.<br /> Multipliez les
+				couches en fonction de la température.<br /> A l’inverse, prévoyez
+				aussi un maillot de bain et de quoi vous protéger du soleil :
+				lunettes , chapeau et crème solaire.
+			</p>
+
+			<p>Des chaussures à semelle blanche antidérapante sont
+				nécessaires pour ne pas marquer ni rayer le sol. Des gants de
+				protection vous éviterons les brûlures dues au frottement des
+				cordages.</p>
+
+			<p>Pour les grandes traversées, des livres et de la musique
+				permettent de passer le temps.</p>
+
+			<p>Enfin les incontournables : une lampe frontale, un couteau, et
+				des médicaments pour <s:link view="/static/malDeMer_fr.xhtml" value="le mal de mer" propagation="none" style="margin-left:5px;"/>.</p>
+			<p>Pour finir, la partie administrative et les vaccins. Votre
+				passeport doit être en règle. Ils vous faudra un visa pour le pays
+				de destination (Renseignez vous auprès de votre consulat ou
+				ambassade).</p>
+		</rich:panel>
+	</ui:define>
+
+</ui:composition>

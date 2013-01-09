@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div id="toggleDiv#{id}"><ui:insert /></div>
+	<div style="clear: both;" />
+	<div id="annonceDivMore#{id}"
+		style="margin-top: 5px;"
+		class="curseurMain morePanel #{moreClass}">
+		<h:graphicImage value="/img/flecheBasPtt.png"
+				alt="" />
+	</div>
+	<div id="annonceDivLess#{id}"
+		class="curseurMain morePanel #{moreClass}">
+		<h:graphicImage value="/img/flecheHautPtt.png"
+				alt="" />
+	</div>
+
+
+	<rich:jQuery selector="#annonceDivMore#{id}"
+		query="click(
+				function(){
+						jQuery('#toggleDiv#{id}').stop(true,true).slideDown('fast');
+						jQuery('#annonceDivMore#{id}').hide();
+						jQuery('#annonceDivLess#{id}').show();
+				});" />
+
+	<rich:jQuery selector="#annonceDivLess#{id}"
+		query="click(
+				function(){
+						jQuery('#annonceDivLess#{id}').hide();
+						jQuery('#annonceDivMore#{id}').show();
+						jQuery('#toggleDiv#{id}').stop(true,true).slideUp('fast');
+				});" />
+
+	<rich:jQuery timing="immediate"
+		selector="#toggleDiv#{id}" query="hide()" />
+
+	<rich:jQuery timing="immediate"
+		selector="#annonceDivLess#{id}" query="hide()" />
+
+</ui:composition>
+
+

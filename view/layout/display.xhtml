@@ -1,0 +1,27 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:s="http://jboss.com/products/seam/taglib">
+
+    <div class="prop">
+    	<span class="nameAndDesc #{labelClass} #{allClass}" >
+         <span class="name">
+            <ui:insert name="label"/>
+        </span>
+		<br/>		
+		<span  class="desc">
+            <ui:insert name="desc"/>            
+        </span >
+		</span>
+    
+       
+        <span class="value #{allClass}">
+            <ui:insert/>
+        </span>
+        <span class="type #{allClass}">
+			<ui:insert name="type"/>
+		</span>
+    </div>
+
+</ui:composition>

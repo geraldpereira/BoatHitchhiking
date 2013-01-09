@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<f:view contentType="text/html" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+	<html>
+	<head>
+	<ui:include src="head.xhtml" />
+
+	<ui:insert name="meta" />
+	<ui:insert name="title">
+		<title>#{messages['meta.title']}</title>
+	</ui:insert>
+	<ui:insert name="head" />
+
+	</head>
+
+	<body>
+	<!-- 	 -->
+	<div id="all">
+	<div id="global">
+	<a id="homeLink" href="#{proprieteFactory.getBasePath()}" />
+	<div id="header" class="header_#{locale.getLanguage().toString()}">
+		<div id="searchBar"><ui:include src="menuRecherche.xhtml" /></div>
+		<div id="navBar"><ui:include src="menuNavigation.xhtml" /></div>
+		<div id="login"><ui:include src="login.xhtml" /></div>
+	</div>
+	<fc:loadingScreen styleClass="loadingCentre" text="#{messages['layout.centre.chargement']}" id="centre" timing="immediate">
+	<div id="center">
+		<div id="content">
+		<ui:include src="breadcrumbs.xhtml" />
+		<ui:insert name="body" />
+		
+		</div>
+		<div id="sidebar">
+			<ui:include src="/layout/aide.xhtml" /> 
+			<div style="height:10px;"/>
+			<ui:include src="/layout/banniere.xhtml"/>
+			<ui:insert name="side" />			
+		</div>
+	</div>
+	</fc:loadingScreen>
+	</div>
+	<div id="footer" style="min-width:100% !important;"><ui:include src="piedDePage.xhtml" /></div>	
+	</div>
+	<a:status onstart="javascript:document.body.style.cursor='wait';"
+		onstop="javascript:document.body.style.cursor='default';" />
+
+	</body>
+	</html>
+</f:view>
+
+
+
+

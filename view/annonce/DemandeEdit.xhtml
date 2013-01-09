@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{demandeEdit.managed ? messages['demande.modifier'] : messages['demande.ajouter']} - #{messages['meta.title']}</title>
+	</ui:define>
+	<ui:define name="side">
+		<s:fragment rendered="#{demandeEdit.managed}">
+			<ui:include src="/note.xhtml">
+  				<ui:param name="id" value="noteDemande" />
+  				<ui:param name="note" value="#{demandeEdit.instance.note}" />
+  				<ui:param name="renderIndications" value="#{identity.loggedIn and utilisateurCourant.pseudonyme.equals(demandeEdit.instance.utilisateur.pseudonyme)}" />
+  				<ui:param name="indications" value="#{demandeHelper.getIndications(demandeEdit.instance)}" />
+			</ui:include>
+		</s:fragment>
+	</ui:define>	
+	<ui:define name="body">
+
+		<h:form id="demande" styleClass="edit">
+			<h1>#{demandeEdit.managed ? messages['demande.modifier'] : messages['demande.ajouter']}
+			</h1>
+			<rich:panel rendered="#{demandeEdit.managed}">
+				<s:decorate id="dateMaj" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['annonce.maj']}</ui:define>
+					<h:outputText value="#{demandeEdit.instance.dateMaj}">
+						<s:convertDateTime dateStyle="medium" type="date" />
+					</h:outputText>
+				</s:decorate>
+				<div style="clear: both" />
+			</rich:panel>
+			<rich:panel>
+				<f:facet name="header">#{messages['annonce.detail']}</f:facet>
+				<ui:include src="../annonce/DemandeEditInner.xhtml">
+						<ui:param name="demande" value="#{demandeEdit.instance}" />
+				</ui:include>
+			</rich:panel>
+				<fc:togglePanel id="annonceAvance" libelle="#{messages['global.avance']}"
+				toggleBean="#{annonceAvance}" toggleClass="avance">
+				<h:panelGrid columns="2" style="width:100%;"  border="0" cellpadding="0" cellspacing="0"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+					<s:decorate id="typeNavList" template="/layout/editAide.xhtml">
+						<ui:define name="label">#{messages['annonce.typeNav']}</ui:define>
+						<ui:define name="desc">#{messages['global.selectionMultiple']}</ui:define>
+						<h:selectManyListbox value="#{demandeEdit.instance.typesNav}"
+							id="typesNav">
+							<s:selectItems value="#{typeNavs}" var="_curTypeNav"
+								label="#{messages['typeNav.'.concat(_curTypeNav.name())]}" />
+							<s:convertEnum/>
+						</h:selectManyListbox>
+					</s:decorate>
+					<s:decorate id="typeCoqueField" template="/layout/edit.xhtml">
+						<ui:define name="label">#{messages['demande.coque']}</ui:define>
+						<h:selectOneMenu id="typeCoque"
+							value="#{demandeEdit.instance.typeCoque}">
+							<s:selectItems value="#{typeCoques}" var="_curTypeCoque"
+								label="#{messages['typeCoque.'.concat(_curTypeCoque.name())]}" noSelectionLabel=" " />
+							<s:convertEnum />
+						</h:selectOneMenu>
+					</s:decorate>
+				</h:panelGrid>
+				<s:decorate id="descriptionField" template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['annonce.description']}</ui:define>
+					<h:inputTextarea id="description" rows="10"
+						style="width:600px!important;"
+						value="#{demandeEdit.instance.description}">
+						<a:support event="onblur" reRender="descriptionField"
+									bypassUpdates="true" ajaxSingle="true" eventsQueue="demandeQueue" ignoreDupResponses="true"/>
+					</h:inputTextarea>
+				</s:decorate>
+				</fc:togglePanel>
+
+			<div style="clear: both"><span class="required">*</span>
+			#{messages['global.champsRequis']}</div>
+
+			<div class="actionButtons">
+			
+			<h:commandButton id="save"
+				value="#{messages['bouton.save']}" action="#{demandeEdit.persist}"
+				rendered="#{!demandeEdit.managed}" />
+
+			<h:commandButton id="update" value="#{messages['bouton.modifier']}"
+				action="#{demandeEdit.update}" rendered="#{demandeEdit.managed}" />
+
+			<h:commandButton id="delete" value="#{messages['bouton.supprimer']}"
+				onclick="#{rich:component('deleteConfirm')}.show();return false;"
+				rendered="#{demandeEdit.managed}" /> 
+
+			<s:button
+				action="terminer"
+				id="cancel" value="#{messages['bouton.annuler']}"/>	
+			</div>
+
+		</h:form>
+
+		<s:fragment rendered="#{demandeEdit.managed}">
+		<fc:confirmModalPanel id="deleteConfirm" width="400">
+		<ui:define name="headerMP">
+			<h:outputText value="#{messages['demande.modalPanelSupprimer.titre']}" />
+		</ui:define>
+		<ui:define name="bodyMP">
+			<p>#{messages['demande.modalPanelSupprimer.texte1']}</p>
+		</ui:define>
+		<ui:define name="actionMP">
+			<h:commandButton id="confirmer" value="#{messages['bouton.confirm']}"
+				action="#{demandeEdit.remove}" />
+		</ui:define>
+	</fc:confirmModalPanel>
+		</s:fragment>
+	</ui:define>
+
+</ui:composition>

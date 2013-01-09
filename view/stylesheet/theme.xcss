@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http:/jsf.exadel.com/template"
+	xmlns:u="http:/jsf.exadel.com/template/util">
+
+	<u:selector name="h1">
+		<u:style name="font-family" skin="generalFamilyFont" />
+		<u:style name="color" skin="tabDisabledTextColor" />
+	</u:selector>
+	<u:selector name="a:active, a:link, a:visited">
+		<u:style name="color" skin="generalLinkColor" />
+	</u:selector>
+	<u:selector name="a:hover">
+		<u:style name="color" skin="hoverLinkColor" />
+	</u:selector>
+	<u:selector name="input[type=text], input[type=password], textarea, select">
+		<u:style name="background-color" skin="controlBackgroundColor" />
+		<u:style name="color" skin="controlTextColor" />
+		<u:style name="background-position" value="left top" />
+		<u:style name="background-repeat" value="repeat-x" />
+		<u:style name="background-image">
+			<f:resource f:key="org.richfaces.renderkit.html.images.SliderFieldGradient" />
+		</u:style>
+		<u:style name="border" value="1px solid" />
+		<u:style name="border-color" skin="tableBorderColor" />
+	</u:selector>
+	<u:selector name="select">
+		<u:style name="background-color" value="transparent" />
+		<u:style name="background-image">
+			<f:resource f:key="org.richfaces.renderkit.html.images.SliderFieldGradient" />
+		</u:style>
+	</u:selector>
+	<u:selector name="option">
+		<u:style name="background-color" skin="generalBackgroundColor" />
+	</u:selector>
+	<u:selector name="select[multiple]">
+		<u:style name="background-color" skin="controlBackgroundColor" />
+	</u:selector>
+	<u:selector name="select[multiple] option">
+		<u:style name="background-color" value="transparent" />
+	</u:selector>
+	<u:selector name="input[type=submit], input[type=button], .pageScoller">
+		<u:style name="padding" value="1px 4px" />
+		<u:style name="background-image">
+			<f:resource f:key="org.richfaces.renderkit.html.GradientA" />
+		</u:style>
+		<u:style name="border" value="1px solid" />
+		<u:style name="border-color" skin="headerBackgroundColor" />
+		<u:style name="color" skin="headerTextColor" />
+		<u:style name="font-weight" value="bold" />
+	</u:selector>
+	<u:selector
+		name="input[type=submit][disabled], input[type=button][disabled]">
+		<u:style name="opacity" value="0.33" />
+		<u:style name="border" value="0" />
+	</u:selector>
+
+	<u:selector name="input[type=text][disabled]">
+		<u:style name="border-width" value="1px" />
+		<u:style name="border-style" value="solid" />
+		<u:style name="border-color" skin="couleur3" />
+		<u:style name="background-image">
+			<f:resource f:key="org.richfaces.renderkit.html.CustomizeableGradient">
+				<f:attribute name="valign" value="top" />
+				<f:attribute name="gradientHeight" value="17px" />
+				<f:attribute name="gradientColor" skin="couleur3_clair" />
+				<f:attribute name="baseColor" value="white" />
+			</f:resource>
+		</u:style>
+	</u:selector>
+
+
+	<!--
+		hack for IE to just get rid of border since it doubles the border if
+		you use one
+	-->
+
+	<u:selector
+		name="* html input[type=submit], * html
+		input[type=button], *+html input[type=submit], *+html
+		input[type=button]">
+		<u:style name="border" value="0" />
+		<u:style name="font-size" value="11px" />
+	</u:selector>
+
+
+
+	<!-- Général -->
+
+	<u:selector name=".smallHeader">
+		<u:style name="border" value="none" />
+		<u:style name="border-bottom" value="0 !important" />
+		<u:style name="background" value="none" />
+		<u:style name="font-size" value="1em !important" />
+		<u:style name="padding" value="2px 3px" />
+		<u:style name="border-color" skin="couleur2" />
+		<u:style name="color" skin="couleur1_fonce" />
+
+	</u:selector>
+
+
+	<u:selector name=".avance">
+		<u:style name="font-size" value="0.9em!important" />
+		<u:style name="text-align" value="right!important" />
+		<u:style name="border" value="none!important" />
+	</u:selector>
+
+
+	<u:selector name=".group a:hover">
+		<u:style name="color" skin="couleur2_imp" />
+	</u:selector>
+
+	<u:selector name="input:focus">
+		<u:style name="border" value="1px solid" />
+		<u:style name="border-color" skin="couleur1_fonce" />
+	</u:selector>
+
+	<u:selector name=".zeroMarge">
+		<u:style name="margin" value="0" />
+		<u:style name="padding" value="0" />
+	</u:selector>
+
+	<u:selector name=".curseurMain">
+		<u:style name="cursor" value="pointer" />
+	</u:selector>
+
+	<u:selector name=".panelGrid-column">
+		<u:style name="vertical-align" value="top" />
+		<u:style name="margin" value="0" />
+	</u:selector>
+
+	<u:selector name=".width100">
+		<u:style name="width" value="100% !important" />
+	</u:selector>
+
+	<u:selector name=".width90">
+		<u:style name="width" value="90% !important" />
+	</u:selector>
+	
+	<u:selector name=".width85">
+		<u:style name="width" value="85% !important" />
+	</u:selector>
+
+	<u:selector name=".width75">
+		<u:style name="width" value="75% !important" />
+	</u:selector>
+	
+	<u:selector name=".width70">
+		<u:style name="width" value="70% !important" />
+	</u:selector>
+
+	<u:selector name=".width60">
+		<u:style name="width" value="60% !important" />
+	</u:selector>
+
+	<u:selector name=".width50">
+		<u:style name="width" value="50% !important" />
+	</u:selector>
+
+	<u:selector name=".width40">
+		<u:style name="width" value="75% !important" />
+	</u:selector>
+
+	<u:selector name=".width30">
+		<u:style name="width" value="75% !important" />
+	</u:selector>
+
+
+	<u:selector name=".width25">
+		<u:style name="width" value="25% !important" />
+	</u:selector>
+
+	<u:selector name=".width15">
+		<u:style name="width" value="15% !important" />
+	</u:selector>
+	
+	<u:selector name=".width10">
+		<u:style name="width" value="10% !important" />
+	</u:selector>
+	
+	<u:selector name=".height16">
+		<u:style name="height" value="16px !important" />
+	</u:selector>
+
+	<u:selector name=".noBorder">
+		<u:style name="border" value="none !important" />
+	</u:selector>
+
+	<u:selector name=".noBackground">
+		<u:style name="background" value="none !important" />
+		<u:style name="background-color" value="none !important" />
+	</u:selector>
+
+	<u:selector name=".noPadding">
+		<u:style name="padding" value="0" />
+	</u:selector>
+	
+	<u:selector
+		name=".retour,.supprimer,.ajouter,.editer, .contact, .demande, .offre, .contactGris, .user, .key, .bateau, .facebook">
+		<u:style name="text-align" value="right" />
+		<u:style name="color" skin="couleur1_fonce" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="text-decoration" value="none" />
+		<u:style name="padding-left" value="17px" />
+		<u:style name="height" value="16px" />
+		<u:style name="cursor" value="pointer" />
+	</u:selector>
+
+	<u:selector
+		name=".retour:hover,.facebook:hover,.supprimer:hover,.ajouter:hover,.editer:hover, .contact:hover, .demande:hover, .offre:hover, .contactGris:hover, .user:hover, .key:hover, .bateau:hover">
+		<u:style name="color" skin="couleur2" />
+	</u:selector>
+	
+	<u:selector name=".retour">
+		<u:style name="background-image">
+			<f:resource f:key="/img/retour.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+	
+	<u:selector name=".facebook">
+		<u:style name="background-image">
+			<f:resource f:key="/img/fb.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".bateau">
+		<u:style name="background-image">
+			<f:resource f:key="/img/bateau.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+
+	<u:selector name=".demande">
+		<u:style name="background-image">
+			<f:resource f:key="/img/demande.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".offre">
+		<u:style name="background-image">
+			<f:resource f:key="/img/offre.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".contactGris">
+		<u:style name="background-image">
+			<f:resource f:key="/img/contact_gris.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".user">
+		<u:style name="background-image">
+			<f:resource f:key="/img/user.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".key">
+		<u:style name="background-image">
+			<f:resource f:key="/img/key.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".supprimer ">
+		<u:style name="background-image">
+			<f:resource f:key="/img/delete.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".contact">
+		<u:style name="background-image">
+			<f:resource f:key="/img/contact.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<u:selector name=".ajouter">
+		<u:style name="background-image">
+			<f:resource f:key="/img/add.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+
+	</u:selector>
+
+	<u:selector name=".editer">
+		<u:style name="background-image">
+			<f:resource f:key="/img/edit.png" />
+		</u:style>
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+
+	<!-- Le pannel d'expérience -->
+	<u:selector name=".xpPanel">
+		<u:style name="border" value="1px solid" />
+		<u:style name="border-color" skin="headerBackgroundColor" />
+		<u:style name="margin" value="3px 3px 3px 3px" />
+	</u:selector>
+
+	<u:selector name=".alignDroite">
+		<u:style name="text-align" value="right" />
+		<u:style name="vertical-align" value="bottom" />
+		<u:style name="float" value="right" />
+	</u:selector>
+
+	<!-- utilisateurPhoto -->
+	<u:selector name=".utilisateurPhoto">
+		<u:style name="float" value="left" />
+		<u:style name="position" value="relative" />
+		<u:style name="width" value="190px" />
+		<u:style name="height" value="190px" />
+	</u:selector>
+
+	<u:selector name=".utilisateurPhoto .image">
+		<u:style name="z-index" value="2" />
+		<u:style name="position" value="absolute" />
+		<u:style name="top" value="0" />
+		<u:style name="left" value="0" />
+		<u:style name="padding-left" value="10px" />
+		<u:style name="padding-top" value="10px" />
+		<u:style name="width" value="180px" />
+		<u:style name="height" value="180px" />
+		<u:style name="background-color" value="white" />
+		<u:style name="border" value="4px solid" />
+		<u:style name="border-color" skin="couleur3_clair" />
+	</u:selector>
+
+	<u:selector name=".utilisateurPhoto .upload">
+		<u:style name="z-index" value="1" />
+		<u:style name="position" value="absolute" />
+		<u:style name="top" value="0" />
+		<u:style name="left" value="0" />
+		<u:style name="padding-left" value="5px" />
+		<u:style name="padding-top" value="5px" />
+		<u:style name="width" value="190px" />
+		<u:style name="height" value="190px" />
+	</u:selector>
+
+
+	<u:selector name=".messageTableVide">
+		<u:style name="font-style" value="italic" />
+	</u:selector>
+
+	<u:selector name=".imageToolTip">
+		<u:style name="padding-left" value="5px" />
+		<u:style name="padding-top" value="5px" />
+		<u:style name="padding-right" value="5px" />
+		<u:style name="padding-bottom" value="5px" />
+		<u:style name="background-color" value="white" />
+		<u:style name="border" value="4px solid" />
+		<u:style name="border-color" skin="couleur3_clair" />
+	</u:selector>
+
+	<!-- Conditions d'utilisation -->
+
+	<u:selector name=".conditionsUtilisation h1">
+		<u:style name="padding-top" value="10px" />
+	</u:selector>
+
+	<u:selector
+		name=".conditionsUtilisation h1, .conditionsUtilisation h2, .conditionsUtilisation h3, .conditionsUtilisation h4, .conditionsUtilisation h5">
+		<u:style name="font-style" value="italic" />
+		<u:style name="color" skin="couleur1_fonce" />
+		<u:style name="text-align" value="left" />
+	</u:selector>
+
+	<!-- UtilisateurList -->
+	<u:selector name=".tooltiped, .titreBleu">
+		<u:style name="font-weight" value="bold" />		
+		<u:style name="text-decoration" value="none !important" />
+		<u:style name="color" skin="couleur1_fonce_imp" />
+	</u:selector>
+
+	<u:selector name=".tooltiped:hover, .titreOrange">
+		<u:style name="font-weight" value="bold" />
+		<u:style name="color" skin="couleur2_imp" />
+	</u:selector>
+
+	<!-- Utilisateur langues -->
+	<u:selector name=".border-south-light">
+		<u:style name="border-bottom-color" skin="couleur1_tres_clair" />
+		<u:style name="border-bottom" value="1px solid" />
+	</u:selector>
+
+
+	<!-- Home -->
+	<u:selector name=".devenir">
+		<u:style name="float" value="left" />
+		<u:style name="position" value="relative" />
+		<u:style name="width" value="260px !important" />
+		<u:style name="height" value="200px !important" />
+	</u:selector>
+
+	<u:selector name=".devenir .skipper">
+		<u:style name="z-index" value="2" />
+		<u:style name="position" value="absolute" />
+		<u:style name="top" value="0" />
+		<u:style name="left" value="0" />
+		<u:style name="width" value="320px !important" />
+		<u:style name="height" value="200px !important" />
+		<u:style name="background-color" value="white" />
+	</u:selector>
+
+	<u:selector name=".devenir .equipier">
+		<u:style name="z-index" value="1" />
+		<u:style name="position" value="absolute" />
+		<u:style name="top" value="0" />
+		<u:style name="left" value="0" />
+		<u:style name="width" value="320px !important" />
+		<u:style name="height" value="200px !important" />
+	</u:selector>
+
+	<u:selector name="ul">
+		<u:style name="list-style-image">
+			<f:resource f:key="/img/flecheListe.png" />
+		</u:style>
+	</u:selector>
+	
+	<u:selector name=".action">
+		<u:style name="width" value="60px" />
+	</u:selector>
+
+	<u:selector name=".actionHeader">
+		<u:style name="color" skin="couleur1_fonce" />
+	</u:selector>
+	
+	<u:selector name=".overflowHidden">
+		<u:style name="color" skin="couleur1_fonce" />
+	</u:selector>
+		
+	<!-- Message -->
+	
+	<u:selector name=".message-header">
+		<u:style name="font-size" value="1em !important" />
+		<u:style name="border" value="none !important" />
+		<u:style name="padding" value="0" />
+		<u:style name="margin" value="0" />
+	</u:selector>
+	
+	<u:selector name=".message-body">
+		<u:style name="color" value="black" />
+		<u:style name="width" value="580px!important" />
+		<u:style name="overflow" value="hidden" />
+	</u:selector>
+	
+	<u:selector name=".groupRss">
+		<u:style name="padding" value="2px" />
+	</u:selector>
+	
+	<!-- sous Titre des panneaux de recherche (offre et demande) -->
+	<u:selector name=".sous-titre">
+		<u:style name="font-weight" value="bold" />
+		<u:style name="float" value="left" />
+		<u:style name="margin-top" value="5px" />
+		<u:style name="width" value="95%" />
+		<u:style name="border-bottom" value="1px solid" />
+		<u:style name="border-color" skin="couleur1_clair" />
+		<u:style name="font-size" value="1.1em !important" />
+		<u:style name="color" skin="couleur1_fonce" />
+	</u:selector>
+	
+	<u:selector
+		name=".couleurOffre">
+		<u:style name="color" skin="couleur2_imp" />
+	</u:selector>
+	
+	<u:selector
+		name=".couleurOffre:hover">
+		<u:style name="color" skin="couleur2_clair_imp" />
+	</u:selector>
+	
+	<!--  -->
+	
+	<u:selector
+		name=".width590">
+		<u:style name="width" value="580px!important" />
+		<u:style name="overflow" value="hidden" />
+	</u:selector>
+	
+	<u:selector
+		name=".width600">
+		<u:style name="width" value="600px!important" />
+		<u:style name="overflow" value="hidden" />
+	</u:selector>
+	
+	<u:selector
+		name=".width300">
+		<u:style name="width" value="290px!important" />
+		<u:style name="overflow" value="hidden" />
+	</u:selector>
+	
+	<!--
+		Define static styles in the CDATA block below (you can also move this
+		block to the top)
+	-->
+	<f:verbatim><![CDATA[
+]]></f:verbatim>
+</f:template>

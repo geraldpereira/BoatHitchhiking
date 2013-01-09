@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<h:form>
+	<s:div styleClass="breadcrumbs">
+		<s:fragment rendered="#{not empty conversationUtils.conversationStack}">
+			<s:link view="/home.xhtml"
+			value="#{messages['layout.entete.accueil']}" propagation="none"/>
+		</s:fragment>		
+		<ui:repeat value="#{conversationUtils.conversationStack}" var="entry">
+			<h:outputText value=" &#62; " />
+			<h:commandLink value="#{entry.description}" action="#{conversationUtils.select(entry)}" rendered="#{not conversationUtils.isCurrentConversation(entry)}"/>
+			<h:outputText value="#{entry.description}" rendered="#{conversationUtils.isCurrentConversation(entry)}"/>
+		</ui:repeat>
+		</s:div>
+	</h:form>
+</ui:composition>

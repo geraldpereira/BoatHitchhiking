@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+	<description>#{messages['breadcrumbs.bateau.view']} #{bateauView.instance.nom}</description>
+	
+	<action execute="#{bateauView.wire}" on-postback="false"/>
+
+	<param name="urlDecorator" value="#{bateauView.urlDecorator}" />
+	<param name="bateauIdBateau" value="#{bateauView.bateauIdBateau}" />
+
+	</page>

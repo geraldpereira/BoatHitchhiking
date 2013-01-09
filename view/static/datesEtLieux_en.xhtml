@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="Les dates et lieux de d&eacute;part en BateauStop." />
+		<meta name="abstract" content="Les dates et lieux de d&eacute;part en BateauStop." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Dates et lieux de d&eacute;part - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Where and when do I have to look for a boat ?</f:facet>
+
+			<p>These are the two most important questions if you wish to find a boat to board.</p>
+			<p>Indeed, for each crossing on a sailboat, the sea currents' directions and the main winds 
+			have to be studied. The sailboats choose their starting points depending on the  most propice 
+			periods and places.</p>
+
+			<p>The following map shows the various places where you can find a sailboat.  Each starting 
+			point is associated with destinations and periods.</p>
+
+			<iframe width="615" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.fr/maps/ms?msa=0&amp;msid=213269559098686121159.0004aaa5bedc534aebcaa&amp;ie=UTF8&amp;ll=4.136827,-119.884958&amp;spn=93.767678,319.794331&amp;vpsrc=6&amp;output=embed"></iframe><br /><small>Display <a href="http://maps.google.fr/maps/ms?msa=0&amp;msid=213269559098686121159.0004aaa5bedc534aebcaa&amp;ie=UTF8&amp;ll=4.136827,-119.884958&amp;spn=93.767678,319.794331&amp;vpsrc=6&amp;source=embed" style="color:#0000FF;text-align:left">CrusingRoutes</a> on a bigger map.</small>
+		
+			<p>Click on a blue indicator to use the map. By doing so, a caption will show the associated destinations and periods (at months intervals).</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">Which direction do I have to choose ?</f:facet>
+			<p>Most of the sailboats are travelling from East to West: this is why it's better to choose this direction.<br/> Nevertheless, it's also possible to do the contrary. If you wish to do so, we advise you to try to cross the Atlantic from Europe or  from Africa, and to cross the Pacific from America.</p>
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header">How long does a crossing usually take ?</f:facet>
+			<p>Although it depends on the time spent to each  stop,  it usually takes between 2 or 3 weeks  
+			to cross the Atlantic, and between 2 and 6 months to cross the Pacific.</p>
+			<p>N.B. : a sailboat approximately moves forward at five  knots speed (9 km/h). Thanks to this 
+			indication, you have the possibility to estimate the time you'll need.<br/> Also, don't forget 
+			to take into account whether or not the boat sails during the night or not.</p>
+		</rich:panel>
+		
+	</ui:define>
+
+</ui:composition>

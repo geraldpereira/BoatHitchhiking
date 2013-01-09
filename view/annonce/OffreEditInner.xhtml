@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+
+	<s:decorate id="titreFieldOffre" style="margin-left:10px;"
+		template="../layout/edit.xhtml">
+		<ui:param name="labelClass" value="small" />
+		<ui:define name="label">#{messages['annonce.titre']}</ui:define>
+		<h:inputText id="titreOffre" required="true"
+			converter="#{majusculeConverter}" value="#{offre.titre}"
+			style="width:470px;">
+			<a:support event="onblur" reRender="titreFieldOffre"  eventsQueue="offreQueue" ignoreDupResponses="true"
+				ajaxSingle="true" />
+		</h:inputText>
+
+	</s:decorate>
+	<div style="clear: both" />
+	<fc:roundedPanel id="depart" titleColor="white"
+		image="../img/round-panel-simple.png">
+		<ui:define name="header">#{messages['annonce.depart']}</ui:define>
+
+		<s:decorate id="dateDebutFieldOffre" template="/layout/edit.xhtml">
+			<ui:param name="labelClass" value="small" />
+			<ui:define name="label">#{messages['annonce.date']}</ui:define>
+			<rich:calendar id="dateDebut" required="true" locale="#{locale}"
+				value="#{offre.dateDebut}"
+				datePattern="#{dateFormat.getDateFormatShort(locale)}">
+				<a:support event="onchanged" reRender="dateDebutFieldOffre" eventsQueue="offreQueue" ignoreDupResponses="true"
+					action="#{annonceHome.validerDateDebut}" ajaxSingle="true" />
+			</rich:calendar>
+		</s:decorate>
+
+
+		<div style="clear: both" />
+		<h:panelGrid columns="2" border="0" cellpadding="0" cellspacing="0"
+			width="100%"
+			columnClasses="panelGrid-column width50,panelGrid-column width50">
+			<ui:include src="../LieuEditInner.xhtml">
+				<ui:param name="idForm" value="offre" />
+				<ui:param name="id" value="offreLieuDep" />
+				<ui:param name="lieuTemplate" value="/layout/edit.xhtml" />
+				<ui:param name="lieuLabelClass" value="small" />
+				<ui:param name="lieuSelectionManager"
+					value="#{annonceHome.lieuDepart.lieuSelectionManager}" />
+			</ui:include>
+
+		</h:panelGrid>
+	</fc:roundedPanel>
+	<fc:roundedPanel id="arrivee" titleColor="white"
+		image="../img/round-panel-simple.png">
+		<ui:define name="header">#{messages['annonce.arrivee']}</ui:define>
+		<s:decorate id="dateFinFieldOffre" template="/layout/edit.xhtml">
+			<ui:param name="labelClass" value="small" />
+			<ui:define name="label">#{messages['annonce.date']}</ui:define>
+			<rich:calendar id="dateFin" required="true" locale="#{locale}"
+				value="#{offre.dateFin}"
+				datePattern="#{dateFormat.getDateFormatShort(locale)}">
+				<a:support event="onchanged" reRender="dateFinFieldOffre" eventsQueue="offreQueue" ignoreDupResponses="true"
+					action="#{annonceHome.validerDateFin}" ajaxSingle="true" />
+			</rich:calendar>
+		</s:decorate>
+		<div style="clear: both" />
+		<h:panelGrid columns="2" border="0" cellpadding="0" cellspacing="0"
+			width="100%"
+			columnClasses="panelGrid-column width50,panelGrid-column width50">
+			<ui:include src="../LieuEditInner.xhtml">
+				<ui:param name="idForm" value="offre" />
+				<ui:param name="id" value="offreLieuArr" />
+				<ui:param name="lieuTemplate" value="/layout/edit.xhtml" />
+				<ui:param name="lieuLabelClass" value="small" />
+				<ui:param name="lieuSelectionManager" 
+					value="#{annonceHome.lieuArrivee.lieuSelectionManager}" />
+			</ui:include>
+		</h:panelGrid>
+	</fc:roundedPanel>
+	<fc:roundedPanel id="financement" titleColor="white"
+		image="../img/round-panel-simple.png">
+		<ui:define name="header">#{messages['annonce.financement']}</ui:define>
+		<s:decorate id="typePaiementFieldOffre" template="/layout/edit.xhtml">
+			<ui:define name="label">#{messages['annonce.modePaiement']}</ui:define>
+			<h:selectOneMenu id="typePaiementOffre"
+				value="#{offre.contribFin.typePaiement}"
+				required="true">
+				<s:selectItems value="#{typePaiements}" var="_curTypePaiements"
+					hideNoSelectionLabel="false" noSelectionLabel=" "
+					label="#{messages[e:concat('typePaiement.',_curTypePaiements.name())]}" />
+				<a:support event="onblur" reRender="typePaiementFieldOffre" eventsQueue="offreQueue" ignoreDupResponses="true"
+					 ajaxSingle="true" />
+			</h:selectOneMenu>
+		</s:decorate>
+		<div style="clear: both" />
+		<h:panelGrid columns="2" style="width:100%;" border="0"
+			cellpadding="0" cellspacing="0"
+			columnClasses="panelGrid-column width50,panelGrid-column width50">
+			<s:decorate id="montantFieldOffre" template="/layout/edit.xhtml">
+				<ui:define name="label">#{messages['annonce.montant']}</ui:define>
+				<rich:inputNumberSpinner id="valeurPaiementOffre" minValue="0"
+					required="true" maxValue="999999" step="1" inputSize="5"
+					style="width:72px;"
+					value="#{offre.contribFin.montant}">
+				</rich:inputNumberSpinner>
+			</s:decorate>
+			<s:decorate id="paiementMonnaieFieldOffre" template="/layout/edit.xhtml">
+				<ui:param name="labelClass" value="small" />
+				<ui:define name="label">#{messages['annonce.monnaie']}</ui:define>
+				<h:selectOneMenu id="paiementMonnaieOffre" style="width:120px;" 
+					value="#{offre.contribFin.monnaie}" required="true">
+					<s:selectItems value="#{monnaies}" var="_curMonnaie" hideNoSelectionLabel="false" noSelectionLabel=" "
+						label="#{messages[e:concat('monnaie.',_curMonnaie.idMonnaie)]} (#{_curMonnaie.code})" />
+					<f:converter converterId="monnaieConverter" />
+					<a:support event="onblur" reRender="paiementMonnaieFieldOffre" eventsQueue="offreQueue" ignoreDupResponses="true"
+						 ajaxSingle="true" />
+				</h:selectOneMenu>
+			</s:decorate>
+		</h:panelGrid>
+	</fc:roundedPanel>	
+</ui:composition>

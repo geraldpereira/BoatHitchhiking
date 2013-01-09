@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+
+	<s:decorate template="/layout/previewPanel.xhtml">
+		<ui:param name="hasPhoto" value="#{bateau.getPhotosBateau() != null and not bateau.getPhotosBateau().isEmpty()}" />
+		<ui:param name="hasDesc" value="#{bateau.getInfo() != null and not bateau.getInfo().isEmpty()}" />
+		<ui:param name="bodyClass" value="width590" />
+		
+		<ui:define name="titre">
+			<ui:include src="/bateau/preview/BateauPreviewHeader.xhtml"/>
+		</ui:define>
+		<ui:define name="infos">
+			<ui:include src="/bateau/preview/BateauPreviewInfos.xhtml"/>
+		</ui:define>
+		<ui:define name="photos">
+			<ui:include src="/bateau/preview/BateauPreviewPhotos.xhtml"/>	
+		</ui:define>
+		<ui:define name="description">
+			<ui:include src="/bateau/preview/BateauPreviewDesc.xhtml"/>		
+		</ui:define>
+	</s:decorate>
+
+</ui:composition>
+

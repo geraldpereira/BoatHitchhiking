@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+
+<suite name="Utilisateur Tests" verbose="2" parallel="false">
+   <test name="UTilisateurCreer Test">
+     <classes>
+       <class name="fr.byob.bs.utilisateur.UtilisateurCreerTest"/>       
+     </classes>
+   </test>	
+</suite>

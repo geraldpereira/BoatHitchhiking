@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BoatHitchhiking - You received a new message" />
+		<ui:param name="toName" value="#{contactEmailManager.mail.toPseudo}"/>
+		<ui:param name="toMail" value="#{contactEmailManager.mail.toMail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BateauStop"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="en"/>
+				 	
+		<ui:define name="body">
+			<p>
+			You received a new message on BoatHitchhiking.com. To read it, please click on the link bellow:
+			</p>
+			<p>
+			<a href="#{proprieteFactory.getBasePath('en')}messagerie/MPList.seam"><b>My inbox</b></a> 
+			</p>
+		</ui:define>
+</ui:composition>
+
+
+

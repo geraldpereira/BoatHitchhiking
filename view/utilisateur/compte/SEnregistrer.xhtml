@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<s:fragment>
+			<title>#{messages['utilisateur.senregistrer']} - #{messages['meta.title']}</title>
+		</s:fragment>
+	</ui:define>
+
+	<ui:define name="side">
+			<fc:roundedPanel id="note" title="#{messages['global.note']}"
+				titleColor="none" imageClass="round-panel-plain">
+				<h:outputText value="#{messages['utilisateur.senregistrer.note.incitation']}" />
+			</fc:roundedPanel>
+	</ui:define>
+
+	<ui:define name="body">
+		<h1>#{messages['utilisateur.senregistrer']}</h1>
+
+		<a:region renderRegionOnly="true">
+			<a:form id="utilisateur" styleClass="edit"
+				enctype="multipart/form-data">
+
+				<rich:panel>
+					<f:facet name="header">#{messages['utilisateur.senregistrer.vous']}</f:facet>
+
+					<s:decorate id="pseudonymeField" template="/layout/edit.xhtml">
+						<ui:define name="label">#{messages['utilisateur.pseudonyme']}</ui:define>
+						<ui:param name="labelClass" value="small" />
+						<h:inputText id="pseudonyme" required="true"
+							value="#{senregistrerManager.utilisateur.pseudonyme}">
+							<a:support event="onblur" reRender="pseudonymeField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+								action="#{senregistrerManager.validerPseudonyme}" ajaxSingle="true" />
+						</h:inputText>
+					</s:decorate>
+
+					<s:decorate id="motDePasseField" template="/layout/edit.xhtml">
+						<ui:define name="label">#{messages['utilisateur.motDePasse']}</ui:define>
+						<ui:param name="labelClass" value="small" />
+						<h:inputSecret id="motDePasse" required="true" redisplay="true"
+							value="#{senregistrerManager.utilisateur.motDePasse}">
+							<a:support event="onblur" reRender="motDePasseField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+								bypassUpdates="true" ajaxSingle="true" />
+						</h:inputSecret>
+					</s:decorate>
+
+					<div style="clear: both;" />
+
+					<h:panelGrid columns="2" style="width:100%;" border="0"
+						cellpadding="0" cellspacing="0"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+						<h:panelGroup>
+							<s:decorate id="nomField" template="/layout/edit.xhtml">
+								<ui:define name="label">#{messages['utilisateur.nom']}</ui:define>
+								<ui:param name="labelClass" value="small" />
+								<h:inputText id="nom" required="true"
+									converter="#{majusculeConverter}"
+									value="#{senregistrerManager.utilisateur.coordonnees.nom}">
+									<a:support event="onblur" reRender="nomField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="true" ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="prenomField" template="/layout/edit.xhtml">
+								<ui:define name="label">#{messages['utilisateur.prenom']}</ui:define>
+								<ui:param name="labelClass" value="small" />
+								<h:inputText id="prenom" required="true"
+									converter="#{majusculeConverter}"
+									value="#{senregistrerManager.utilisateur.coordonnees.prenom}">
+									<a:support event="onblur" reRender="prenomField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="true" ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="mailField" template="/layout/edit.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['utilisateur.mail']}</ui:define>
+								<h:inputText id="mail" required="true"
+									value="#{senregistrerManager.utilisateur.mail}">
+									<a:support event="onblur" reRender="mailField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										ajaxSingle="true" action="#{senregistrerManager.validerMail}" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="mailConfirmField" template="/layout/edit.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['utilisateur.mailConfirm']}</ui:define>
+								<h:inputText id="mailConfirm" redisplay="true" required="true"
+									value="#{senregistrerManager.mailConfirm}">
+									<a:support event="onblur" reRender="mailConfirmField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="telField" template="/layout/edit.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['utilisateur.telephone']}</ui:define>
+								<h:inputText id="tel" required="true"
+									value="#{senregistrerManager.utilisateur.coordonnees.tel}">
+									<a:support event="onblur" reRender="telField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="true" ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup><!-- Nothing here --></h:panelGroup>
+
+						<ui:include src="/LieuEditInner.xhtml">
+								<ui:param name="idForm" value="utilisateur" />
+								<ui:param name="id" value="utilisateur" />
+								<ui:param name="lieuTemplate" value="/layout/edit.xhtml" />
+								<ui:param name="lieuLabelClass" value="small" />
+								<ui:param name="lieuSelectionManager"
+									value="#{lieuHome.lieuSelectionManager}" />
+							</ui:include>
+					</h:panelGrid>
+
+				</rich:panel>
+
+				<div style="clear: both" />
+				<a:region>
+				<rich:panel id="annoncePanel">
+				<f:facet name="header">
+					<s:div>
+						<s:div style="float:left;">
+						<h:outputText value="#{messages['utilisateur.senregistrer.votreAnnonce']}" rendered="#{senregistrerManager.mode == 'None'}"/>
+						<h:outputText value="#{messages['utilisateur.senregistrer.votreDemande']}" rendered="#{senregistrerManager.mode == 'Demande'}" />
+						<h:outputText value="#{messages['utilisateur.senregistrer.votreOffre']}" rendered="#{senregistrerManager.mode == 'Offre'}"/>
+						</s:div>
+						<a:commandLink styleClass="supprimer" style="float:right;" rendered="#{senregistrerManager.mode != 'None'}" action="#{senregistrerManager.setMode('None')}" reRender="annoncePanel" ajaxSingle="true" eventsQueue="utilisateurQueue" onclick="showenregistrer();" oncomplete="hideenregistrer();">#{messages['bouton.annuler']}</a:commandLink>
+						<div style="clear: both" />
+					</s:div>
+				</f:facet>
+				<fc:loadingScreen styleClass="loadingSmallMarron" text="#{messages['layout.centre.chargement']}" id="enregistrer" timing="immediate">
+				<s:fragment rendered="#{senregistrerManager.mode == 'None'}">
+					<h:panelGrid columns="2" style="width:100%;" border="0"
+						cellpadding="5" cellspacing="5"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+						<h:panelGroup>
+							#{messages['utilisateur.senregistrer.ajouterOffre']}<br/>
+							<a:commandLink styleClass="offre" onclick="showenregistrer();" oncomplete="hideenregistrer();" value="#{messages['utilisateur.senregistrer.ajouterOffre.lien']}" action="#{senregistrerManager.setMode('Offre')}" reRender="annoncePanel" ajaxSingle="true" eventsQueue="utilisateurQueue" ignoreDupResponses="true"/>
+						</h:panelGroup>
+						<h:panelGroup>
+							#{messages['utilisateur.senregistrer.ajouterDemande']}<br/>
+							<a:commandLink styleClass="demande" onclick="showenregistrer();" oncomplete="hideenregistrer();" value="#{messages['utilisateur.senregistrer.ajouterDemande.lien']}" action="#{senregistrerManager.setMode('Demande')}" reRender="annoncePanel" ajaxSingle="true" eventsQueue="utilisateurQueue" ignoreDupResponses="true"/>
+						</h:panelGroup>
+					</h:panelGrid>
+				</s:fragment>
+				
+				<s:fragment rendered="#{senregistrerManager.mode == 'Offre'}">
+										
+					<ui:include src="/annonce/OffreEditInner.xhtml">
+						<ui:param name="offre" value="#{senregistrerManager.offre}" />
+					</ui:include>
+					
+					<s:decorate id="descriptionFieldOffre" template="/layout/edit.xhtml">
+						<ui:define name="label">#{messages['annonce.description']}</ui:define>
+						<h:inputTextarea id="descriptionOffre" rows="10"
+							style="width:600px!important;"
+							value="#{senregistrerManager.offre.description}">
+							<a:support event="onblur" reRender="descriptionField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="false" ajaxSingle="true" />
+						</h:inputTextarea>
+					</s:decorate>
+					
+					<div style="clear: both" />
+					
+					<fc:roundedPanel id="bateauRounded" titleColor="white" title="Bateau"
+						imageClass="round-panel-simple">			
+						<ui:include src="/bateau/BateauEditInner.xhtml">
+							<ui:param name="bateau" value="#{senregistrerManager.bateau}" />
+						</ui:include>
+					</fc:roundedPanel>
+				</s:fragment>
+
+				<s:fragment rendered="#{senregistrerManager.mode == 'Demande'}">
+					<ui:include src="/annonce/DemandeEditInner.xhtml">
+								<ui:param name="demande" value="#{senregistrerManager.demande}" />
+					</ui:include>
+					
+					<s:decorate id="descriptionField" template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['annonce.description']}</ui:define>
+					<h:inputTextarea id="description" rows="10"
+						style="width:600px!important;"
+						value="#{senregistrerManager.demande.description}">
+						<a:support event="onblur" reRender="descriptionField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+					</h:inputTextarea>
+				</s:decorate>
+				
+				</s:fragment>
+				</fc:loadingScreen>
+				</rich:panel>
+				</a:region>
+				
+				<div style="clear: both" />
+
+				<rich:panel>
+					<s:decorate id="verifCAPTCHAField" template="/layout/editAide.xhtml">
+						<ui:define name="label">#{messages['global.captcha']}</ui:define>
+						<h:panelGroup>
+								<h:graphicImage id="verifCAPTCHAFImage"
+									value="/seam/resource/captcha" style="margin-bottom:-4px;"/>
+								<h:inputText value="#{captcha.response}" required="true" />
+						</h:panelGroup>	
+						<ui:define name="desc">#{messages['global.captcha.tooltip']}</ui:define>
+					</s:decorate>
+
+
+					<s:decorate id="cndUtilisation" template="/layout/edit.xhtml"	>
+						<ui:define name="label">#{messages['global.conditions']}</ui:define>
+						<h:selectBooleanCheckbox
+							value="#{senregistrerManager.utilisateur.cndUtilisation}" />
+                    #{messages['utilisateur.conditionsCase']}&#160;<h:outputLink
+							value="../../conditionsUtilisation_#{locale.getLanguage().toString()}.seam"
+							target="_blank">#{messages['utilisateur.conditions']}</h:outputLink>.
+				</s:decorate>
+
+				</rich:panel>
+
+				<div style="clear: both"><span class="required">*</span>
+					#{messages['global.champsRequis']}</div>
+					
+				<div class="actionButtons">
+				
+					<h:commandButton id="save"
+					value="#{messages['bouton.save']}"
+					action="#{senregistrerManager.persist}"	/> 
+					
+					<s:button id="cancelAdd"
+					value="#{messages['bouton.annuler']}" propagation="end"
+					view="/#{empty senregistrerFrom ? 'home' : senregistrerFrom}.xhtml" />
+				</div>
+
+			</a:form>
+		</a:region>
+
+	</ui:define>
+</ui:composition>

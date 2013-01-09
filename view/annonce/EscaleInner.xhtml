@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<fc:roundedPanel id="Escale" titleColor="white"
+		imageClass="round-panel-simple">
+		<ui:define name="header">
+			<h:graphicImage value="/img/drapeauEscSmall.png" />
+			#{messages['escale.escales']}</ui:define>
+		<s:div id="escaleOffre">
+			<h:outputText styleClass="messageTableVide"
+				value="#{messages['escale.aucuneEscale']}"
+				rendered="#{empty escaleManager.escalesOffre}" />
+
+			<s:div rendered="#{not empty escaleManager.escalesOffre}">
+
+				<rich:dataTable value="#{escaleManager.escalesOffre}" border="0" width="100%"
+					var="_current" styleClass="noBorder" columnClasses="noBorder"
+					rowKeyVar="_index">
+					<rich:column>
+						<div id="xpTogglePanel#{_index}" style="width:100%">
+						
+						<s:decorate id="dateField#{_index}" template="../layout/display.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['escale.date']}</ui:define>
+								<h:outputText id="date#{_index}" value="#{_current.date}">
+									<s:convertDateTime dateStyle="medium" type="date" />
+								</h:outputText>
+						</s:decorate>
+						<div style="clear: both" />
+						 <h:panelGrid columns="2"  border="0" cellpadding="0" cellspacing="0" width="100%"
+							columnClasses="panelGrid-column width50,panelGrid-column width50">
+							<s:decorate id="dureeField#{_index}"
+								template="../layout/display.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['escale.duree']}</ui:define>
+								<h:outputText id="duree#{_index}" 
+									value="#{_current.duree}" />
+								<ui:define name="type">
+									<h:outputText id="typeDuree#{_index}" 
+									value="#{messages['typeDuree.'.concat(_current.typeDuree.name())]}" />
+								</ui:define>
+							</s:decorate>
+							<h:panelGroup />
+							<s:decorate id="lieuField" template="/layout/display.xhtml">
+								<ui:define name="label">#{messages['escale.lieu']}</ui:define>
+								<ui:param name="labelClass" value="small" />
+								<ui:include src="/LieuPreview.xhtml">
+									<ui:param name="lieu" value="#{_current.lieu}" />
+								</ui:include>
+							</s:decorate>
+						</h:panelGrid>
+
+						<div style="clear: both" />
+						<rich:separator width="100%" height="1px"
+							rendered="#{(escaleManager.escalesOffre.size() -1)!= _index}" />
+
+						</div>
+
+					</rich:column>
+				</rich:dataTable>
+
+			</s:div>
+		</s:div>
+	</fc:roundedPanel>
+	<div style="clear: both" />
+</ui:composition>
+
+

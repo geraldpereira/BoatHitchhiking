@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+	<rich:panel>
+	<s:div id="photoEditInner">
+	<div id="utilisateurPhoto" class="utilisateurPhoto">
+	<div id="utilisateurImage" class="image">
+	<h:panelGroup id="info">
+		<h:graphicImage
+						width="170px" height="170px" value="/img/inconnu.png"
+						rendered="#{!photoToolTipManager.hasPhoto(utilisateurPhotoManager.photoUtilisateur)}" />
+		<h:graphicImage width="170px" height="170px"
+						url="#{utilisateurPhotoManager.photoUtilisateur.fullPath}"
+						rendered="#{photoToolTipManager.hasPhoto(utilisateurPhotoManager.photoUtilisateur)}" />
+		<!-- <h:graphicImage width="170px" height="170px" 
+					url="#{utilisateurPhotoManager.photoUtilisateur.fullPath}" /> -->
+	</h:panelGroup>
+	</div>
+	<div class="upload">
+	<rich:fileUpload listWidth="186"
+		listHeight="130" fileUploadListener="#{utilisateurPhotoManager.listener}"
+		maxFilesQuantity="1" autoclear="true" id="upload" ajaxSingle="true" onupload="showcentre();" onuploadcanceled="hidecentre();"
+		immediateUpload="true" acceptedTypes="jpg, gif, png, bmp"
+		allowFlash="false" onsizerejected="alert('#{messages['fichier.taille']}');"
+					ontyperejected="alert('#{messages['fichier.type']}');"
+		addControlLabel="#{utilisateurPhotoManager.photoUtilisateur == null ? messages['bouton.ajouter'] : messages['bouton.modifier']}" >
+		<a:support event="onuploadcomplete" oncomplete="hidecentre();" reRender="photoEditInner" ajaxSingle="true" eventsQueue="utilisateurQueue" ignoreDupResponses="true" requestDelay="300"/>
+	</rich:fileUpload>
+	<a:commandLink action="#{utilisateurPhotoManager.supprimerPhotoUtilisateur}" styleClass="supprimer" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+			reRender="photoEditInner" value="#{messages['bouton.supprimer']}"
+			rendered="#{utilisateurPhotoManager.photoUtilisateur != null}" ajaxSingle="true" />
+			
+		
+	</div>
+	</div>
+	<rich:jQuery selector="#utilisateurPhoto" query="hover( function(){ jQuery('#utilisateurImage').stop(true,true).fadeOut('def');},function(){jQuery('#utilisateurImage').stop(true,true).fadeIn('def');})"/>
+	</s:div>
+	</rich:panel>
+</ui:composition>

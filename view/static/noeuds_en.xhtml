@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description" content="Les noeuds marins." />
+		<meta name="abstract" content="Les noeuds marins." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Les noeuds marins - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Le noeud simple</f:facet>
+			<p>
+				<h:graphicImage value="/img/NoeudSimple1.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/NoeudSimple2.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/NoeudSimple3.png"
+					style="margin:5px 5px 5px 5px;" />
+			</p>
+			<p>Ce noeud courant sert de base pour tous les autres noeuds. Il
+				est difficile à défaire sous tension.</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">Le noeud en huit</f:facet>
+			<p>
+				<h:graphicImage value="/img/Noeud8_1.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/Noeud8_2.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/Noeud8_3.png"
+					style="margin:5px 5px 5px 5px;" />
+			</p>
+			<p>Ce noeud est facile à faire. Plus facile à dénouer sous
+				tension que le noeud simple, il est aussi plus gros que ce dernier.
+				Il présente donc moins de risque de glisser autour d'un taquet, ou
+				de passer a travers d'une poulie.</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">Le noeud de chaise</f:facet>
+			<p>
+				<h:graphicImage value="/img/NoeudChaise1.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/NoeudChaise2.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/NoeudChaise3.png"
+					style="margin:5px 5px 5px 5px;" />
+			</p>
+			<p>Facile à faire et défaire, ce noeud est très courant sur un
+				bateau.</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">Le tour mort et deux demi clés</f:facet>
+			<p>
+				<h:graphicImage value="/img/DemiCle1.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/DemiCle2.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/DemiCle3.png"
+					style="margin:5px 5px 5px 5px;" />
+			</p>
+			<p>
+				Ce noeud permet de fixer un cordage de manière temporaire sur un
+				objet fixe.<br /> Si le cordage doit être sous tension, ajouter le
+				frottement d’un ou deux tours morts autour de l’objet fixe avant de
+				faire les demi-clés.
+			</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">Le noeud de chaise</f:facet>
+			<p>
+				<h:graphicImage value="/img/cabestan2.png"
+					style="margin:5px 5px 5px 5px;" />
+				<h:graphicImage value="/img/cabestan3.png"
+					style="margin:5px 5px 5px 5px;" />
+			</p>
+			<p>Il doit être noué autour de quelque chose. Pratique pour
+				attacher les défences (pares batages), ce noeud est très difficile à
+				défaire sous tension (contrairement au tour mort ci-dessus).</p>
+		</rich:panel>
+
+	</ui:define>
+
+
+</ui:composition>

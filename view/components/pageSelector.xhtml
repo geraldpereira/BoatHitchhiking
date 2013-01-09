@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<h:panelGrid id="#{id}PageSelector" columns="3"  border="0" cellpadding="0" cellspacing="0" width="100%" rendered="#{entityList.pageCount > 1}" styleClass="pageSelector" columnClasses="pageSelectorLeftCol,pageSelectorCenterCol,pageSelectorRightCol">
+		<h:panelGroup>
+        <s:link view="#{view}" styleClass="item leftItem #{entityList.previousExists ? '' : 'borderItem-disabled'}" 
+            disabled="#{!entityList.previousExists}"
+               value="|#{messages.left}" 
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        <s:link view="#{view}" styleClass="item leftItem #{entityList.previousExists ? '' : 'borderItem-disabled'}" 
+            disabled="#{!entityList.previousExists}"
+               value="#{messages.left}#{messages.left}" 
+                  id="previousFastPage">
+            <f:param name="firstResult"
+                    value="#{entityList.prevFastResult}"/>
+        </s:link>
+        <s:link view="#{view}" styleClass="item leftItem #{entityList.previousExists ? '' : 'borderItem-disabled'}" 
+            disabled="#{!entityList.previousExists}" 
+               value="#{messages.left}"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{entityList.previousFirstResult}"/>
+        </s:link>
+		</h:panelGroup>
+		<h:panelGroup>
+		<ui:repeat value="#{entityList.pagesIntegerTab}" var="_pageNumber">
+			<s:link view="#{view}" styleClass="centralItem #{entityList.isCurrentPage(_pageNumber) ? 'centralItem-selected' : ''}" 
+               value="#{_pageNumber}" disabled="#{entityList.isCurrentPage(_pageNumber)}"
+                  id="#{_pageNumber}Page">
+            <f:param name="firstResult"
+                    value="#{_pageNumber*entityList.maxResults}"/>
+        </s:link>
+		</ui:repeat>
+		</h:panelGroup>
+		<h:panelGroup>
+          <s:link view="#{view}" styleClass="item rightItem #{entityList.nextExists ? '' : 'borderItem-disabled'}" 
+            disabled="#{!entityList.nextExists}"
+               value="#{messages.right}|"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{entityList.lastFirstResult}"/>
+        </s:link>
+        <s:link view="#{view}" styleClass="item rightItem #{entityList.nextExists ? '' : 'borderItem-disabled'}" 
+            disabled="#{!entityList.nextExists}" 
+               value="#{messages.right}#{messages.right}"
+                  id="nextFastPage">
+            <f:param name="firstResult"
+                    value="#{entityList.nextFastResult}"/>
+        </s:link>
+     	<s:link view="#{view}" styleClass="item rightItem #{entityList.nextExists ? '' : 'borderItem-disabled'}" 
+            disabled="#{!entityList.nextExists}" 
+               value="#{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{entityList.nextFirstResult}"/>
+        </s:link>
+        </h:panelGroup>
+	</h:panelGrid>
+</ui:composition>

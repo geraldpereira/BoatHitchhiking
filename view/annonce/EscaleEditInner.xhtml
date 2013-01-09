@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+	<fc:loadingScreen styleClass="loadingSmallMarron" text="#{messages['layout.centre.chargement']}" id="escale" timing="immediate">
+	<fc:roundedPanel id="Escale" title="#{messages['escale.escales']}" titleColor="white"
+		imageClass="round-panel-simple">
+		<s:div id="escaleOffre">
+			<h:outputText styleClass="messageTableVide"
+				value="#{messages['escale.aucuneEscale']}"
+				rendered="#{empty escaleManager.escalesOffre}" />
+
+			<s:div rendered="#{not empty escaleManager.escalesOffre}">
+
+				<rich:dataTable value="#{escaleManager.escalesOffre}" border="0"
+					var="_current" styleClass="noBorder" columnClasses="noBorder" width="100%"
+					rowKeyVar="_index">
+					<rich:column>
+						<div id="xpTogglePanel#{_index}"><h:panelGrid columns="2"
+							 border="0" cellpadding="0" cellspacing="0" width="100%"
+							columnClasses="panelGrid-column width90,panelGrid-column width10">
+							<s:decorate id="dateField#{_index}" template="../layout/editAide.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['escale.date']}</ui:define>
+								<rich:calendar id="date" locale="#{locale}" required="true"
+									value="#{_current.date}"
+									datePattern="#{dateFormat.getDateFormatShort(locale)}">
+										<a:support event="onchanged" reRender="dateField" bypassUpdates="false" ajaxSingle="true" 
+										eventsQueue="offreQueue" ignoreDupResponses="true" />
+									</rich:calendar>
+									<ui:define name="desc">#{messages['global.tooltip.calendar']}</ui:define>
+							</s:decorate>
+							<h:panelGroup>
+								<a:commandLink action="#{escaleManager.supprimerEscale(_index)}" eventsQueue="deleteStopoverQueue" ignoreDupResponses="true"
+									styleClass="supprimer" reRender="escaleOffre" onclick="showescale();" oncomplete="hideescale();"
+									value="#{messages['bouton.supprimer']}" ajaxSingle="true" />
+
+							</h:panelGroup>
+						</h:panelGrid> <h:panelGrid columns="2"  border="0" cellpadding="0" cellspacing="0" width="100%"
+							columnClasses="panelGrid-column width50,panelGrid-column width50">
+							
+							<s:decorate id="dureeField#{_index}"
+								template="../layout/edit.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['escale.duree']}</ui:define>
+								<rich:inputNumberSpinner id="valeurDuree#{_index}" minValue="0"
+									maxValue="10000" step="1" inputSize="5" style="width:72px;"
+									required="true" value="#{_current.duree}">
+									<a:support requestDelay="500" event="onchange" reRender="dureeField" eventsQueue="offreQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="true" />	
+								</rich:inputNumberSpinner>
+								<ui:define name="type">
+									<h:selectOneMenu id="typeDuree#{_index}" style="width:60px;"
+										value="#{_current.typeDuree}" required="true">
+										<s:selectItems value="#{typeDurees}" var="_curTypeDuree"
+											label="#{messages['typeDuree.'.concat(_curTypeDuree.name())]}"
+											hideNoSelectionLabel="#{messages['escale.escaleInner.selectTypeDuree']}" />
+										<s:convertEnum />
+									</h:selectOneMenu>
+								</ui:define>
+							</s:decorate>
+							<h:panelGroup />
+							<ui:include src="../LieuEditInner.xhtml">
+								<ui:param name="idForm" value="offreEdit" />
+								<ui:param name="id" value="escaleLieu" />
+								<ui:param name="lieuTemplate" value="/layout/edit.xhtml" />
+								<ui:param name="lieuLabelClass" value="small" />
+								<ui:param name="lieuSelectionManager"
+									value="#{escaleManager.getEscalesLieuHome().get(_index).lieuSelectionManager}" />
+							</ui:include>
+						</h:panelGrid>
+
+						<div style="clear: both" />
+						<rich:separator width="100%" height="1px"
+							rendered="#{(escaleManager.escalesOffre.size() -1)!= _index}" />
+
+						</div>
+
+					</rich:column>
+				</rich:dataTable>
+
+			</s:div>
+		</s:div>
+		<ui:define name="footer">
+			<a:commandLink action="#{escaleManager.ajouterEscale()}" eventsQueue="offreQueue" ignoreDupResponses="true"
+				styleClass="ajouter" reRender="escaleOffre"  onclick="showescale();" oncomplete="hideescale();"
+				value="#{messages['escale.ajouterEscale']}"
+				ajaxSingle="true" />
+		</ui:define>
+	</fc:roundedPanel>
+	</fc:loadingScreen>
+	<div style="clear: both" />
+</ui:composition>

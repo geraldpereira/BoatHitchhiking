@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<fc:cachingSet var="_indications" value="#{indications}">
+	<fc:roundedPanel id="#{id}Rounded" title="#{messages['global.note']}"
+		titleColor="none" imageClass="round-panel-plain">
+		<fc:star id="#{id}Star" ratingTitle="#{note}"
+			value="#{e:getNotePar5(note)}" minValue="1"
+			maxValue="5" />
+		<s:div
+			rendered="#{renderIndications == true and _indications.size > 0}"
+			style="margin-top:6px;">
+			<h:outputText value="#{messages['note.aug']}" />
+			<ul>
+				<ui:repeat
+					value="#{_indications}"
+					var="_indication">
+					<li><h:outputText value="#{_indication}" /></li>
+				</ui:repeat>
+			</ul>
+		</s:div>
+	</fc:roundedPanel>
+	</fc:cachingSet>
+</ui:composition>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http:/jsf.exadel.com/template"
+	xmlns:u="http:/jsf.exadel.com/template/util">
+
+	<!-- Custom Richfaces -->
+	
+	<u:selector name=".rich-panel,.rich-stglpanel">
+		<u:style name="border" value="none !important" />
+		<u:style name="color" skin="couleur1_fonce" />
+		<u:style name="background" value="none !important" />
+		<u:style name="background-color" value="none !important" />
+	</u:selector>
+
+	<u:selector name=".rich-panel-header,.rich-stglpanel-header">
+		<u:style name="border" value="none" />
+		<u:style name="border-bottom" value="1px solid" />
+		<u:style name="background" value="none" />
+		<u:style name="font-size" value="1.1em" />
+		<u:style name="padding" value="2px 3px" />
+		<u:style name="border-color" skin="couleur2" />
+		<u:style name="color" skin="couleur1_fonce" />
+	</u:selector>
+
+	<u:selector name=".rich-stglpanel-body">
+		<u:style name="overflow" value="auto" />
+	</u:selector>
+
+	<u:selector name=".rich-toolbar">
+		<u:style name="border" value="none" />
+		<u:style name="background" value="none" />
+	</u:selector>
+
+<!--  rich-toolbar-item-->
+
+	<u:selector name="a img">
+		<u:style name="border" value="none" />
+	</u:selector>
+
+	<u:selector name="h1">
+		<u:style name="font-size" value="1.6em" />
+		<u:style name="margin-top" value="0" />
+		<u:style name="text-align" value="center" />
+		<u:style name="color" skin="couleur1_fonce" />
+	</u:selector>
+
+
+	<u:selector name="input[type=submit],input[type=button]">
+		<u:style name="font-size" value="10px" />
+		<u:style name="margin" value="5px 5px 5px 0" />
+		<u:style name="cursor" value="pointer" />
+	</u:selector>
+
+
+	<u:selector name="input[type=text],input[type=password],textarea">
+		<u:style name="font-size" value="11px" />
+		<u:style name="padding-left" value="1px" />
+	</u:selector>
+
+	<u:selector name=".columnHeader:hover">
+		<u:style name="color" skin="couleur2" />
+	</u:selector>
+
+	<u:selector name=".message">
+		<u:style name="padding" value="5px" />
+		<u:style name="list-style" value="none" />
+		<u:style name="border" value="0" />
+		<u:style name="background" value="none" />
+		<u:style name="padding" value="0" />
+		<u:style name="color" value="#000000" />
+		<u:style name="margin" value="5px 0 8px 0" />
+		<u:style name="font-size" value="12px" />
+	</u:selector>
+
+	<u:selector name=".message li">
+		<u:style name="background" value="no-repeat left center" />
+		<u:style name="padding-top" value="1px" />
+		<u:style name="padding-left" value="20px" />
+		<u:style name="margin-left" value="3px" />
+	</u:selector>
+
+	<u:selector name=".message li.infomsg">
+		<u:style name="background-image">
+			<f:resource f:key="/img/msginfo.png" />
+		</u:style>
+	</u:selector>
+
+	<u:selector name=".message li.errormsg ">
+		<u:style name="background-image">
+			<f:resource f:key="/img/msgerror.png" />
+		</u:style>
+	</u:selector>
+
+	<u:selector name=".message li.warnmsg">
+		<u:style name="background-image">
+			<f:resource f:key="/img/msgwarn.png" />
+		</u:style>
+	</u:selector>
+	<!-- 
+	<u:selector name=".prop">
+		<u:style name="border" value="1px solid black" />
+		<u:style name="height" value="100%" />
+	</u:selector>
+	
+	
+	
+	 -->
+
+	<u:selector name=".nameAndDesc">
+		<u:style name="vertical-align" value="top" />
+		<u:style name="width" value="115px" />
+		<u:style name="float" value="left" />
+		<u:style name="padding" value="5px" />
+		<u:style name="margin-top" value="3px" />
+		<u:style name="clear" value="left" />
+	</u:selector>
+
+	<u:selector name=".name">
+		<u:style name="font-weight" value="bold" />
+	</u:selector>
+	
+	<u:selector name=".desc">
+		<u:style name="font-size" value="0.7em" />
+		<u:style name="font-style" value="italic" />
+	</u:selector>
+	
+	<u:selector name=".title">
+		<u:style name="vertical-align" value="top" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="float" value="left" />
+		<u:style name="padding" value="5px" />
+		<u:style name="margin-top" value="3px" />
+		<u:style name="font-size" value="1.1em !important" />
+		<u:style name="color" skin="couleur1_fonce" />
+		<u:style name="clear" value="left" />
+		<u:style name="border-bottom" value="0px" />
+	</u:selector>
+	
+	<!-- Pour les libelles en edition -->
+	<u:selector name=".smallInfos">
+		<u:style name="padding-top" value="0px !important" />
+		<u:style name="padding-bottom" value="0px !important" />
+	</u:selector>
+	
+	<u:selector name=".small">
+		<u:style name="width" value="80px !important" />
+	</u:selector>
+
+	<u:selector name=".large ">
+		<u:style name="width" value="180px !important" />
+	</u:selector>
+
+	<u:selector name=".value">
+		<u:style name="float" value="left" />
+		<u:style name="padding" value="5px" />
+	</u:selector>
+
+	<u:selector name=".type">
+		<u:style name="vertical-align" value="top" />
+		<u:style name="float" value="left" />
+		<u:style name="padding" value="5px" />
+	</u:selector>
+
+	<u:selector name=".error">
+		<u:style name="float" value="left" />
+		<u:style name="padding" value="5px" />
+	</u:selector>
+
+	<u:selector name=".errors">
+		<u:style name="color" skin="couleur_erreur" />
+		<u:style name="vertical-align" value="middle" />
+	</u:selector>
+
+	<u:selector name="img.errors">
+		<u:style name="padding-right" value="5px" />
+	</u:selector>
+
+	<u:selector name=".errors input,.errors textarea">
+		<u:style name="border" value="1px solid !important" />
+		<u:style name="border-color" skin="couleur_erreur_imp" />
+	</u:selector>
+
+	<u:selector name=".required">
+		<u:style name="color" skin="couleur2" />
+		<u:style name="padding-left" value="2px" />
+	</u:selector>
+	
+	<u:selector name=".aide">
+		<u:style name="vertical-align" value="top" />
+		<u:style name="float" value="left" />
+		<u:style name="padding" value="5px" />
+	</u:selector>
+
+	<u:selector
+		name=".rich-panel input[type=submit],.rich-panel input[type=button],.rich-tabpanel input[type=submit],.rich-tabpanel input[type=button]">
+		<u:style name="margin-bottom" value="0" />
+	</u:selector>
+
+
+	<u:selector name=".actionButtons">
+		<u:style name="width" value="100%" />
+		<u:style name="margin-left" value="auto !important" />
+		<u:style name="margin-right" value="auto !important" />
+		<u:style name="text-align" value="center" />
+	</u:selector>
+
+	<u:selector name=".actionButtons select">
+		<u:style name="margin" value="5px 5px 5px 0" />
+		<u:style name="vertical-align" value="bottom" />
+	</u:selector>
+
+	<u:selector name="div.info">
+		<u:style name="font-size" value="1.2em" />
+	</u:selector>
+<!-- 
+	<u:selector name=".rich-datalist">
+		<u:style name="list-style" value="none" />
+	</u:selector> -->
+
+	<u:selector name="td.action">
+		<u:style name="text-align" value="center" />
+		<u:style name="width" value="8em" />
+		<u:style name="white-space" value="nowrap" />
+	</u:selector>
+
+	<u:selector name="td.action a">
+		<u:style name="padding-left" value="1px" />
+		<u:style name="padding-right" value="1px" />
+	</u:selector>
+
+	<!-- Le supa tab pannel -->
+
+	<u:selector name=".rich-tabpanel, .rich-tabpanel-content">
+		<u:style name="border" value="none !important" />
+	</u:selector>
+
+	<u:selector name=".rich-tab-bottom-line">
+		<u:style name="border-color" skin="couleur2" />
+		<u:style name="background" value="none !important" />
+	</u:selector>
+
+	<u:selector name=".rich-tabhdr-side-cell">
+		<u:style name="border-color" skin="couleur2" />
+		<u:style name="background" value="grey !important" />
+	</u:selector>
+
+	<u:selector name=".rich-tabhdr-side-border">
+		<u:style name="border-color" value="green !important" />
+		<u:style name="background" skin="couleur2" />
+	</u:selector>
+
+
+	<u:selector name=".rich-tab-header">
+		<u:style name="color" skin="couleur1_fonce" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="font-size" value="1.1em" />
+		<u:style name="background-color" value="white !important" />
+	</u:selector>
+
+	<u:selector name=".tabCellInactive">
+		<u:style name="font-color" value="white !important" />
+		<u:style name="background-image" value="none !important" />
+		<u:style name="cursor" value="pointer" />
+	</u:selector>
+
+	<!-- Les separateurs -->
+	
+	<u:selector name=".rich-separator">
+		<u:style name="background-image" value="none !important" />
+		<u:style name="background-color" skin="couleur1_tres_clair" />
+		<u:style name="width" value="100%" />		
+		<u:style name="height" value="1px" />
+		<u:style name="margin-top" value="5px" />
+		<u:style name="margin-bottom" value="10px" />
+	</u:selector>
+	
+	<!-- <u:selector name=".rich-table-header, .rich-table-header-continue">
+		<u:style name="background-image" value="none !important" />
+		<u:style name="background-color" skin="couleur1_tres_clair" />
+	</u:selector> -->
+	
+	<u:selector name=".rich-menu-item-hover">
+		<u:style name="border" value="none !important" />
+		<u:style name="margin" value="1px !important" />
+		<u:style name="background" value="none !important" />
+		<u:style name="color" skin="couleur2_imp" />
+	</u:selector>
+	<u:selector name=".rich-menu-item">
+		<u:style name="color" skin="couleur1_fonce" />
+		<u:style name="font-weight" value="bold" />		
+	</u:selector>
+	
+	<!--
+		Define static styles in the CDATA block below (you can also move this
+		block to the top)
+	-->
+	<f:verbatim><![CDATA[
+]]></f:verbatim>
+</f:template>

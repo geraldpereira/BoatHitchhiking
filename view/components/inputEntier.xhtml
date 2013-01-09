@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<h:panelGrid columns="3" border="0" cellpadding="0" cellspacing="0"> 
+		<h:graphicImage id="#{id}CommandMoins" value="/img/moins.gif"	alt="-" styleClass="curseurMain"/>
+		<h:inputText id="#{id}" value="#{value}"
+			maxlength="#{length != null ? length : 3}"
+			size="#{length != null ? length : 3}">
+			<ui:insert />
+		</h:inputText>
+		<h:graphicImage id="#{id}CommandPlus" value="/img/plus.gif" alt="+" styleClass="curseurMain"/>
+	</h:panelGrid>
+
+	<rich:jQuery timing="immediate" selector="##{id}CommandPlus"
+		query="click(function(){incrementeInput()})" />
+
+	<rich:jQuery timing="immediate" selector="##{id}CommandMoins"
+		query="click(function(){decrementeInput()})" />
+
+	<rich:jQuery timing="onJScall" name="incrementeInput" selector="##{id}"
+		query="attr('value',function(arr){
+			jQuery(this).focus();
+			if (jQuery(this).attr('value') != undefined){
+				return Number(jQuery(this).attr('value'))+1;			
+			}else{
+				return 0;
+			}
+		
+		})" />
+
+	<rich:jQuery timing="onJScall" name="decrementeInput" selector="##{id}"
+		query="attr('value',function(arr){
+			jQuery(this).focus();
+			if (jQuery(this).attr('value') != undefined){
+				return jQuery(this).attr('value')-1;			
+			}else{
+				return 0;
+			}
+		
+		})" />
+
+</ui:composition>
+
+

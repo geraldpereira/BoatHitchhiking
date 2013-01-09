@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<meta http-equiv="Content-Type"
+		content="#{messages['meta.content-type']}" />
+	<meta name="keywords" content="#{messages['meta.keywords']}" />
+	<meta name="Author" content="#{messages['meta.author']}" />
+	<meta name="reply-to" content="#{messages['meta.replyTo']}" />
+	<meta name="Owner" content="#{messages['meta.owner']}" />
+	<meta name="Generator" content="#{messages['meta.generator']}" />
+	<meta name="Language" content="#{messages['meta.language']}" />
+	<meta name="Revisit-After" content="#{messages['meta.revisit-after']}" />
+	<meta name="Rating" content="#{messages['meta.rating']}" />
+	<meta name="Distribution" content="#{messages['meta.distribution']}" />
+
+	<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+
+	<a:loadStyle src="resource:///stylesheet/theme.xcss" />
+	<a:loadStyle src="resource:///stylesheet/components.xcss" />
+	<a:loadStyle src="resource:///stylesheet/customRichfaces.xcss" />
+	<a:loadStyle src="resource:///stylesheet/jquery.rating.css" />
+
+	<a:loadStyle src="resource:///stylesheet/miseEnPage.xcss" />
+
+	<!--[if lte IE 6]>
+			<a:loadStyle src="resource:///stylesheet/ie.css" />			
+		<![endif]-->
+
+	<a:loadScript src="#{proprietes.get('res_url')}jquery.rating.js" />
+	<a:loadScript src="#{proprietes.get('res_url')}bs.js" />
+
+	<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-15133065-3']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+	</script>
+
+</ui:composition>

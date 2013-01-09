@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+	<description>#{messages['breadcrumbs.offre.list']}</description>
+
+	<action execute="#{offreList.setMaxResults(20)}" on-postback="false" />
+	<action execute="#{offreList.setPagesDisplayed(7)}" on-postback="false" />
+	<action execute="#{offreList.doFilterResultList()}" on-postback="false" />
+
+	<param name="firstResult" value="#{offreList.firstResult}" />
+	<param name="sort" value="#{offreList.orderColumn}" />
+	<param name="dir" value="#{offreList.orderDirection}" />
+
+	<param name="pseudonyme" value="#{offreList.filters.pseudonyme}"
+		converter="#{trimConverter}" />
+	<param name="nomBateau" value="#{offreList.filters.nomBateau}"
+		converter="#{trimConverter}" />
+	<param name="titre" value="#{offreList.filters.titre}" converter="#{trimConverter}" />
+
+	<param name="dateDebutFrom" value="#{offreList.filters.dateDebutFrom}"
+		converter="#{dateConverter}" />
+	<param name="dateDebutTo" value="#{offreList.filters.dateDebutTo}"
+		converter="#{dateConverter}" />
+	<param name="paysDepart" value="#{offreList.filters.paysDepart}"
+		converter="#{paysConverter}" />
+	<param name="villeDepart" value="#{offreList.filters.villeDepart}"
+		converter="#{trimConverter}" />
+
+	<param name="dateFinFrom" value="#{offreList.filters.dateFinFrom}"
+		converter="#{dateConverter}" />
+	<param name="dateFinTo" value="#{offreList.filters.dateFinTo}"
+		converter="#{dateConverter}" />
+	<param name="paysArrivee" value="#{offreList.filters.paysArrivee}"
+		converter="#{paysConverter}" />
+	<param name="villeArrivee" value="#{offreList.filters.villeArrivee}"
+		converter="#{trimConverter}" />
+
+	<param name="typePaiement" value="#{offreList.filters.typePaiement}"
+		converter="#{typePaiementConverter}" />
+	<param name="montantMax" value="#{offreList.filters.montantMax}"
+		converter="#{trimConverter}" />
+
+	<param name="ageFrom" value="#{offreList.filters.ageFrom}"
+		converter="#{trimConverter}" />
+	<param name="ageTo" value="#{offreList.filters.ageTo}" converter="#{trimConverter}" />
+	<param name="sexe" value="#{offreList.filters.sexe}" converter="#{sexeConverter}" />
+	<param name="xpGenerale" value="#{offreList.filters.xpGenerale}"
+		converter="#{xpGeneraleConverter}" />
+	<param name="avecPhoto" value="#{offreList.filters.avecPhoto}"
+		converter="#{bsBooleanConverter}" />
+
+	<param name="avecPhotoB" value="#{offreList.filters.avecPhotoB}"
+		converter="#{bsBooleanConverter}" />
+	<param name="marque" value="#{offreList.filters.marque}"
+		converter="#{trimConverter}" />
+	<param name="typeCoque" value="#{offreList.filters.typeCoque}"
+		converter="#{typeCoqueConverter}" />
+	<param name="greement" value="#{offreList.filters.greement}"
+		converter="#{greementConverter}" />
+
+</page>

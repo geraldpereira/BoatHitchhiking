@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j">
+
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['annonce.titre']}</ui:define>
+		<h:inputText id="titre" converter="#{majusculeConverter}"
+			value="#{curAnnonceList.filters.titre}">
+		</h:inputText>
+	</s:decorate>
+	<h:outputText styleClass="sous-titre"
+		value="#{messages['annonce.depart']}" />
+
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['annonce.date'].concat(' ').concat(messages['global.entre'])}</ui:define>
+		<rich:calendar value="#{curAnnonceList.filters.dateDebutFrom}"
+			datePattern="#{dateFormat.getDateFormatShort(locale)}"
+			locale="#{locale}" popup="true" showApplyButton="false" />
+	</s:decorate>
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">
+			<h:outputText value="#{messages['global.et']}"
+				style="margin-left:10px;" />
+		</ui:define>
+		<rich:calendar value="#{curAnnonceList.filters.dateDebutTo}"
+			datePattern="#{dateFormat.getDateFormatShort(locale)}"
+			locale="#{locale}" popup="true" showApplyButton="false" />
+	</s:decorate>
+
+
+	<ui:include src="../LieuEditInner.xhtml">
+		<ui:param name="idForm" value="demandeSearch" />
+		<ui:param name="id" value="curAnnonceListDepart" />
+		<ui:param name="lieuTemplate" value="/layout/display.xhtml" />
+		<ui:param name="lieuSelectionManager"
+			value="#{curAnnonceList.lieuDepartSM}" />
+	</ui:include>
+	<h:outputText styleClass="sous-titre"
+		value="#{messages['annonce.arrivee']}" />
+
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['annonce.date'].concat(' ').concat(messages['global.entre'])}</ui:define>
+		<rich:calendar value="#{curAnnonceList.filters.dateFinFrom}"
+			datePattern="#{dateFormat.getDateFormatShort(locale)}"
+			locale="#{locale}" popup="true" showApplyButton="false" />
+	</s:decorate>
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">
+			<h:outputText value="#{messages['global.et']}"
+				style="margin-left:10px;" />
+		</ui:define>
+		<rich:calendar value="#{curAnnonceList.filters.dateFinTo}"
+			datePattern="#{dateFormat.getDateFormatShort(locale)}"
+			locale="#{locale}" popup="true" showApplyButton="false" />
+	</s:decorate>
+
+	<ui:include src="../LieuEditInner.xhtml">
+		<ui:param name="idForm" value="demandeSearch" />
+		<ui:param name="id" value="curAnnonceListArrivee" />
+		<ui:param name="lieuTemplate" value="/layout/display.xhtml" />
+		<ui:param name="lieuSelectionManager"
+			value="#{curAnnonceList.lieuArriveeSM}" />
+	</ui:include>
+
+	<h:outputText styleClass="sous-titre"
+		value="#{messages['annonce.financement']}" />
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['annonce.modePaiement']}</ui:define>
+		<h:selectOneMenu id="typeFin" style="width:120px;"
+			value="#{curAnnonceList.filters.typePaiement}">
+			<s:selectItems value="#{typePaiements}" var="_curTP"
+				label="#{messages['typePaiement.'.concat(_curTP.name())]}"
+				noSelectionLabel=" " />
+			<s:convertEnum />
+		</h:selectOneMenu>
+	</s:decorate>
+	
+	<s:decorate template="/layout/display.xhtml">
+		<ui:define name="label">#{messages['annonce.montantMax']}</ui:define>
+		<rich:inputNumberSpinner minValue="0" maxValue="999999" inputSize="5"
+			style="width:72px;" value="#{curAnnonceList.filters.montantMax}" />
+	</s:decorate>
+</ui:composition>

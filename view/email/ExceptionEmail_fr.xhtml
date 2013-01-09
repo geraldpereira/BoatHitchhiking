@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BateauStop - Exception" />
+		<ui:param name="toName" value="BateauStop"/>
+		<ui:param name="toMail" value="boathitchhiking@gmail.com"/>
+		<ui:param name="replyTo" value="boathitchhiking@gmail.com"/>
+		<ui:param name="fromName" value="BateauStop"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="fr"/>
+		
+		<ui:define name="body">
+			<p>Attention une exception a &#233;t&#233; lev&#233;e sur votre site !!!</p>
+			<p>
+				<h:outputText value="#{emailManager.messageException}" converter="#{HTMLConverter}" escape="false"/>
+			</p>
+			
+			<p>L'&#233;quipe BateauStop.
+			</p>
+
+		</ui:define>
+</ui:composition>
+
+
+

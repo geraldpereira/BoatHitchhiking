@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd"
+	no-conversation-view-id="/home.xhtml"
+	login-required="true">
+
+<description>#{messages['breadcrumbs.utilisateur.edit']} #{utilisateurEdit.instance.pseudonyme}</description>
+
+	<!--<begin-conversation join="true" flush-mode="MANUAL" />
+ 	
+	-->
+	<action execute="#{utilisateurEdit.wire}" on-postback="false"/>
+	<action execute="#{utilisateurEdit.validerAuthorisation}"/>
+	<action execute="#{utilisateurPhotoManager.wire}" on-postback="false"/>
+	<action execute="#{competenceUtilisateurManager.wire(utilisateurEdit)}" on-postback="false" />  
+	<action execute="#{xpManager.wire(utilisateurEdit)}" on-postback="false" />
+	<action execute="#{langueManager.wire}" on-postback="false" />
+	
+	<param name="utilisateurPseudonyme" value="#{utilisateurEdit.utilisateurPseudonyme}" />
+   	<param name="utilisateurToggle" value="#{utilisateurAvance.toggleOuvert}" />
+   
+   <navigation from-action="#{utilisateurEdit.update}">
+      <rule if-outcome="updated">
+      	 <end-conversation before-redirect="true"/>
+         <redirect view-id="#{conversationUtils.getPreviousPage(viewFrom)}" />
+      </rule>
+   </navigation>
+        
+   <navigation from-action="#{utilisateurEdit.remove}">
+      <rule if-outcome="removed">
+      	<end-conversation before-redirect="true"/>
+         <redirect view-id="#{conversationUtils.getPreviousPage(viewFrom)}" />
+      </rule>
+   </navigation>
+   
+   <navigation>
+		<rule if-outcome="cancelled">
+			<end-conversation before-redirect="true"/>
+			<redirect view-id="#{conversationUtils.getPreviousPage(viewFrom)}" />
+		</rule>
+	</navigation>
+
+</page>

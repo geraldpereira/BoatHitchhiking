@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<rich:toolBar xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<rich:toolBarGroup itemSeparator="disc">
+		<s:link view="/home.xhtml"
+			value="#{messages['layout.entete.accueil']}" propagation="none"
+			styleClass="navBar-link" />
+		<s:link view="/byob.xhtml" value="#{messages['layout.entete.contact']}"
+			propagation="none" styleClass="navBar-link" />
+		<s:link view="/sitemap.xhtml" value="#{messages['sitemap']}"
+			propagation="none" styleClass="navBar-link" />
+		<s:link view="/faq.xhtml" value="#{messages['faq']}"
+			propagation="none" styleClass="navBar-link" />  
+	</rich:toolBarGroup>
+	<rich:toolBarGroup itemSeparator="none" location="right" >
+		<h:form id="settings">
+			<h:panelGrid columns="2" >
+			<s:link view="/home.xhtml" value=" " propagation="none"
+					action="#{localeSelector.selectLanguage('fr')}">
+					<h:graphicImage width="27px" height="15px" styleClass="curseurMain"
+						value="/img/francais.png">
+					</h:graphicImage>
+				</s:link>
+
+				<s:link view="/home.xhtml" value=" " propagation="none"
+					action="#{localeSelector.selectLanguage('en')}">
+					<h:graphicImage width="27px" height="15px" styleClass="curseurMain"
+						value="/img/anglais.png">
+					</h:graphicImage>
+				</s:link>
+				
+			</h:panelGrid>
+		</h:form>
+	</rich:toolBarGroup>
+</rich:toolBar>

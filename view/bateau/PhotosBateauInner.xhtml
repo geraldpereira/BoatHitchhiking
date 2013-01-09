@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:a="http://richfaces.org/a4j">
+	
+	<rich:panel>
+		<s:div id="photoInner">
+		
+		<fc:photoViewer rendered="#{bateauView.instance.photosBateau.size!=0}">
+			<a:repeat value="#{bateauView.instance.photosBateau}" rows="2"
+				var="_varListPhoto" id="imagesTable" rowKeyVar="_index">
+				<rich:modalPanel  id="photoView" autosized="true" moveable="false" resizeable="false">
+					<h:outputLink value="#" id="linkPhoto">
+						<img class="thumb" id="imgFull" src="#{photoToolTipManager.getFullPath(bateauView.instance.utilisateur,_varListPhoto)}" />
+						<rich:componentControl for="photoView" attachTo="linkPhoto"
+										operation="hide" event="onclick"/>
+					</h:outputLink>
+				</rich:modalPanel>
+				<h:outputLink value="#" id="link">
+					<h:graphicImage styleClass="thumb" id="curImage" width="170px" height="170px"
+						url="#{photoToolTipManager.getFullPath(bateauView.instance.utilisateur,_varListPhoto)}" />
+					<rich:componentControl for="photoView" attachTo="link"
+						operation="show" event="onclick" />										
+				</h:outputLink>
+			</a:repeat>
+		</fc:photoViewer>				
+		</s:div>
+	</rich:panel>
+</ui:composition>

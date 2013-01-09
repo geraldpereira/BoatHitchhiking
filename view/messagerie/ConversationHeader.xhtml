@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<h:panelGrid columns="3" width="100%" border="0" cellpadding="0"
+		cellspacing="0"
+		columnClasses="panelGrid-column,panelGrid-column width100,panelGrid-column">
+		<h:column>
+			<div style="width:80px;#{conversationListHandler.isLu(conversation.dernierMessage) ? '' : 'font-weight:bold'}">
+			<s:link styleClass="tooltiped"
+				id="tooltiped2" view="/utilisateur/Utilisateur.xhtml"
+				value="#{conversationListHandler.getAutrePseudonyme(conversation.dernierMessage)}">
+				<f:param name="utilisateurPseudonyme"
+					value="#{conversationListHandler.getAutrePseudonyme(conversation.dernierMessage)}" />
+			</s:link> 
+			<rich:toolTip id="tooltip2" for="tooltiped2" showDelay="300"
+				followMouse="false" hideDelay="300" verticalOffset="-120"
+				horizontalOffset="-10" mode="ajax" layout="block" zorder="99"
+				style="max-width:520px;overflow:hidden;">
+				<ui:include src="/utilisateur/preview/UtilisateurPreview.xhtml">
+					<ui:param name="utilisateur"
+						value="#{conversationListHandler.getAutre(conversation.dernierMessage)}" />
+					<ui:param name="noContact" value="true" />
+				</ui:include>
+			</rich:toolTip> 
+			<h:outputText value=" (#{conversation.nombreMessages})"
+				rendered="#{conversation.nombreMessages != 1}" /></div>
+		</h:column>
+		<h:column>
+			<div class="overflowHidden" style="text-align:left;#{conversationListHandler.isLu(conversation.dernierMessage) ? '' : 'font-weight:bold'}"><h:outputText
+				value="#{conversation.titre}" /> <h:outputText style="color:grey;"
+				value=" - #{conversation.dernierMessage.texte}"
+				converter="#{trimMessageConverter}"
+				rendered="#{conversationListHandler.indexCourant == -1}" /></div>
+		</h:column>
+		<h:column>
+			<div style="width: 100px; text-align:right;"><h:outputText
+				value="#{conversation.dernierMessage.dateEnvoi}">
+				<s:convertDateTime dateStyle="short" timeStyle="medium" type="both" />
+			</h:outputText></div>
+		</h:column>
+	</h:panelGrid>
+
+
+</ui:composition>

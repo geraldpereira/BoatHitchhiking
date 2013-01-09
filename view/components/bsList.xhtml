@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<a:form>
+		<rich:panel>
+			<f:facet name="header">
+				<s:div id="#{id}Header">
+					<span style="float: left;">#{messages['recherche.resultat']}</span>
+					<a:commandLink style="float:right;"
+						action="#{entityList.switchRenderMode()}" reRender="#{id},#{id}Header"  onclick="showcentre();" oncomplete="hidecentre();"
+						ajaxSingle="true" eventsQueue="listQueue">
+						<h:graphicImage value="#{entityList.renderMode == 0 ? '/img/liste.png' : '/img/table.png'}" style="border:0; padding-left:10px;" 
+							title="#{entityList.renderMode == 0 ? messages['recherche.liste'] : messages['recherche.table']}"/>
+					</a:commandLink>
+					<span style="float: right;">#{'('.concat(0 + entityList.getResultCount()).concat(' ').concat(messages['recherche.resultatCount'])}</span>
+					<div style="clear: both" />
+				</s:div>
+			</f:facet>
+
+			<s:div styleClass="results" id="#{id}">
+
+				<h:outputText value="#{messages['recherche.noResult']}"
+					rendered="#{empty entityList.resultList}"
+					styleClass="messageTableVide" />
+
+				<s:div rendered="#{not empty entityList.resultList}">
+
+					<a:region>
+						<s:fragment rendered="#{entityList.renderMode == 0}">
+							<rich:dataTable id="#{id}Table"
+								onRowMouseOver="jQuery(this).addClass('dataTableRow-MouseOver');"
+								onRowMouseOut="jQuery(this).removeClass('dataTableRow-MouseOver');"
+								onRowClick="#{onRowClick}" styleClass="curseurMain"
+								rowClasses="dataTableRow" width="100%"
+								value="#{entityList.resultList}" rowKeyVar="_rowKeyVar"
+								var="_varList">
+
+								<ui:insert />
+
+							</rich:dataTable>
+						</s:fragment>
+						<s:fragment rendered="#{entityList.renderMode == 1}">
+							<rich:dataGrid value="#{entityList.resultList}" width="100%"
+								cellpadding="4" cellspacing="4" var="_varList"
+								rowKeyVar="_rowKeyVar">
+								<ui:insert name="listPreview"/>	
+								
+								<s:fragment rendered="#{(1+_rowKeyVar) % 7 == 0}">
+								<div style="margin-left:65px;margin-top:5px;">
+									<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7072666090503661";
+/* BanniereListe */
+google_ad_slot = "9706060320";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+								</s:fragment>
+							</rich:dataGrid>
+						</s:fragment>
+					</a:region>
+
+					<fc:pageSelector id="#{id}" view="#{view}"
+						entityList="#{entityList}" />
+
+				</s:div>
+			</s:div>
+		</rich:panel>
+	</a:form>
+</ui:composition>
+

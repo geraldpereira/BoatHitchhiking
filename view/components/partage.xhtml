@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:addthis="http://www.addthis.com/help/api-spec">
+
+
+	<!-- AddThis Button BEGIN -->
+	<!-- Code optimization : avoid multiple calls to the folowing EL -->
+	<fc:cachingSet var="_currentURL" value="#{e:concat(proprieteFactory.getBasePath(locale),helper.getURL(instance,locale))}">
+	<fc:cachingSet var="_currentDescription" value="#{helper.getDescription(instance,locale)}">
+	<fc:cachingSet var="_currentTitle" value="#{helper.getTitle(instance)}">
+	<div class="addthis_toolbox addthis_default_style" style="padding-top:20px;padding-bottom:10px;">
+		<a
+		href="http://www.addthis.com/bookmark.php"
+		addthis:url="#{_currentURL}" addthis:title="#{_currentTitle}"
+		addthis:description="#{_currentDescription}" class="addthis_button_compact">#{messages['global.partage']}</a>
+		<span class="addthis_separator">|</span>
+		<a class="addthis_button_facebook" addthis:url="#{_currentURL}" addthis:title="#{_currentTitle}"
+		addthis:description="#{_currentDescription}" ></a>
+		<a class="addthis_button_myspace" addthis:url="#{_currentURL}" addthis:title="#{_currentTitle}"
+		addthis:description="#{_currentDescription}" ></a>
+		<a class="addthis_button_google" addthis:url="#{_currentURL}" addthis:title="#{_currentTitle}"
+		addthis:description="#{_currentDescription}" ></a>
+		<a class="addthis_button_twitter" addthis:url="#{_currentURL}" addthis:title="#{_currentTitle}"
+		addthis:description="#{_currentDescription}" ></a>
+	</div>
+	<script type="text/javascript"
+		src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c645aa85f47cb0b"></script>
+	<!-- AddThis Button END -->
+	</fc:cachingSet>
+	</fc:cachingSet>
+	</fc:cachingSet>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'fr'}
+</script>
+
+<div class="g-plusone" data-size="small" data-count="true"></div>
+	
+</ui:composition>
+
+

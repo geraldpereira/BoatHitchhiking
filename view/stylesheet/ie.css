@@ -1,0 +1,22 @@
+#global {
+	height: 100%;
+	position: static;
+	background: none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="css/img/global.png", sizingMethod="scale");
+	}
+#content {
+	display: inline;
+	}
+#center {
+	overflow: visible;
+	height: 1%;
+	}
+a, pre {
+	position: relative;
+	}
+body {
+	position: relative;
+	}
+#content, #sidebar {
+	margin-top: 15px;
+	} 

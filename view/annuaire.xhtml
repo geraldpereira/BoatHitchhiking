@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+	
+	<ui:define name="meta">		
+		<meta name="description" content="#{messages['meta.annuaire.description']}"/>
+		<meta name="abstract" content="#{messages['meta.annuaire.abstract']}"/>
+		<meta name="robots" content="#{messages['meta.robots.follow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.annuaire.title']} - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="body">
+		<h1>#{messages['annuaire']}</h1>
+		<rich:panel>
+			<f:facet name="header">#{messages['annuaire.info']}</f:facet>
+			<ul>
+				<li>
+					<h:outputLink target="_blank" value="http://www.youboat.fr/actualites-bateau.html">#{messages['annuaire.yb.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['annuaire.yb.texte']}"/>
+			<!-- 		
+				<a href="http://www.youboat.fr/actualites-bateau.html"
+						target="_blank">Magazine Youboat.fr</a>
+						<p class="seamTextPara">Youboat est un magazine dédié aux
+							bateaux à moteurs avec de nombreux essais, des conseils pratiques,
+							dossiers, et même des petites annonces occasion. Vous y trouverez
+							des articles avec de nombreuses photos, dans un format moderne et
+							design repris par la suite sur le site Youboat.fr</p> -->
+				</li>
+				<li>
+					<h:outputLink target="_blank" value="http://fr.bemyboat.com">#{messages['annuaire.bmb.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['annuaire.bmb.texte']}"/>
+				</li>
+				<li>
+					<h:outputLink target="_blank" value="http://www.newswinch.com/">#{messages['annuaire.newswinch.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['annuaire.newswinch.texte']}"/>
+				</li>
+				<li>
+					<h:outputLink target="_blank" value="http://www.grandlargecafe.com/">#{messages['annuaire.grandlargecafe.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['annuaire.grandlargecafe.texte']}"/>
+				</li>
+				<li>
+					<h:outputLink target="_blank" value="http://www.voilemedias.fr/">#{messages['annuaire.voilemedia.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['annuaire.voilemedia.texte']}"/>
+				</li>
+				<li>
+					<h:outputLink target="_blank" value="http://www.noonsite.com/">#{messages['annuaire.noonsite.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['annuaire.noonsite.texte']}"/>
+				</li>
+			</ul>						
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">#{messages['annuaire.club']}</f:facet>
+			<ul>
+				<li>
+					<h:outputLink target="_blank" value="http://www.worldcruising.com/">#{messages['annuaire.worldcruising.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['annuaire.worldcruising.texte']}"/>
+				</li>
+			</ul>						
+		</rich:panel>
+	</ui:define>
+</ui:composition>

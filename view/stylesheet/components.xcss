@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http:/jsf.exadel.com/template"
+	xmlns:u="http:/jsf.exadel.com/template/util">
+
+
+	<!-- Bouton de navigation avec menu -->
+
+	<u:selector name=".boutonNavBS">
+		<u:style name="width" value="135px" />
+		<u:style name="height" value="38px" />
+		<u:style name="background-repeat" value="no-repeat" />
+		<u:style name="position" value="relative" />
+	</u:selector>
+
+	<u:selector name=".boutonNavBS .lienBS">
+		<u:style name="z-index" value="30" />
+		<u:style name="position" value="absolute" />
+		<u:style name="width" value="inherit" />
+		<u:style name="height" value="inherit" />
+		<u:style name="text-decoration" value="none" />
+		<u:style name="text-align" value="center" />
+		<u:style name="font-size" value="1.4em" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="color" value="white" />
+		<u:style name="padding-top" value="4px" />
+		<u:style name="width" value="135px" />
+		<u:style name="height" value="38px" />
+		<u:style name="display" value="block" />
+	</u:selector>
+	
+	<u:selector name=".boutonNavBS .lienBS a:hover">
+		<u:style name="color" value="white!important" />
+	</u:selector>
+	
+	<u:selector name=".boutonNavBS .lienBS a:active,.boutonNavBS .lienBS a:link, .boutonNavBS .lienBS a:visited">
+		<u:style name="text-decoration" value="none" />
+		<u:style name="color" value="white" />
+		<u:style name="width" value="135px" />
+		<u:style name="height" value="38px" />
+		<u:style name="display" value="block" />
+	</u:selector>
+
+
+	<u:selector name=".boutonNavBS .boutonBS">
+		<u:style name="z-index" value="20" />
+		<u:style name="position" value="absolute" />
+		<u:style name="width" value="inherit" />
+		<u:style name="height" value="inherit" />
+	</u:selector>
+
+	<u:selector name=".boutonNavBS .boutonOverBS">
+		<u:style name="z-index" value="10" />
+		<u:style name="position" value="absolute" />
+		<u:style name="width" value="inherit" />
+		<u:style name="height" value="inherit" />
+	</u:selector>
+
+	<u:selector name=".boutonNavBS .menuBS">
+		<u:style name="z-index" value="5" />
+		<u:style name="position" value="absolute" />
+		<u:style name="width" value="121px" />
+		<u:style name="margin-top" value="34px" />
+		<u:style name="margin-left" value="5px" />
+		<u:style name="margin-bottom" value="8px" />
+	</u:selector>
+
+	<!-- Loading Screen  -->
+
+	<u:selector name=".loadingScreen">
+		<u:style name="position" value="relative" />
+		<u:style name="margin-left" value="auto" />
+		<u:style name="margin-right" value="auto" />
+		<u:style name="overflow" value="hidden" />
+	</u:selector>
+
+	<u:selector name=".loadingScreen .upper">
+		<u:style name="position" value="absolute" />
+		<u:style name="top" value="0" />
+		<u:style name="left" value="0" />
+		<u:style name="z-index" value="99" />
+		<u:style name="height" value="100%" />
+		<u:style name="width" value="100%" />
+		<u:style name="display" value="block" />
+		<u:style name="filter" value="Alpha(opacity =     60)" />
+		<u:style name="-moz-opacity" value=".60" />
+		<u:style name="-khtml-opacity" value="0.60" />
+		<u:style name="opacity" value=".60" />
+	</u:selector>
+
+	<u:selector name=".loadingScreen .insert">
+		<u:style name="width" value="100%" />
+		<u:style name="height" value="100%" />
+	</u:selector>
+
+	<u:selector name=".loadingScreen .opaque">
+		<u:style name="filter" value="Alpha(opacity =     20)" />
+		<u:style name="-moz-opacity" value=".20" />
+		<u:style name="-khtml-opacity" value="0.20" />
+		<u:style name="opacity" value=".20" />
+	</u:selector>
+
+	<u:selector name=".loadingSmallMarron">
+		<!-- <u:style name="background-image">
+			<f:resource f:key="/img/ajax-loader-moyen.gif" />
+		</u:style> -->
+		<u:style name="background-repeat" value="no-repeat" />
+		<u:style name="background-position" value="center 25px" />
+		<u:style name="background-color" skin="couleur3_clair" />
+		<u:style name="color" value="white" />
+		<u:style name="font-size" value="1.2em" />
+		<u:style name="font-weight" value="bolder" />
+		<u:style name="padding-top" value="10px" />
+		<u:style name="width" value="100% !important" />
+		<u:style name="text-align" value="center !important" />		
+		<!-- Putain de hack pour IE6 de merdum ! -->
+		 <u:style name="height" value="9999px !important" />
+	</u:selector>
+	
+	
+	<!-- Competence Tree  -->
+	<u:selector name=".bsTree .bsNode">
+		<u:style name="font-weight" value="bold" />
+		<u:style name="cursor" value="pointer" />
+		<u:style name="color" skin="couleur1_fonce" />
+	</u:selector>
+
+	<u:selector name=".bsTree .bsNode:hover">
+		<u:style name="color" skin="couleur2" />
+	</u:selector>
+
+	<u:selector name=".bsTree .rich-tree-node-icon">
+		<u:style name="display" value="none" />
+	</u:selector>
+
+
+	<u:selector name=".bsTree .rich-tree-node-icon-leaf">
+		<u:style name="display" value="none" />
+	</u:selector>
+
+	<u:selector name=".bsTree .rich-tree-node-highlighted">
+		<u:style name="text-decoration" value="none" />
+	</u:selector>
+
+	<u:selector name=".bsTree .rich-tree-node-selected">
+		<u:style name="border-color" value="white" />
+	</u:selector>
+
+
+	<!-- Le togglePanel -->
+
+	<u:selector name=".toggleBouton">
+		<u:style name="background-image">
+			<f:resource f:key="/img/flecheDroite.png" />
+		</u:style>
+		<u:style name="background-position" value="top right" />
+		<u:style name="background-repeat" value="no-repeat" />
+		<u:style name="padding-right" value="17px" />
+		<u:style name="padding-left" value="3px" />
+		<u:style name="margin-left" value="2px" />
+		<u:style name="margin-bottom" value="4px" />
+		<u:style name="margin-right" value="2px" />
+		<u:style name="height" value="17px" />
+		<u:style name="color" skin="couleur1_fonce" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="font-size" value="1.2em" />
+		<u:style name="text-align" value="left" />
+		<u:style name="border-color" skin="couleur2_imp" />
+		<u:style name="border-bottom" value="1px solid" />
+	</u:selector>
+	
+	<u:selector name=".toggleBouton:hover">
+		<u:style name="color" skin="couleur2" />
+	</u:selector>
+
+	<u:selector name=".toggleBoutonOuvert">
+		<u:style name="background-image">
+			<f:resource f:key="/img/flecheBas.png" />
+		</u:style>
+	</u:selector>
+
+	<u:selector name=".togglePanel">
+		<u:style name="margin-top" value="0px" />
+		<u:style name="padding-top" value="0px" />
+	</u:selector>
+	
+	
+	<!-- LE page selector -->
+	<u:selector name=".pageSelector">
+		<u:style name="margin" value="0" />
+		<u:style name="padding" value="0" />
+		<u:style name="text-align" value="center" />
+		<u:style name="margin-top" value="5px" />
+		<u:style name="font-weight" value="bolder" />
+	</u:selector>
+
+	<u:selector name=".pageSelector .centralItem">
+		<u:style name="border-top" value="3px solid" />
+		<u:style name="border-color" skin="couleur1" />
+		<u:style name="margin-left" value="1px" />
+		<u:style name="padding-left" value="10px" />
+		<u:style name="padding-right" value="10px" />
+		<u:style name="text-decoration" value="none" />
+	</u:selector>
+
+	<u:selector name=".pageSelector .centralItem-selected">
+		<u:style name="cursor" value="default" />
+		<u:style name="border-top" value="3px solid #444444" />
+		<u:style name="color" value="#444444" />
+	</u:selector>
+
+	<u:selector name=".pageSelector .leftItem">
+		<u:style name="float" value="left" />
+	</u:selector>
+	
+	<u:selector name=".pageSelector .item">
+		<u:style name="width" value="24px" />
+		<u:style name="height" value="16px" />
+		<!-- <u:style name="border" value="1px solid" />
+		<u:style name="border-color" skin="couleur1" />-->
+		<u:style name="background-color" skin="headerBackgroundColor" /> 
+		<u:style name="margin-left" value="1px" />
+		<u:style name="display" value="block" />
+		<u:style name="text-decoration" value="none" />
+		<u:style name="background-image">
+			<f:resource f:key="org.richfaces.renderkit.html.GradientA" />
+		</u:style>
+		<u:style name="border" value="1px solid" />
+		<u:style name="border-color" skin="headerBackgroundColor" />
+		<u:style name="color" skin="headerTextColor" />
+		<u:style name="font-weight" value="bold" />
+	</u:selector>
+
+	<u:selector name=".pageSelector .rightItem">
+		<u:style name="float" value="right" />
+	</u:selector>
+
+	<u:selector name=".pageSelector .borderItem-disabled">
+		<!--<u:style name="filter" value="Alpha(opacity =     40)" />
+		<u:style name="-moz-opacity" value=".40" />
+		<u:style name="-khtml-opacity" value="0.40" />
+		<u:style name="opacity" value=".40" />-->
+		<u:style name="opacity" value="0.33" />
+		<u:style name="border" value="0" />
+		<u:style name="cursor" value="default" />
+	</u:selector>
+
+	<u:selector name=".pageSelectorLeftCol">
+		<u:style name="width" value="90px" />
+	</u:selector>
+
+	<u:selector name=".pageSelectorCenterCol ">
+	</u:selector>
+
+	<u:selector name=".pageSelectorRightCol">
+		<u:style name="width" value="90px" />
+	</u:selector>
+
+	<!-- La bsList -->
+	<u:selector name=".dataTableRow">
+	</u:selector>
+
+	<u:selector name=".dataTableRow-MouseOver">
+		<u:style name="background-color" skin="couleur1_tres_clair" />
+	</u:selector>
+	
+	<u:selector name=".dataTableRow-ContextMenu">
+		<u:style name="background-color" skin="couleur2_tres_clair" />
+	</u:selector>
+
+	<!-- rounded pannel -->
+	
+	<u:selector name=".rounded-panel">
+		<u:style name="margin-top" value="8px" />
+	</u:selector>
+	
+	<u:selector name=".rounded-panel .title">
+		<u:style name="margin-left" value="5px" />
+		<u:style name="margin-top" value="-15px" />
+		<u:style name="padding-top" value="0" />
+		<u:style name="padding-bottom" value="0" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="color" skin="couleur1_fonce" />
+	</u:selector>
+
+	<u:selector name=".rounded-panel .footer">
+		<u:style name="margin-top" value="-5px" />
+		<u:style name="padding-left" value="5px" />
+		<u:style name="padding-right" value="5px" />
+		<u:style name="margin-right" value="20px" />
+		<u:style name="float" value="right" />
+	</u:selector>
+	
+	<!-- Stars in their eyes -->
+	<u:selector name=".star"> 
+        <u:style name="background-image"> 
+            <f:resource f:key="/img/star.gif" /> 
+        </u:style> 
+        <u:style name="background-repeat" value="no-repeat" /> 
+        <u:style name="background-position" value="0 0px" /> 
+        <u:style name="width" value="16px" /> 
+        <u:style name="height" value="16px" /> 
+    </u:selector> 
+    <u:selector name=".starPlein"> 
+        <u:style name="background-position" value="0 -16px !important" />         
+    </u:selector>
+	
+	<!-- More panel -->
+	<u:selector name=".morePanel"> 
+        <u:style name="width" value="100%" />         
+        <u:style name="text-align" value="center" />
+    </u:selector>
+    
+    <u:selector name=".morePanel-blue"> 
+        <u:style name="background-color" skin="couleur1_tres_clair" />
+    </u:selector>
+	
+	 <u:selector name=".morePanel-blue:hover"> 
+        <u:style name="background-color" skin="couleur1_clair_imp" />
+        
+    </u:selector>
+	
+	 <u:selector name=".morePanel-orange"> 
+        <u:style name="background-color" skin="couleur2_tres_clair" />
+    </u:selector>
+	
+	 <u:selector name=".morePanel-orange:hover"> 
+        <u:style name="background-color" skin="couleur2_clair_imp" />
+    </u:selector>
+	
+	<!-- Rounded panel -->
+	 <u:selector name=".rounded-panel .haut"> 
+        <u:style name="margin-left" value="-7px" />
+        <u:style name="padding" value="0" />
+        <u:style name="background-position" value="top right" />
+        <u:style name="background-repeat" value="no-repeat" />
+    </u:selector>
+    
+     <u:selector name=".rounded-panel .hautInner"> 
+        <u:style name="height" value="7px" />
+        <u:style name="width" value="7px" />
+        <u:style name="background-position" value="top left" />
+        <u:style name="background-repeat" value="no-repeat" />
+    </u:selector>
+
+	<u:selector name=".rounded-panel .gauche"> 
+        <u:style name="margin" value="auto" />
+        <u:style name="max-width" value="1007px" />
+        <u:style name="background-position" value="bottom left" />
+        <u:style name="background-repeat" value="no-repeat" />
+    </u:selector>
+
+	<u:selector name=".rounded-panel .droit"> 
+        <u:style name="margin-left" value="7px" />
+        <u:style name="background-position" value="bottom right" />
+        <u:style name="background-repeat" value="no-repeat" />
+    </u:selector>
+	
+	<u:selector name=".round-panel"> 
+		<u:style name="background-image">
+			<f:resource f:key="/img/round-panel.png" />
+		</u:style>
+	</u:selector>
+	<u:selector name=".round-panel-orange"> 
+		<u:style name="background-image">
+			<f:resource f:key="/img/round-panel-orange.png" />
+		</u:style>
+	</u:selector>
+	<u:selector name=".round-panel-plain"> 
+		<u:style name="background-image">
+			<f:resource f:key="/img/round-panel-plain.png" />
+		</u:style>
+	</u:selector>
+	<u:selector name=".round-panel-plain-maron"> 
+		<u:style name="background-image">
+			<f:resource f:key="/img/round-panel-plain-maron.png" />
+		</u:style>
+	</u:selector>
+	<u:selector name=".round-panel-plain-orange"> 
+		<u:style name="background-image">
+			<f:resource f:key="/img/round-panel-plain-orange.png" />
+		</u:style>
+	</u:selector>
+	<u:selector name=".round-panel-simple"> 
+		<u:style name="background-image">
+			<f:resource f:key="/img/round-panel-simple.png" />
+		</u:style>
+	</u:selector>
+	<u:selector name=".round-panel-simple-orange"> 
+		<u:style name="background-image">
+			<f:resource f:key="/img/round-panel-simple-orange.png" />
+		</u:style>
+	</u:selector>
+	
+	<!--
+		Define static styles in the CDATA block below (you can also move this
+		block to the top)
+	-->
+	<f:verbatim><![CDATA[
+]]></f:verbatim>
+</f:template>

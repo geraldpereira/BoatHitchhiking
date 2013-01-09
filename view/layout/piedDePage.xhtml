@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div class="piedDePage miseEnPage_#{locale.getLanguage().toString()}">
+	<div style="margin-left: auto; margin-right: auto; width: 964px;">
+
+	<div style="width: 840px; float: left;"><rich:toolBar
+		width="300px" height="30px"
+		style="margin-left:auto;margin-right:auto;padding-top:12px;">
+		<rich:toolBarGroup itemSeparator="disc">
+			<s:link
+				view="/conditionsUtilisation_#{locale.getLanguage().toString()}.xhtml"
+				value="#{messages['layout.piedDePage.conditions']}"
+				propagation="none" styleClass="footer-link" />
+			<s:link view="/presse.xhtml" value="#{messages['presse']}"
+				propagation="none" styleClass="footer-link" />
+			<s:link view="/annuaire.xhtml" value="#{messages['annuaire']}"
+				propagation="none" styleClass="footer-link" />
+			<ui:include src="rss.xhtml" />
+			<s:div>
+				<h:graphicImage value="/img/fb.png"
+					style="margin-right: 5px;" />
+				<h:outputLink value="http://www.facebook.com/pages/BateauStop/110119125709261" target="_blank" id="fb" styleClass="footer-link">#{messages['layout.piedDePage.fb']}
+					
+				</h:outputLink>
+			</s:div>
+			<s:div>
+				<h:graphicImage value="/img/twitter.png"
+					style="margin-right: 5px;" />
+				<h:outputLink value="http://twitter.com/BateauStop" target="_blank" id="twitter" styleClass="footer-link">#{messages['layout.piedDePage.twitter']}
+				</h:outputLink>
+			</s:div>
+
+		</rich:toolBarGroup>
+	</rich:toolBar>
+	
+	<div style="font-size:11px;color:white;">#{messages['layout.piedDePage.copy']}</div>
+	</div>
+		<s:link view="/byob.xhtml" propagation="none" styleClass="footer-link">
+	<h:graphicImage value="/img/byob.png"
+		style="float:right;margin-top:-5px;" />
+			</s:link>
+	<div style="clear: both;" />
+	<!--    
+		<h:outputLink styleClass="lien" target="_blank" value="http://spreadsheets.google.com/ccc?key=0AocJLCFtUbB6dGNkM0xfc2E5bEp5S3RUOGE1dUNQeXc">#{messages['layout.piedDePage.bug']}</h:outputLink>	  
+	  <s:link view="/home.xhtml" value="#{messages['layout.piedDePage.partenaire']}" propagation="none" styleClass="lien"/>
+         <s:link view="/home.xhtml" value="#{messages['layout.piedDePage.site']}" propagation="none" styleClass="lien"/> -->
+	</div>
+	</div>
+
+</ui:composition>

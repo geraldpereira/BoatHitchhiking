@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+
+	<s:decorate template="/layout/display.xhtml"
+		rendered="#{utilisateur.langues != null and not empty utilisateur.langues}">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['utilisateur.langues']}</ui:define>
+		<rich:dataTable value="#{utilisateur.langues}" border="0"
+			cellpadding="0" cellspacing="0" var="_current" styleClass="noBorder"
+			columnClasses="noBorder" rowKeyVar="_index">
+			<h:column>
+				<h:outputText id="langue#{_index}"
+					value="#{messages['langue.'.concat(_current.langue)]}" />
+			</h:column>
+			<h:column>
+				<rich:spacer width="20px" height="5px" />
+			</h:column>
+			<h:column>
+				<fc:star
+					id="niveau#{_index}" ratingTitle="#{_current.niveau}"
+					value="#{_current.niveau}" minValue="1" maxValue="5" />
+			</h:column>
+		</rich:dataTable>
+	</s:decorate>
+
+	<s:decorate template="/layout/display.xhtml"
+		rendered="#{utilisateur.description != null and utilisateur.description.length() != 0}">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['utilisateur.description']}</ui:define>
+			<h:outputText converter="#{trimDescriptionConverter}"
+			value="#{utilisateur.description}" />
+	</s:decorate>
+
+</ui:composition>

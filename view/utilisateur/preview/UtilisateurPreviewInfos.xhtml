@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<s:decorate id="dateInscription" template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label"><h:outputText value="#{messages['utilisateur.inscrit']} #{ infosLabelClass == 'small' ? '' : messages['global.le']}" /></ui:define>
+		<h:outputText value="#{utilisateur.dateInscription}">
+			<s:convertDateTime type="date" dateStyle="short" />
+		</h:outputText>
+	</s:decorate>
+	<s:decorate id="prenom" template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['utilisateur.nom']}</ui:define>
+		<fc:outputXXX id="prenomXXX"
+			value="#{utilisateur.coordonnees.nom} #{utilisateur.coordonnees.prenom}">
+			<h:outputText
+				value="#{utilisateur.coordonnees.nom} #{utilisateur.coordonnees.prenom}" />
+		</fc:outputXXX>
+	</s:decorate>
+	<s:decorate id="lieu" template="/layout/display.xhtml">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['utilisateur.lieu']}</ui:define>
+		<ui:include src="/LieuPreview.xhtml">
+			<ui:param name="lieu" value="#{utilisateur.coordonnees.lieu}" />
+		</ui:include>
+	</s:decorate>
+	<s:decorate id="detail" template="/layout/display.xhtml"
+		rendered="#{utilisateur.sexe != null or utilisateur.dateNaissance != null}">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['utilisateur.detail']}</ui:define>
+		<s:fragment rendered="#{utilisateur.sexe != null}">
+			<h:outputText
+				value="#{messages['sexe.'.concat(utilisateur.sexe.name())]}" />
+		</s:fragment>
+		<s:fragment
+			rendered="#{utilisateur.sexe != null and utilisateur.dateNaissance != null}">
+			<h:outputText value=", " />
+		</s:fragment>
+		<s:fragment rendered="#{utilisateur.dateNaissance != null}">
+			<h:outputText value="#{utilisateur.dateNaissance}"
+				converter="#{ageConverter}" />
+			<h:outputText value=" #{messages['utilisateur.ans']}" />
+		</s:fragment>
+	</s:decorate>
+	<s:decorate id="xpGeneraleField" template="/layout/edit.xhtml"
+		rendered="#{utilisateur.xpGenerale != null}" for="xpGenerale">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['utilisateur.expGenerale']}</ui:define>
+		<h:outputText id="xpGenerale"
+			value="#{messages['xpGenerale.'.concat(utilisateur.xpGenerale.name())]}" />
+	</s:decorate>
+
+</ui:composition>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div style="clear: both" />
+	<fc:togglePanel id="equipGeneral"
+		libelle="#{messages['equipGeneral']}"
+		toggleBean="#{bateauAvance}">
+
+		<h:panelGrid columns="2" style="width:100%;" border="0"
+			styleClass="noBorder" cellpadding="0" cellspacing="0"
+			columnClasses="panelGrid-column width50 noBorder,panelGrid-column width50 noBorder">
+			<h:panelGroup>
+			<s:decorate id="contenanceEauField" template="/layout/edit.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.contenanceEau']}</ui:define>
+				<rich:inputNumberSpinner id="contenanceEau" minValue="0"
+					maxValue="10000" step="10" inputSize="5" style="width:72px;"
+					value="#{bateauEdit.instance.equipGeneral.contenanceEau}">
+					<!-- <a:support event="onblur" reRender="contenanceEauField"
+						bypassUpdates="true" ajaxSingle="true" /> -->
+				</rich:inputNumberSpinner>
+				<ui:define name="type">#{messages['equipGeneral.contenanceEau.type']}</ui:define>
+			</s:decorate>
+			<s:decorate id="nbCabinesField" template="/layout/edit.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.nbCabines']}</ui:define>
+				<rich:inputNumberSpinner id="nbCabines" minValue="0" maxValue="10"
+					inputSize="2" style="width:54px;"
+					value="#{bateauEdit.instance.equipGeneral.nbCabines}">
+					<!-- <a:support event="onblur" reRender="nbCabinesField"
+						bypassUpdates="true" ajaxSingle="true" /> -->
+				</rich:inputNumberSpinner>
+			</s:decorate>
+			<s:decorate id="nbDouchesField" template="/layout/edit.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.nbDouches']}</ui:define>
+				<rich:inputNumberSpinner id="nbDouches" minValue="0" maxValue="10"
+					inputSize="2" style="width:54px;"
+					value="#{bateauEdit.instance.equipGeneral.nbDouches}">
+					<!-- <a:support event="onblur" reRender="nbDouchesField"
+						bypassUpdates="true" ajaxSingle="true" /> -->
+				</rich:inputNumberSpinner>
+			</s:decorate>
+			<s:decorate id="nbWCField" template="/layout/edit.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.nbWC']}</ui:define>
+				<rich:inputNumberSpinner id="nbWC" minValue="0" maxValue="10"
+					inputSize="2" style="width:54px;"
+					value="#{bateauEdit.instance.equipGeneral.nbWC}">
+					<!-- <a:support event="onblur" reRender="nbWCField" bypassUpdates="true"
+						ajaxSingle="true" /> -->
+				</rich:inputNumberSpinner>
+			</s:decorate>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<s:decorate id="annexeField" template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.annexe']}</ui:define>
+					<h:selectBooleanCheckbox id="annexe"
+						value="#{bateauEdit.instance.equipGeneral.annexe}" />
+				</s:decorate>
+				<div id ="moteursDiv">
+				<s:decorate id="nbMoteursField" template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.nbMoteurs']}</ui:define>
+					<rich:inputNumberSpinner id="nbMoteurs" minValue="0" maxValue="10"
+						inputSize="2" style="width:54px;"
+						value="#{bateauEdit.instance.equipGeneral.nbMoteurs}">
+						<!-- <a:support event="onblur" reRender="nbMoteursField"
+							bypassUpdates="true" ajaxSingle="true" />-->
+					</rich:inputNumberSpinner>
+				</s:decorate>
+				</div>
+				<div style="clear: both" />
+				<div id ="puissanceDiv">
+				<s:decorate id="puissanceField"
+					template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.puissance']}</ui:define>
+					<rich:inputNumberSpinner id="puissance" minValue="0"
+						maxValue="10000" inputSize="5" style="width:72px;"
+						value="#{bateauEdit.instance.equipGeneral.puissance}">
+						<!-- <a:support event="onblur" reRender="puissanceField"
+							bypassUpdates="true" ajaxSingle="true" /> -->
+					</rich:inputNumberSpinner>
+					<ui:define name="type">#{messages['equipGeneral.puissance.type']}</ui:define>
+				</s:decorate> 
+				<s:decorate id="contenanceGazoilField"
+					template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.contenanceGazoil']}</ui:define>
+					<rich:inputNumberSpinner id="contenanceGazoil" minValue="0"
+						maxValue="10000" step="10" inputSize="5" style="width:72px;"
+						value="#{bateauEdit.instance.equipGeneral.contenanceGazoil}">
+						<!-- <a:support event="onblur" reRender="contenanceGazoilField"
+							bypassUpdates="true" ajaxSingle="true" /> -->
+					</rich:inputNumberSpinner>
+					<ui:define name="type">#{messages['equipGeneral.contenanceGazoil.type']}</ui:define>
+				</s:decorate>
+				</div>
+				<rich:jQuery selector="#moteursDiv input" query="change(function(){
+					var nbMoteurs = Number(jQuery(this).attr('value'));
+					if (nbMoteurs >= 1){
+						if (jQuery('#puissanceDiv').is(':visible')){
+						}else{
+							jQuery('#puissanceDiv').slideDown();						
+						}
+					}else{
+						jQuery('#puissanceDiv').slideUp();
+						jQuery('#puissanceDiv input').attr('value','');
+					}			
+				})"/>
+				
+				<rich:jQuery rendered="#{bateauEdit.instance.equipGeneral.nbMoteurs == null or bateauEdit.instance.equipGeneral.nbMoteurs == 0}" timing="immediate" selector="#puissanceDiv"
+					query="hide()" />
+
+			</h:panelGroup>
+		</h:panelGrid>
+
+		<div style="clear: both" />
+		
+		<ui:include src="/bateau/EquipementsEditInner.xhtml" />
+		
+		<s:decorate id="autresField" template="/layout/edit.xhtml">
+			<ui:define name="label">#{messages['equipGeneral.autres']}</ui:define>
+			<h:inputTextarea id="autres" rows="5" style="width:610px!important;"
+				value="#{bateauEdit.instance.equipGeneral.autres}" >
+				<a:support event="onblur" reRender="autresField" eventsQueue="bateauQueue" ignoreDupResponses="true"
+							bypassUpdates="true" ajaxSingle="true" />
+			</h:inputTextarea>
+		</s:decorate>
+
+	</fc:togglePanel>
+
+</ui:composition>

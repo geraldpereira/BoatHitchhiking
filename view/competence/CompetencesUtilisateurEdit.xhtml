@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+			<div class="bsTree">
+		 <rich:tree switchType="client" toggleOnClick="true" icon="" iconCollapsed="/img/flecheDroite.png" iconExpanded="/img/flecheBas.png" showConnectingLines="false" ajaxSingle="true">
+			<rich:treeNodesAdaptor id="typeCompetence" nodes="#{competenceUtilisateurManager.typesCompetencesUtilisateur}"
+				var="typeCompetence">
+				<rich:treeNode >
+					<span class="bsNode">#{messages['typeCompetence.'.concat(typeCompetence.idTypeCompetence)]}</span>
+				</rich:treeNode>
+				<rich:treeNodesAdaptor id="competence" var="competence"
+					nodes="#{typeCompetence.competences}" >
+					<rich:treeNode iconLeaf="">
+						<h:outputText value="#{messages['competence.'.concat(competence.competence.idCompetence)]}" style="float:left;"/>
+						<div style="float:right">
+							<fc:starRating id="#{competence.competence.idCompetence}" value="#{competence.niveau}" minValue="1" maxValue="5"/>	
+						</div>
+					</rich:treeNode>
+				</rich:treeNodesAdaptor>
+			</rich:treeNodesAdaptor> 
+		</rich:tree>
+	</div>
+</ui:composition>
+
+

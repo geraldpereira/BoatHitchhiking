@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns="http://jboss.com/products/seam/components"
+	xmlns:core="http://jboss.com/products/seam/core" xmlns:persistence="http://jboss.com/products/seam/persistence"
+	xmlns:drools="http://jboss.com/products/seam/drools" xmlns:bpm="http://jboss.com/products/seam/bpm"
+	xmlns:security="http://jboss.com/products/seam/security" xmlns:mail="http://jboss.com/products/seam/mail"
+	xmlns:web="http://jboss.com/products/seam/web" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:i18n="http://jboss.com/products/seam/international" xmlns:ui="http://jboss.com/products/seam/ui"
+	xmlns:transaction="http://jboss.com/products/seam/transaction"
+	xsi:schemaLocation="http://jboss.com/products/seam/core 
+					http://jboss.com/products/seam/core-2.2.xsd
+                 http://jboss.com/products/seam/persistence 
+                 http://jboss.com/products/seam/persistence-2.2.xsd
+                 http://jboss.com/products/seam/drools 
+                 http://jboss.com/products/seam/drools-2.2.xsd
+                 http://jboss.com/products/seam/bpm 
+                 http://jboss.com/products/seam/bpm-2.2.xsd
+                 http://jboss.com/products/seam/security 
+                 http://jboss.com/products/seam/security-2.2.xsd
+                 http://jboss.com/products/seam/mail 
+                 http://jboss.com/products/seam/mail-2.2.xsd
+                 http://jboss.com/products/seam/web 
+                 http://jboss.com/products/seam/web-2.2.xsd
+                 http://jboss.com/products/seam/components 
+                 http://jboss.com/products/seam/components-2.2.xsd"
+	xmlns:async="http://jboss.com/products/seam/async"
+                >
+
+	<core:init debug="@debug@" jndi-pattern="@jndiPattern@" />
+
+	<core:manager concurrent-request-timeout="5000"
+		conversation-timeout="120000" conversation-id-parameter="cid"
+		parent-conversation-id-parameter="pid" />
+
+	<core:resource-loader>
+		<core:bundle-names>
+			<value>messages</value>
+			<value>application</value>
+			<value>listes</value>
+			<value>FrenchHelper</value>
+			<value>EnglishHelper</value>
+		</core:bundle-names>
+	</core:resource-loader>
+
+	<i18n:locale-config default-locale="fr" supported-locales="en fr"/>
+	<i18n:locale-selector cookie-enabled="true" />
+	
+	<web:hot-deploy-filter url-pattern="*.seam" />
+	
+	<!--<web:rewrite-filter view-mapping="*.seam"/>-->
+	
+	<web:character-encoding-filter encoding="UTF-8" 
+   override-client="true" 
+   url-pattern="*.seam" />
+
+	<drools:rule-base name="securityRules">
+		<drools:rule-files>
+			<value>/security.drl</value>
+		</drools:rule-files>
+	</drools:rule-base>
+
+	<event type="org.jboss.seam.security.notLoggedIn">
+		<action execute="#{redirect.captureCurrentView}" />
+	</event>
+	<event type="org.jboss.seam.security.loginSuccessful">
+		<action execute="#{redirect.returnToCapturedView}" />
+	</event>
+
+	<security:rule-based-permission-resolver
+		security-rules="#{securityRules}" />
+
+	<security:identity authenticate-method="#{authenticator.authenticate}"
+		remember-me="true" />
+
+	<persistence:hibernate-session-factory
+		name="hibernateSessionFactory" />
+
+	<persistence:managed-hibernate-session
+		name="hibernateSession" session-factory-jndi-name="java:/hibernateSessionFactory"
+		auto-create="true" />
+
+	<transaction:hibernate-transaction
+		session="#{hibernateSession}" />
+
+	<ui:hibernate-entity-loader session="#{hibernateSession}" />
+
+	<mail:mail-session host="@mailHost@" port="@mailPort@"
+		username="@mailUsername@" password="@mailPassword@" />
+
+	<web:cache-control-filter name="imageCacheControlFilter"
+                          regex-url-pattern=".*(\.gif|\.png|\.jpg|\.jpeg)"
+                          value="max-age=86400"/>
+
+	<web:cache-control-filter name="textCacheControlFilter"
+                          regex-url-pattern=".*(\.css|\.js)"
+                          value="max-age=1400"/>
+
+	<component class="fr.byob.bs.RssManager" > 
+		<property name="adresseMSNRss">@adresseMSNRss@</property>  
+		<property name="adresseGoogleRss">@adresseGoogleRss@</property> 
+		<property name="adresseYahooRss">@adresseYahooRss@</property> 
+		<property name="adresseNetvibes">@adresseNetvibes@</property> 
+		<property name="imgXMLRss">@imgXMLRss@</property> 
+		<property name="imgMSNRss">@imgMSNRss@</property>  
+		<property name="imgGoogleRss">@imgGoogleRss@</property> 
+		<property name="imgYahooRss">@imgYahooRss@</property> 
+		<property name="imgNetvibesRss">@imgNetvibesRss@</property> 
+	</component>
+	
+	<!-- <event type="org.jboss.seam.postInitialization"> 
+	    <action execute="#{majController.scheduleTimer}"/> 
+	</event> -->
+	<async:quartz-dispatcher/>
+	
+	<!--
+		<persistence:managed-persistence-context name="entityManager"
+		auto-create="true"
+		persistence-unit-jndi-name="java:/BoatHitchhikingEntityManagerFactory"/>
+
+		<ui:jpa-entity-loader entity-manager="#{entityManager}" />
+	-->
+	<!--
+		<component class="org.jboss.seam.servlet.MultipartConfig"> <property
+		name="createTempFiles">true</property> <property
+		name="maxRequestSize">1000000</property> </component>
+	-->
+
+
+</components>

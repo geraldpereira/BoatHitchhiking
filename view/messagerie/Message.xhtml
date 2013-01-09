@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<s:div id="msgDiv#{indexMsg}_#{index}_#{idList}">
+		<rich:simpleTogglePanel headerClass="message-header" bodyClass="message-body" switchType="client" opened="#{not conversationListHandler.isLu(_message)}" oncollapse="showMsgTexte#{indexMsg}_#{index}_#{idList}();" onexpand="hideMsgTexte#{indexMsg}_#{index}_#{idList}();">
+			<f:facet name="header">
+			<s:div>
+				<h:outputText value="#{conversationListHandler.isRecu(_message) ? messages['mp.recu'] : messages['mp.envoye']} "/>
+				<rich:spacer  width="5px"/>				
+				<h:outputText value="#{_message.dateEnvoi}">
+					<s:convertDateTime dateStyle="short" timeStyle="medium" type="both" />
+				</h:outputText>
+				<span id="msgTexte#{indexMsg}_#{index}_#{idList}" ><h:outputText style="color:grey;"
+				value=" - #{_message.texte}"
+				converter="#{trimMessageConverter}" /></span>
+				</s:div>
+			</f:facet>
+			<s:formattedText value="#{_message.texte}"/>
+			<!-- <h:outputText value="#{_message.texte}" converter="#{HTMLConverter}" escape="false"/> -->
+		</rich:simpleTogglePanel>
+		
+		<rich:jQuery timing="onJScall" name="showMsgTexte#{indexMsg}_#{index}_#{idList}" selector="#msgTexte#{indexMsg}_#{index}_#{idList}" query="show()" />
+		<rich:jQuery timing="onJScall" name="hideMsgTexte#{indexMsg}_#{index}_#{idList}" selector="#msgTexte#{indexMsg}_#{index}_#{idList}" query="hide()" />
+		<s:fragment rendered="#{not conversationListHandler.isLu(_message)}">
+			<script>
+				hideMsgTexte#{indexMsg}_#{index}_#{idList}();
+			</script>
+		</s:fragment>
+	</s:div>
+
+
+</ui:composition>

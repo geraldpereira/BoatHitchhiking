@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<s:fragment rendered="#{utilisateurEdit.managed}">
+			<title>#{messages['utilisateur.utilisateur']} #{utilisateurEdit.instance.pseudonyme} - #{messages['meta.title']}</title>
+		</s:fragment>
+	</ui:define>
+	<ui:define name="side">
+		<s:fragment rendered="#{utilisateurEdit.managed}">
+			<ui:include src="/note.xhtml">
+  				<ui:param name="id" value="noteUtilisateur" />
+  				<ui:param name="note" value="#{utilisateurEdit.instance.note}" />
+  				<ui:param name="renderIndications" value="#{identity.loggedIn and utilisateurCourant.pseudonyme.equals(utilisateurEdit.instance.pseudonyme)}" />
+  				<ui:param name="indications" value="#{utilisateurHelper.getIndications(utilisateurEdit.instance)}" />
+			</ui:include>
+		</s:fragment>
+	</ui:define>
+	<ui:define name="body">
+		<h1>#{messages['utilisateur.monCompte']}</h1>
+
+		<a:region renderRegionOnly="true">
+			<a:form id="utilisateur" styleClass="edit"
+				enctype="multipart/form-data">
+
+				<rich:panel>
+					<f:facet name="header">#{messages['utilisateur.coord']}</f:facet>
+
+					<s:decorate id="pseudonyme" template="../layout/display.xhtml"
+						rendered="#{utilisateurEdit.managed}">
+						<ui:define name="label">#{messages['utilisateur.pseudonyme']}</ui:define>
+						<h:outputText value="#{utilisateurEdit.instance.pseudonyme}" />
+					</s:decorate>
+					
+					<s:decorate id="motDePasseField" template="../layout/edit.xhtml">
+						<ui:define name="label">#{messages['utilisateur.motDePasse']}</ui:define>
+						<h:inputSecret id="motDePasse" required="true" redisplay="true"
+							value="#{utilisateurEdit.instance.motDePasse}">
+							<a:support event="onblur" reRender="motDePasseField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+								bypassUpdates="true" ajaxSingle="true" />
+						</h:inputSecret>
+					</s:decorate>
+
+					
+
+					<div style="clear: both;" />
+
+					<h:panelGrid columns="2" style="width:100%;" border="0"
+						cellpadding="0" cellspacing="0"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+						
+						<h:panelGroup>
+							<s:decorate rendered="#{utilisateurEdit.managed}" id="mail"
+							template="../layout/display.xhtml">
+								<ui:define name="label">#{messages['utilisateur.mail']}</ui:define>
+								<h:outputText id="mail" value="#{utilisateurEdit.instance.mail}">
+								</h:outputText>
+							</s:decorate>
+						</h:panelGroup>
+						
+						
+						<h:panelGroup>
+							<h:selectBooleanCheckbox
+										value="#{utilisateurEdit.instance.mailAuth}" />
+							<div style="width:170px;float:right;"><h:outputText value="#{messages['utilisateur.mailAuth']}"/></div>			                    	
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="nomField" template="../layout/edit.xhtml">
+								<ui:define name="label">#{messages['utilisateur.nom']}</ui:define>
+								<h:inputText id="nom" required="true"
+									converter="#{majusculeConverter}"
+									value="#{utilisateurEdit.instance.coordonnees.nom}">
+									<a:support event="onblur" reRender="nomField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="true" ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="prenomField" template="../layout/edit.xhtml">
+								<ui:define name="label">#{messages['utilisateur.prenom']}</ui:define>
+								<h:inputText id="prenom" required="true"
+									converter="#{majusculeConverter}"
+									value="#{utilisateurEdit.instance.coordonnees.prenom}">
+									<a:support event="onblur" reRender="prenomField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="true" ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="telField" template="../layout/edit.xhtml">
+								<ui:define name="label">#{messages['utilisateur.telephone']}</ui:define>
+								<h:inputText id="tel" required="true"
+									value="#{utilisateurEdit.instance.coordonnees.tel}">
+									<a:support event="onblur" reRender="telField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="true" ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="telBisField" template="../layout/edit.xhtml">
+								<ui:define name="label">#{messages['utilisateur.telephone.bis']}</ui:define>
+								<h:inputText id="telBis"
+									value="#{utilisateurEdit.instance.coordonnees.telBis}">
+									<a:support event="onblur" reRender="telBisField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+										bypassUpdates="true" ajaxSingle="true" />
+								</h:inputText>
+							</s:decorate>
+						</h:panelGroup>
+
+					</h:panelGrid>
+
+					<s:decorate id="siteField" template="../layout/edit.xhtml">
+						<ui:define name="label">#{messages['utilisateur.site']}</ui:define>
+						<h:inputText id="site"
+							value="#{utilisateurEdit.instance.coordonnees.site}">
+							<a:support event="onblur" reRender="siteField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+								bypassUpdates="true" ajaxSingle="true" />
+						</h:inputText>
+					</s:decorate>
+
+					<div style="clear: both" />
+
+				</rich:panel>
+
+				<rich:panel>
+					<f:facet name="header">#{messages['utilisateur.infoPerso']}</f:facet>
+
+					<h:panelGrid columns="2" style="width:100%;" border="0"
+						cellpadding="0" cellspacing="0"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+						<h:panelGroup>
+							<ui:include src="/utilisateur/PhotoEditInner.xhtml" />
+						</h:panelGroup>
+						<h:panelGroup>
+							<ui:include src="../LieuEditInner.xhtml">
+								<ui:param name="idForm" value="utilisateur" />
+								<ui:param name="id" value="utilisateur" />
+								<ui:param name="lieuTemplate" value="/layout/edit.xhtml" />
+								<ui:param name="lieuLabelClass" value="small" />
+								<ui:param name="lieuSelectionManager"
+									value="#{lieuHome.lieuSelectionManager}" />
+							</ui:include>
+							<s:decorate id="adresseField" template="../layout/edit.xhtml">
+								<ui:define name="label">#{messages['utilisateur.adresse']}</ui:define>
+								<h:inputTextarea id="adresse" rows="6"
+									style="width:290px!important;"
+									value="#{utilisateurEdit.instance.coordonnees.adresse}" />
+							</s:decorate>
+						</h:panelGroup>
+					</h:panelGrid>
+				</rich:panel>
+
+				<fc:togglePanel id="utilisateurAvance"
+					libelle="#{messages['global.avance']}"
+					toggleBean="#{utilisateurAvance}"
+					toggleClass="avance">
+
+					<h:panelGrid columns="2" style="width:100%;" border="0"
+						cellpadding="0" cellspacing="0"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+
+						<s:decorate id="sexeField" template="../layout/edit.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['utilisateur.sexe']}</ui:define>
+							<h:selectOneMenu id="sexe"
+								value="#{utilisateurEdit.instance.sexe}">
+								<s:selectItems value="#{sexes}" var="_curSexe"
+									label="#{messages['sexe.'.concat(_curSexe.name())]}"
+									noSelectionLabel=" " />
+								<s:convertEnum />
+							</h:selectOneMenu>
+						</s:decorate>
+
+						<s:decorate id="dateNaissanceField"
+							template="../layout/editAide.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['utilisateur.dateNaissance']}</ui:define>
+							<rich:calendar id="dateNaissance" 
+								value="#{utilisateurEdit.instance.dateNaissance}"
+								datePattern="#{dateFormat.getDateFormatShort(locale)}"
+								locale="#{locale}" popup="true" showApplyButton="false">
+								<a:support event="onchange" reRender="dateNaissanceField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+							</rich:calendar>
+							<ui:define name="desc">#{messages['global.tooltip.calendar']}</ui:define>
+						</s:decorate>
+
+					</h:panelGrid>
+
+					<ui:include src="/utilisateur/LangueEditInner.xhtml" />
+
+					<s:decorate id="descriptionField" template="../layout/edit.xhtml">
+						<ui:define name="label">#{messages['utilisateur.description']}</ui:define>
+						<h:inputTextarea id="description" rows="15"
+							style="width:600px!important;"
+							value="#{utilisateurEdit.instance.description}" />
+					</s:decorate>
+
+
+
+				</fc:togglePanel>
+
+				<rich:tabPanel switchType="client" headerSpacing="5px"
+					inactiveTabClass="tabCellInactive">
+					<rich:tab label="#{messages['utilisateur.experiences']}">
+						<s:decorate id="xpGeneraleField" template="../layout/edit.xhtml">
+							<ui:param name="labelClass" value="large" />
+							<ui:define name="label">#{messages['utilisateur.expGenerale']}</ui:define>
+							<h:selectOneMenu id="xpGenerale"
+								value="#{utilisateurEdit.instance.xpGenerale}" required="false">
+								<s:selectItems value="#{experiencesGenerales}" noSelectionLabel=" " 
+									var="_curXpGenerale"
+									label="#{messages['xpGenerale.'.concat(_curXpGenerale.name())]}"
+									hideNoSelectionLabel="no" />
+								<s:convertEnum />
+							</h:selectOneMenu>
+						</s:decorate>
+						<div style="clear: both" />
+						<ui:include src="/experience/XpEditInner.xhtml" />
+					</rich:tab>
+					<rich:tab label="#{messages['utilisateur.competences']}">
+						<ui:include src="/competence/CompetencesUtilisateurEdit.xhtml" />
+					</rich:tab>
+
+				</rich:tabPanel>
+				<div style="clear: both" />
+
+
+				<div style="clear: both"><span class="required">*</span>
+					#{messages['global.champsRequis']}</div>
+					
+				<div class="actionButtons">
+					
+					 <h:commandButton
+					id="update" value="#{messages['bouton.modifier']}"
+					action="#{utilisateurEdit.update}"	 /> 
+					
+					<h:commandButton
+					onclick="#{rich:component('deleteConfirm')}.show();return false;"
+					value="#{messages['bouton.supprimer']}" id="delete"
+					/>
+					
+					 <s:button id="cancelEdit"
+					value="#{messages['bouton.annuler']}"
+					action="#{utilisateurEdit.cancel()}"
+					/> 
+										
+					</div>
+
+
+			</a:form>
+		</a:region>
+
+		<a:region>
+			<s:fragment rendered="#{utilisateurEdit.managed}">
+				<fc:confirmModalPanel id="deleteConfirm" width="400">
+					<ui:define name="headerMP">
+						<h:outputText
+							value="#{messages['utilisateur.modalPanelSupprimer.titre']}" />
+					</ui:define>
+					<ui:define name="bodyMP">
+						<p>#{messages['utilisateur.modalPanelSupprimer.texte1']}</p>
+						<p>#{messages['utilisateur.modalPanelSupprimer.texte2']}</p>
+						<p>#{messages['utilisateur.modalPanelSupprimer.texte3']}</p>
+						<s:decorate id="motDePasseFieldConfirm"
+							template="/layout/edit.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['utilisateur.motDePasse']}</ui:define>
+							<h:inputSecret id="motDePasseConfirm" required="true"
+								redisplay="true" value="#{utilisateurEdit.motDePasse}">
+								<a:support event="onblur" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									action="#{utilisateurEdit.validatePasswordForRemove()}"
+									reRender="motDePasseFieldConfirm,confirmer" bypassUpdates="false"
+									ajaxSingle="true" />
+							</h:inputSecret>
+						</s:decorate>
+					</ui:define>
+					<ui:define name="actionMP">
+						<a:commandButton id="confirmer" value="Confirmer"
+							reRender="motDePasseFieldConfirm" eventsQueue="utilisateurQueue" ignoreDupResponses="true" action="#{utilisateurEdit.remove}"
+							immediate="true"
+							oncomplete="#{utilisateurEdit.validatePasswordForRemove() == true ? 'javascript:location.href = \'../home.seam\';' : 'return false;'}" />
+					</ui:define>
+				</fc:confirmModalPanel>
+			</s:fragment>
+		</a:region>
+	</ui:define>
+</ui:composition>

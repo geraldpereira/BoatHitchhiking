@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+	
+	<ui:define name="meta">		
+		<meta name="description" content="#{messages['meta.sitemap.description']}"/>
+		<meta name="abstract" content="#{messages['meta.sitemap.abstract']}"/>
+		<meta name="robots" content="#{messages['meta.robots.follow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.sitemap.title']} - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="body">
+		<h1>#{messages['sitemap']}</h1>
+		
+		<rich:panel>
+			<f:facet name="header"><s:link view="/home.xhtml" value="#{messages['sitemap.home']}" propagation="none"/></f:facet>
+			<h:outputText value="#{messages['sitemap.home.description']}" />
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['sitemap.various']}" /></f:facet>
+			<ul>
+				<li>
+					<s:link view="/faq.xhtml" value="#{messages['sitemap.various.faq']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.various.faq.description']}" />
+				</li>
+				<li>
+					<s:link view="/conditionsUtilisation_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.various.cnd']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.various.cnd.description']}" />
+				</li>
+				<li>
+					<s:link view="/presse.xhtml" value="#{messages['sitemap.various.press']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.various.press.description']}" />
+				</li>
+				<li>
+					<s:link view="/annuaire.xhtml" value="#{messages['sitemap.various.dir']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.various.dir.description']}" />
+				</li>
+			</ul>
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header"><s:link view="/static/conseils_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils']}"/></f:facet>
+			<h:outputText value="#{messages['sitemap.conseils.description']}" />
+			<ul>
+				<li>
+					<s:link view="/static/compRequises_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.compRequises']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.compRequises.description']}" />
+				</li>
+				<li>
+					<s:link view="/static/datesEtLieux_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.datesEtLieux']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.datesEtLieux.description']}" />
+				</li>
+				<li>
+					<s:link view="/static/diffBateaux_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.diffBateaux']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.diffBateaux.description']}" />
+				</li>
+				<li>
+					<s:link view="/static/lexique_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.lexique']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.lexique.description']}" />
+				</li>
+				<li>
+					<s:link view="/static/malDeMer_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.malDeMer']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.malDeMer.description']}" />
+				</li>
+				<li>
+					<s:link view="/static/noeuds_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.noeuds']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.noeuds.description']}" />
+				</li>
+				<li>
+					<s:link view="/static/securite_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.securite']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.securite.description']}" />
+				</li>
+				<li>
+					<s:link view="/static/datesEtLieux_#{locale.getLanguage().toString()}.xhtml" value="#{messages['sitemap.conseils.trouve']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.conseils.trouve.description']}" />
+				</li>
+			</ul>
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['sitemap.searches']}" /></f:facet>
+			<h:outputText value="#{messages['sitemap.searches.description']}" />
+			<ul>
+				<li>
+					<s:link view="/recherche/UtilisateurList.xhtml" value="#{messages['sitemap.searches.users']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.searches.users.description']}" />
+				</li>
+				<li>
+					<s:link view="/recherche/BateauList.xhtml" value="#{messages['sitemap.searches.boats']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.searches.boats.description']}" />
+				</li>
+				<li>
+					<s:link view="/recherche/OffreList.xhtml" value="#{messages['sitemap.searches.offers']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.searches.offers.description']}" />
+				</li>
+				<li>
+					<s:link view="/recherche/DemandeList.xhtml" value="#{messages['sitemap.searches.requests']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.searches.requests.description']}" />
+				</li>
+			</ul>
+		</rich:panel>
+		
+		<!--<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['sitemap.views']}" /></f:facet>
+			<h:outputText value="#{messages['sitemap.views.description']}" />
+			<ul>
+				<li>
+					<s:link view="/utilisateur/Utilisateur.xhtml" value="#{messages['sitemap.views.users']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.views.users.description']}" />
+				</li>
+				<li>
+					<s:link view="/bateau/Bateau.xhtml" value="#{messages['sitemap.views.boats']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.views.boats.description']}" />
+				</li>
+				<li>
+					<s:link view="/annonce/Offre.xhtml" value="#{messages['sitemap.views.offers']}" propagation="none"/>
+					<h:outputText value=" #{messages['sitemap.views.offers.description']}" />
+				</li>
+				<li>
+					<s:link view="/annonce/Demande.xhtml" value="#{messages['sitemap.views.requests']}" propagation="none"/>
+				</li>
+			</ul>
+		</rich:panel>
+		
+		--><rich:panel>
+			<f:facet name="header"><s:link view="/utilisateur/compte/SEnregistrer.xhtml" value="#{messages['sitemap.register']}"/></f:facet>
+			<h:outputText value="#{messages['sitemap.register.description']}" />
+		</rich:panel>
+				
+	</ui:define>
+</ui:composition>

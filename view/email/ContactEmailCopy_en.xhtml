@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BoatHitchhiking - #{contactEmailManager.mail.title}" />
+		<ui:param name="toName" value="#{contactEmailManager.mail.fromPseudo}"/>
+		<ui:param name="toMail" value="#{contactEmailManager.mail.fromMail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BoatHitchhiking"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="en"/>
+				 	
+		<ui:define name="body">
+		
+			<p><b>The following message was sent:</b></p>
+			<p>
+			<s:formattedText value="#{contactEmailManager.mail.text}"/>
+			</p>
+			<p><b>The <a href="#{proprieteFactory.getBasePath('en')}">BoatHitchhiking</a> team.</b></p>			
+		</ui:define>
+</ui:composition>
+
+
+

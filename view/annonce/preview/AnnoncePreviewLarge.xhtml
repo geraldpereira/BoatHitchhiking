@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<fc:cachingSet var="_hasPhoto" value="#{annonceUtils.hasPhoto(annonce)}">
+	<fc:cachingSet var="_hasDesc" value="#{annonce.getDescription() != null and !annonce.getDescription().isEmpty()}">
+	<fc:cachingSet var="_isOffre" value="#{annonceUtils.isOffre(annonce)}">
+	<fc:cachingSet var="_isDemande" value="#{annonceUtils.isDemande(annonce)}">
+	
+	<fc:roundedPanel id="#{annonce.numAnnonce}" titleColor="white"
+		imageClass="#{annonceUtils.isOffre(annonce) ? 'round-panel-orange':'round-panel'}">
+		<ui:define name="header">
+			<s:div style="width:580px;">
+				<s:fragment rendered="#{_isOffre}">
+					<ui:include src="/annonce/preview/OffrePreviewHeader.xhtml" />
+				</s:fragment>
+				<s:fragment rendered="#{_isDemande}">
+					<ui:include src="/annonce/preview/DemandePreviewHeader.xhtml" />
+				</s:fragment>
+			</s:div>
+		</ui:define>
+		<s:decorate
+			template="/layout/previewPanel.xhtml">
+			<ui:param name="hasPhoto" value="#{_hasPhoto}" />
+			<ui:param name="hasDesc" value="false" />
+			<!--<ui:param name="headerClass" value="smallHeader" />-->
+			<ui:param name="bodyClass" value="noPadding width600" />
+			
+			<ui:define name="photos">
+				<s:fragment rendered="#{_isOffre}">
+					<ui:include src="/annonce/preview/OffrePreviewPhotos.xhtml" />
+				</s:fragment>
+				<s:fragment rendered="#{_isDemande}">
+					<ui:include src="/annonce/preview/DemandePreviewPhoto.xhtml" />
+				</s:fragment>
+			</ui:define>
+			<ui:define name="infos">
+				<ui:include src="/annonce/preview/AnnoncePreviewSmallInfos.xhtml">
+					<!--<ui:param name="infosLabelClass"
+						value="#{(not _hasPhoto and _hasDesc)? 'small' : ''}" />-->
+					<ui:param name="infosAllClass"
+						value="#{_hasPhoto ? '' : 'smallInfos'}" />
+				</ui:include>
+				<ui:include src="/annonce/preview/AnnoncePreviewDesc.xhtml">
+					<!--<ui:param name="infosLabelClass" value="#{(not _hasPhoto and _hasDesc)? 'small' : ''}" />-->
+					<ui:param name="infosAllClass"
+						value="#{_hasPhoto ? '' : 'smallInfos'}" />
+				</ui:include>
+			</ui:define>
+
+			<ui:define name="more">
+				<fc:morePanel id="#{annonce.numAnnonce}" moreClass="#{_isOffre ? 'morePanel-orange':'morePanel-blue'}">
+				<rich:spacer width="100%" height="5px"/>
+				<h:panelGrid columns="2" width="100%" border="0" cellpadding="0"
+					columnClasses="panelGrid-column width50,panelGrid-column width50"
+					rendered="#{_isOffre}">
+					<h:panelGroup>
+						<ui:include
+							src="/annonce/preview/OffreUtilisateurPreview.xhtml">
+							<ui:param name="utilisateur" value="#{annonce.utilisateur}" />
+							<ui:param name="infosLabelClass" value="small" />
+						</ui:include>
+					</h:panelGroup>
+					<h:panelGroup>
+						<ui:include src="/bateau/preview/BateauPreviewSmall.xhtml">
+							<ui:param name="bateau" value="#{annonce.bateau}" />
+						</ui:include>
+					</h:panelGroup>
+				</h:panelGrid> 
+				<s:fragment rendered="#{_isDemande}">
+					<ui:include
+						src="/annonce/preview/DemandeUtilisateurPreview.xhtml">
+						<ui:param name="utilisateur" value="#{annonce.utilisateur}" />
+					</ui:include>
+				</s:fragment>
+				</fc:morePanel>
+			</ui:define>
+		</s:decorate>
+	</fc:roundedPanel>
+	</fc:cachingSet>
+	</fc:cachingSet>
+	</fc:cachingSet>
+	</fc:cachingSet>
+</ui:composition>

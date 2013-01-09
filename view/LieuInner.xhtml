@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+		
+		 <s:decorate id="pays" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['lieu.pays']}</ui:define>
+            <h:outputText value="#{messages['pays.'.concat(lieuHome.instance.pays.getIdPays())]}"/>
+        </s:decorate>
+		 <s:decorate id="ville" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['lieu.ville']}</ui:define>
+            <h:outputText value="#{lieuHome.instance.ville}"/>
+        </s:decorate>
+
+</ui:composition>

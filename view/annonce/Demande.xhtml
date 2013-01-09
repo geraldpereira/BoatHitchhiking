@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="#{messages['meta.demande.description']}" />
+		<meta name="abstract" content="#{messages['meta.demande.abstract']}" />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.demande.title']} -
+		#{messages['meta.title']}</title>
+	</ui:define>
+	<ui:define name="side">
+		<ui:include src="/note.xhtml">
+  			<ui:param name="id" value="noteDemande" />
+  			<ui:param name="note" value="#{demandeView.instance.note}" />
+  			<ui:param name="renderIndications" value="#{identity.loggedIn and utilisateurCourant.pseudonyme.equals(demandeView.instance.utilisateur.pseudonyme)}" />
+  			<ui:param name="indications" value="#{demandeHelper.getIndications(demandeView.instance)}" />
+		</ui:include>
+			
+			<fc:roundedPanel id="liens" title="#{messages['global.liens']}"
+				titleColor="none" imageClass="round-panel-plain">
+				<h:panelGrid columns="2" style="width:100%;" border="0"
+					cellpadding="0" cellspacing="3"
+					columnClasses="panelGrid-column,panelGrid-column">
+
+					<h:panelGroup>
+						<h:graphicImage value="/img/offre.png"
+							style="border:0;float:left;"
+							alt="#{messages['demande.voirOffres']}" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:link id="lienOffres" view="/recherche/OffreList.xhtml"
+							value="#{messages['demande.voirOffres']}" propagation="none">
+							<f:param name="dateDebutFrom"
+								value="#{demandeView.instance.dateDebut}" />
+							<f:param name="dateFinTo"
+								value="#{demandeView.instance.dateFin}" />
+							<f:param name="paysDepart"
+								value="#{demandeView.instance.lieuDepart.pays.idPays}" />
+							<f:param name="paysArrivee"
+								value="#{demandeView.instance.lieuArrivee.pays.idPays}" />
+						</s:link>
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:panelGroup>
+					<ui:include src="../components/partage.xhtml">
+						<ui:param name="helper" value="#{demandeHelper}" />
+						<ui:param name="instance" value="#{demandeView.instance}" />
+					</ui:include>
+				</h:panelGroup>
+			</fc:roundedPanel>
+	</ui:define>
+	<ui:define name="body">
+
+		<h:form id="demande">
+			<h1><h:outputText value="#{demandeView.instance.titre}" /></h1>
+			<rich:panel>
+				<s:decorate id="dateMaj" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['annonce.maj']}</ui:define>
+					<h:outputText value="#{demandeView.instance.dateMaj}">
+						<s:convertDateTime dateStyle="medium" type="date" />
+					</h:outputText>
+				</s:decorate>
+				<div style="clear: both" />
+			</rich:panel>
+
+			<rich:panel>
+				<f:facet name="header">#{messages['annonce.detail']}</f:facet>
+				<f:facet name="header">#{messages['annonce.detail']}</f:facet>
+				<h:panelGrid columns="2" width="100%" border="0" cellpadding="0"
+				columnClasses="panelGrid-column width50,panelGrid-column width50">
+
+				<h:panelGroup>
+					<fc:roundedPanel id="depart" titleColor="white"
+							imageClass="round-panel-simple">
+							<ui:define name="header">#{messages['annonce.depart']}</ui:define>
+							<s:decorate id="dateDebut" template="/layout/display.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['annonce.date']}</ui:define>
+								<h:outputText value="#{demandeView.instance.dateDebut}">
+									<s:convertDateTime dateStyle="medium" type="date" />
+								</h:outputText>
+							</s:decorate>
+							<s:decorate id="lieuDepart" template="/layout/display.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['annonce.lieu']}</ui:define>
+								<ui:include src="/LieuPreview.xhtml">
+									<ui:param name="lieu" value="#{demandeView.instance.lieuDepart}" />
+								</ui:include>
+							</s:decorate>
+						</fc:roundedPanel>
+						</h:panelGroup>
+						<h:panelGroup>
+						<fc:roundedPanel id="arrivee" titleColor="white"
+							imageClass="round-panel-simple">
+							<ui:define name="header">#{messages['annonce.arrivee']}</ui:define>
+							<s:decorate id="dateFin" template="/layout/display.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['annonce.date']}</ui:define>
+								<h:outputText value="#{demandeView.instance.dateFin}">
+									<s:convertDateTime dateStyle="medium" type="date" />
+								</h:outputText>
+							</s:decorate>
+							<s:decorate id="lieuArrivee" template="/layout/display.xhtml">
+								<ui:param name="labelClass" value="small" />
+								<ui:define name="label">#{messages['annonce.lieu']}</ui:define>
+								<ui:include src="/LieuPreview.xhtml">
+									<ui:param name="lieu" value="#{demandeView.instance.lieuArrivee}" />
+								</ui:include>
+							</s:decorate>
+						</fc:roundedPanel>
+						</h:panelGroup>
+				</h:panelGrid>
+				<fc:roundedPanel id="financement" titleColor="white"
+					imageClass="round-panel-simple">
+					<ui:define name="header">#{messages['annonce.financement']}</ui:define>
+					<h:panelGrid columns="2" style="width:100%;" border="0"
+						cellpadding="0" cellspacing="0"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+						<s:decorate id="modePaiement" template="/layout/display.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['annonce.modePaiement']}</ui:define>
+							<h:outputText
+								value="#{messages['typePaiement.'.concat(demandeView.instance.contribFin.typePaiement.name())]}" />
+						</s:decorate>
+						<s:decorate id="montant" template="/layout/display.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['annonce.montant']}</ui:define>
+							<h:outputText value="#{demandeView.instance.contribFin.montant} " />
+							<ui:define name="type">
+								<h:outputText
+									value="#{messages['monnaie.'.concat(demandeView.instance.contribFin.monnaie.idMonnaie)]} (#{demandeView.instance.contribFin.monnaie.code})" />
+							</ui:define>
+						</s:decorate>
+					</h:panelGrid>
+				</fc:roundedPanel>
+			</rich:panel>
+
+			<fc:togglePanel id="annonceAvance"
+				libelle="#{messages['global.avance']}"
+				toggleBean="#{annonceAvance}" toggleClass="avance">
+				<h:panelGrid columns="2" style="width:100%;" border="0"
+					cellpadding="0" cellspacing="0"
+					columnClasses="panelGrid-column width50,panelGrid-column width50">
+					<s:decorate id="typeNavId" template="/layout/display.xhtml">
+						<ui:define name="label">#{messages['annonce.typeNav']}</ui:define>
+						<h:outputText value="#{messages['global.none']}"
+							styleClass="messageTableVide"
+							rendered="#{empty demandeView.instance.typesNav}" />
+						<rich:dataList id="nav" value="#{demandeView.instance.typesNav}"
+							var="_nav" rendered="#{not empty demandeView.instance.typesNav}">
+							<h:outputText
+								value="#{messages['typeNav.'.concat(_nav.name())]}" />
+						</rich:dataList>
+					</s:decorate>
+					<s:decorate id="typeCoque" template="/layout/display.xhtml">
+						<ui:define name="label">#{messages['demande.coque']}</ui:define>
+						<h:outputText
+							value="#{messages['typeCoque.'.concat(demandeView.instance.typeCoque.name())]}" />
+					</s:decorate>
+				</h:panelGrid>
+				<s:decorate id="description" template="/layout/display.xhtml" styleClass="width600">
+					<ui:define name="label">#{messages['annonce.description']}</ui:define>
+						<h:outputText value="#{demandeView.instance.description}" converter="#{HTMLConverter}" escape="false"/>
+				</s:decorate>
+			</fc:togglePanel>
+
+			<div style="clear: both" />
+			<rich:tabPanel switchType="ajax" headerSpacing="5px"
+				inactiveTabClass="tabCellInactive" selectedTab="Hidden"
+				rendered="#{!demandeView.estProprietaire() || authenticator.isAdmin()}">
+				<rich:tab label="#{messages['demande.demandeur']}">
+					<ui:include src="/utilisateur/preview/UtilisateurPreview.xhtml">
+						<ui:param name="utilisateur"
+							value="#{demandeView.instance.utilisateur}" />
+						<ui:param name="object" value="#{demandeView.instance}" />
+						<ui:param name="headerClass" value="smallHeader" />
+					</ui:include>
+				</rich:tab>
+				<rich:tab name="Hidden" label="Hidden" style="visibility:hidden;">
+					<h:outputText value="#{messages['global.clickOnTab']}"
+						styleClass="messageTableVide" />
+				</rich:tab>
+			</rich:tabPanel>
+
+			<div style="clear: both" />
+
+			<div class="actionButtons">
+			
+			<s:button
+				view="/annonce/DemandeEdit.xhtml" id="edit"
+				value="#{messages['bouton.editer']}"
+				rendered="#{demandeView.estProprietaire()}">
+				<f:param name="demandeNumAnnonce" value="#{demandeView.demandeNumAnnonce}"/>
+				<f:param name="urlDecorator" value="#{demandeView.urlDecorator}"/>
+			</s:button> 
+			
+			<s:button
+				action="terminer"
+				id="terminer" value="#{messages['bouton.terminer']}" />
+				
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

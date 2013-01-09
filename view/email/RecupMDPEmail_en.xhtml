@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BoatHitchhiking - Password reset" />
+		<ui:param name="toName" value="#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom}"/>
+		<ui:param name="toMail" value="#{emailManager.utilisateur.mail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BoatHitchhiking"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="en"/>
+		<ui:define name="copy">
+			<m:bcc name="Admin" address="boathitchhiking@gmail.com" />
+		</ui:define>
+		
+		<ui:define name="body">
+
+			<p>#{emailManager.utilisateur.coordonnees.nom}
+			#{emailManager.utilisateur.coordonnees.prenom},</p>
+
+			<p>This email follows up on your account or password recovery query.</p>
+			
+			<p>Your login is : <b>#{emailManager.utilisateur.pseudonyme}</b>.</p>
+			
+			<p>As your password is encrypted in our database, it must be reseted.</p>
+			
+			<p>So, please click on the link below (you will be redirected to the new password capture page) :</p>
+
+			<p><a href="#{proprieteFactory.getBasePath('en')}RecupererMotDePasse?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;hash=#{emailManager.getHashMail()}">#{proprieteFactory.getBasePath('en')}RecupererMotDePasse?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;hash=#{emailManager.getHashMail()}</a></p>
+			<p>The <a href="#{proprieteFactory.getBasePath('en')}">BoatHitchhiking</a> team.</p>
+
+			<f:facet name="alternative">
+#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom},
+
+This email follows up on your account or password recovery query.
+Your login is : #{emailManager.utilisateur.pseudonyme}.
+As your password is encrypted in our database, it must be reseted.
+			
+So, please click on the link below (you will be redirected to the new password capture page) :
+#{proprieteFactory.getBasePath('en')}RecupererMotDePasse?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;hash=#{emailManager.getHashMail()}
+
+The BoatHitchhiking team.
+</f:facet>
+
+		</ui:define>
+</ui:composition>
+
+
+

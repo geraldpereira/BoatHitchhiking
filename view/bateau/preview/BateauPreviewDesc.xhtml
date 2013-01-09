@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<s:decorate id="voiles" template="/layout/display.xhtml" rendered="#{not empty bateau.voiles}">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['bateau.voiles']}</ui:define>
+		<h:outputText value="#{messages['global.none']}"
+			styleClass="messageTableVide"
+			rendered="#{empty bateau.voiles}" />
+		<rich:dataList id="voiles" value="#{bateau.voiles}"
+			var="_voile">
+			<h:outputText value="#{messages['voile.'.concat(_voile.name())]}" />
+		</rich:dataList>
+	</s:decorate>
+
+	<s:decorate template="/layout/display.xhtml"
+		rendered="#{bateau.info != null and not bateau.info.isEmpty()}">
+		<ui:param name="labelClass" value="#{infosLabelClass}" />
+		<ui:param name="allClass" value="#{infosAllClass}" />
+		<ui:define name="label">#{messages['bateau.infos']}    </ui:define>
+			<h:outputText converter="#{trimDescriptionConverter}"
+			value="#{bateau.info}" />
+	</s:decorate>
+
+</ui:composition>
+

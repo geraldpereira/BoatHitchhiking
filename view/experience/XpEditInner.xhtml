@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+<a:region>
+<fc:loadingScreen styleClass="loadingSmallMarron" text="#{messages['layout.centre.chargement']}" id="xp" timing="immediate">
+<fc:roundedPanel id="Xp" title="#{messages['utilisateur.experiences']}" titleColor="white" imageClass="round-panel-simple">
+	<s:div id="experiencesUtilisateur">
+		<h:outputText styleClass="messageTableVide"
+				value="#{messages['experience.aucuneXP']}"
+				rendered="#{empty xpManager.xpsUtilisateur}" /> 
+	
+		<s:div rendered="#{not empty xpManager.xpsUtilisateur}">
+		
+		<rich:dataTable value="#{xpManager.xpsUtilisateur}" border="0" var="_current" styleClass="noBorder" columnClasses="noBorder" 
+			rowKeyVar="_index">
+			<rich:column>
+				<div id="xpTogglePanel#{_index}">
+				<h:panelGrid columns="2"  border="0" cellpadding="0" cellspacing="0"
+					width="100%"
+					columnClasses="panelGrid-column width85,panelGrid-column width15">
+					<h:panelGroup>
+						<s:decorate id="titreField#{_index}"
+							template="../layout/edit.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['experience.titre']}</ui:define>
+							<h:inputText id="titre#{_index}" required="true" converter="#{majusculeConverter}"
+								value="#{_current.titre}" style="width:370px;">
+								<a:support event="onblur" reRender="titreField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="true" />
+								</h:inputText>
+						</s:decorate>
+					</h:panelGroup>
+					<h:panelGroup>
+						<a:commandLink action="#{xpManager.supprimerExperience(_index)}" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+							styleClass="supprimer" reRender="experiencesUtilisateur"  onclick="showxp();" oncomplete="hidexp();"
+							value="#{messages['bouton.supprimer']}" ajaxSingle="true" />
+					</h:panelGroup>
+				</h:panelGrid> 
+				<h:panelGrid columns="2"  border="0" cellpadding="0" cellspacing="0" width="100%"
+					columnClasses="panelGrid-column width50,panelGrid-column width50">
+						<s:decorate id="typePosteField#{_index}"
+							template="../layout/edit.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['experience.typePoste']}</ui:define>
+							<h:selectOneMenu id="typePoste#{_index}"
+								value="#{_current.typePoste}" required="true">
+								<s:selectItems value="#{typePostes}" var="_curTypePoste"
+									label="#{messages['typePoste.'.concat(_curTypePoste.name())]}"
+									hideNoSelectionLabel="false" noSelectionLabel=" " />
+								<s:convertEnum />
+								<a:support event="onchange" reRender="typePosteField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="true" />
+							</h:selectOneMenu>
+						</s:decorate>
+						
+						<s:decorate id="typeXPField#{_index}"
+							template="../layout/edit.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['experience.typeXp']}</ui:define>
+							<h:selectOneMenu id="typeXp#{_index}" value="#{_current.typeXp}"
+								required="true">
+								<s:selectItems value="#{typeXps}" var="_curTypeXp"
+									label="#{messages['typeXp.'.concat(_curTypeXp.name())]}"
+									hideNoSelectionLabel="false" noSelectionLabel=" " />
+								<s:convertEnum />
+								<a:support event="onchange" reRender="typeXPField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="true" />
+							</h:selectOneMenu>
+						</s:decorate>
+
+						<s:decorate id="dureeField#{_index}"
+							template="../layout/edit.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['experience.duree']}</ui:define>
+							<rich:inputNumberSpinner id="duree" minValue="0"
+								maxValue="10000" step="1" inputSize="5" style="width:72px;" required="true"
+									value="#{_current.duree}">
+								<a:support requestDelay="600" event="onchange" reRender="dureeField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="true" />	 
+								</rich:inputNumberSpinner>
+								
+							<ui:define name="type">
+								<h:selectOneMenu id="typeDuree#{_index}" style="width:60px;"
+									value="#{_current.typeDuree}" required="true">
+									<s:selectItems value="#{typeDurees}" var="_curTypeDuree"
+										label="#{messages['typeDuree.'.concat(_curTypeDuree.name())]}"
+										hideNoSelectionLabel="true" />
+									<s:convertEnum />
+								</h:selectOneMenu>
+							</ui:define>
+						</s:decorate>
+
+						<s:decorate id="typeCoqueField#{_index}"
+							template="../layout/edit.xhtml">
+							<ui:param name="labelClass" value="small" />
+							<ui:define name="label">#{messages['experience.typeCoque']}</ui:define>
+							<h:selectOneMenu id="typeCoque#{_index}"
+								value="#{_current.typeCoque}" required="true">
+								<s:selectItems value="#{typeCoques}" var="_curTypeCoque"
+									label="#{messages['typeCoque.'.concat(_curTypeCoque.name())]}"
+									hideNoSelectionLabel="false" noSelectionLabel=" "  />
+								<s:convertEnum />
+								<a:support event="onchange" reRender="typeCoqueField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="true" />
+							</h:selectOneMenu>
+						</s:decorate>
+
+				</h:panelGrid> 
+				
+				<s:decorate id="xpDescriptionField#{_index}"
+					template="../layout/edit.xhtml">
+					<ui:define name="label">#{messages['experience.description']}</ui:define>
+					<h:inputTextarea id="description#{_index}" rows="7"
+						style="width:590px!important;" value="#{_current.description}">
+						<a:support event="onblur" reRender="xpDescriptionField" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="true" />
+						</h:inputTextarea>
+						
+				</s:decorate>
+				<div style="clear: both"/>
+				<rich:separator width="100%" height="1px" rendered="#{(xpManager.xpsUtilisateur.size() -1)!= _index}"/>
+
+				</div>
+
+			</rich:column>
+		</rich:dataTable>
+		
+		</s:div>
+	</s:div>
+	<ui:define name="footer"> <a:commandLink action="#{xpManager.ajouterExperience()}" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+			styleClass="ajouter" reRender="experiencesUtilisateur" onclick="showxp();" oncomplete="hidexp();"
+			value="#{messages['experience.ajouterXP']}" ajaxSingle="true" /></ui:define>
+	
+	</fc:roundedPanel>
+	</fc:loadingScreen>
+	</a:region>
+	<div style="clear: both" />
+</ui:composition>

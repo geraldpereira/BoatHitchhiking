@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<s:decorate id="titreField" style="margin-left:10px;"
+		template="../layout/edit.xhtml">
+		<ui:param name="labelClass" value="small" />
+		<ui:define name="label">#{messages['annonce.titre']}</ui:define>
+		<h:inputText id="titre" required="true"
+			converter="#{majusculeConverter}"
+			value="#{demande.titre}" style="width:470px;">
+			<a:support event="onblur" reRender="titreField" bypassUpdates="true" eventsQueue="demandeQueue" ignoreDupResponses="true"
+				ajaxSingle="true" />
+		</h:inputText>
+
+	</s:decorate>
+	<div style="clear: both" />
+	<fc:roundedPanel id="depart" titleColor="white"
+		image="../img/round-panel-simple.png">
+		<ui:define name="header">#{messages['annonce.depart']}</ui:define>
+
+		<s:decorate id="dateDebutField" template="/layout/edit.xhtml">
+			<ui:param name="labelClass" value="small" />
+			<ui:define name="label">#{messages['annonce.date']}</ui:define>
+			<rich:calendar id="dateDebut" locale="#{locale}"
+				value="#{demande.dateDebut}"
+				datePattern="#{dateFormat.getDateFormatShort(locale)}">
+				<a:support event="onchanged" reRender="dateDebutField" eventsQueue="demandeQueue" ignoreDupResponses="true"
+					action="#{annonceHome.validerDateDebut}" ajaxSingle="true" />
+			</rich:calendar>
+		</s:decorate>
+
+
+		<div style="clear: both" />
+		<h:panelGrid columns="2" border="0" cellpadding="0" cellspacing="0"
+			width="100%"
+			columnClasses="panelGrid-column width50,panelGrid-column width50">
+			<ui:include src="../LieuEditInner.xhtml">
+				<ui:param name="idForm" value="demande" />
+				<ui:param name="id" value="demandeLieuDep" />
+				<ui:param name="lieuTemplate" value="/layout/edit.xhtml" />
+				<ui:param name="lieuLabelClass" value="small" />
+				<ui:param name="lieuSelectionManager"
+					value="#{annonceHome.lieuDepart.lieuSelectionManager}" />
+			</ui:include>
+
+		</h:panelGrid>
+	</fc:roundedPanel>
+	<fc:roundedPanel id="arrivee" titleColor="white"
+		image="../img/round-panel-simple.png">
+		<ui:define name="header">#{messages['annonce.arrivee']}</ui:define>
+		<s:decorate id="dateFinField" template="/layout/edit.xhtml">
+			<ui:param name="labelClass" value="small" />
+			<ui:define name="label">#{messages['annonce.date']}</ui:define>
+			<rich:calendar id="dateFin" locale="#{locale}"
+				value="#{demande.dateFin}"
+				datePattern="#{dateFormat.getDateFormatShort(locale)}">
+				<a:support event="onchanged" reRender="dateFinField" eventsQueue="demandeQueue" ignoreDupResponses="true"
+					action="#{annonceHome.validerDateFin}" ajaxSingle="true" />
+			</rich:calendar>
+		</s:decorate>
+		<div style="clear: both" />
+		<h:panelGrid columns="2" border="0" cellpadding="0" cellspacing="0"
+			width="100%"
+			columnClasses="panelGrid-column width50,panelGrid-column width50">
+			<ui:include src="../LieuEditInner.xhtml">
+				<ui:param name="idForm" value="demande" />
+				<ui:param name="id" value="demandeLieuArr" />
+				<ui:param name="lieuTemplate" value="/layout/edit.xhtml" />
+				<ui:param name="lieuLabelClass" value="small" />
+				<ui:param name="lieuSelectionManager"
+					value="#{annonceHome.lieuArrivee.lieuSelectionManager}" />
+			</ui:include>
+		</h:panelGrid>
+	</fc:roundedPanel>
+	<fc:roundedPanel id="financement" titleColor="white"
+		image="../img/round-panel-simple.png">
+		<ui:define name="header">#{messages['annonce.financement']}</ui:define>
+		<s:decorate id="typePaiementField" template="/layout/edit.xhtml">
+			<ui:define name="label">#{messages['annonce.modePaiement']}</ui:define>
+			<h:selectOneMenu id="typePaiement"
+				value="#{demande.contribFin.typePaiement}"
+				required="true">
+				<s:selectItems value="#{typePaiements}" var="_curTypePaiements"
+					hideNoSelectionLabel="false" noSelectionLabel=" "
+					label="#{messages[e:concat('typePaiement.',_curTypePaiements.name())]}" />
+				<a:support event="onblur" reRender="typePaiementField" eventsQueue="demandeQueue" ignoreDupResponses="true"
+					bypassUpdates="true" ajaxSingle="true" />
+			</h:selectOneMenu>
+		</s:decorate>
+		<div style="clear: both" />
+		<h:panelGrid columns="2" style="width:100%;" border="0"
+			cellpadding="0" cellspacing="0"
+			columnClasses="panelGrid-column width50,panelGrid-column width50">
+			<s:decorate id="montantField" template="/layout/edit.xhtml">
+				<ui:define name="label">#{messages['annonce.montant']}</ui:define>
+				<rich:inputNumberSpinner id="valeurPaiement" minValue="0"
+					required="true" maxValue="999999" step="1" inputSize="5"
+					style="width:72px;"
+					value="#{demande.contribFin.montant}">
+					<a:support event="onchange" reRender="montantField" eventsQueue="demandeQueue" ignoreDupResponses="true"
+						requestDelay="300" bypassUpdates="true" ajaxSingle="true" />
+				</rich:inputNumberSpinner>
+			</s:decorate>
+			<s:decorate id="paiementMonnaieField" template="/layout/edit.xhtml">
+				<ui:param name="labelClass" value="small" />
+				<ui:define name="label">#{messages['annonce.monnaie']}</ui:define>
+				<h:selectOneMenu id="paiementMonnaie" style="width:120px;"
+					value="#{demande.contribFin.monnaie}" required="true">
+					<s:selectItems value="#{monnaies}" var="_curMonnaie" hideNoSelectionLabel="false" noSelectionLabel=" "
+						label="#{messages[e:concat('monnaie.',_curMonnaie.idMonnaie)]} (#{_curMonnaie.code})" />
+					<f:converter converterId="monnaieConverter" />
+					<a:support event="onblur" reRender="paiementMonnaieField" eventsQueue="demandeQueue" ignoreDupResponses="true"
+						bypassUpdates="true" ajaxSingle="true" />
+				</h:selectOneMenu>
+			</s:decorate>
+		</h:panelGrid>
+	</fc:roundedPanel>
+
+
+</ui:composition>

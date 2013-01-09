@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="#{messages['meta.home.description']}" />
+		<meta name="abstract" content="#{messages['meta.home.abstract']}" />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+		<m:resources key="#{proprieteFactory.getGMapsKey()}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.home.title']} -
+		#{messages['meta.title']}</title>
+	</ui:define>
+
+
+	<ui:define name="side">
+		
+		<ui:include src="/devenir.xhtml"/>
+		
+		<div style="clear: both; width: 100%; height: 20px;" />
+		
+		<fc:roundedPanel id="partners" title="#{messages['partenaires']}"
+			titleColor="none" imageClass="round-panel-plain">
+			<h:outputLink target="_blank" value="http://www.ventedebateaux.com" style="margin-right:5px;">#{messages['home.partners.vdb.titre']}</h:outputLink>#{messages['home.partners.vdb.desc']}<br/>
+			<h:outputLink target="_blank" value="http://www.youboat.fr" title="#{messages['home.partners.yb.title']}" style="margin-right:5px;">#{messages['home.partners.yb.titre']}</h:outputLink>#{messages['home.partners.yb.desc']}
+			<ui:define name="footer">
+				<a href="mailto:boathitchhiking@gmail.com">#{messages['partenaires.devenir']}</a>
+			</ui:define>
+		</fc:roundedPanel>
+		
+		<div style="clear: both; width: 100%; height: 10px;" />
+		
+		<fc:roundedPanel id="news" title="#{messages['home.nouveautes']}"
+			titleColor="none" imageClass="round-panel-plain">
+			<ui:include src="/news_#{locale.getLanguage().toString()}.xhtml"/>
+		</fc:roundedPanel>
+		
+		<div style="clear: both; width: 100%; height: 10px;" />
+		
+		<fc:roundedPanel id="news" title="#{messages['home.FB']}"
+			titleColor="white" imageClass="round-panel">
+			<iframe src="http://www.facebook.com/plugins/likebox.php?id=110119125709261&amp;width=292&amp;connections=10&amp;stream=true&amp;header=false&amp;height=555" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:555px;" allowTransparency="true"></iframe>
+		</fc:roundedPanel>		
+	</ui:define>
+
+	<ui:define name="body">
+		<h1>#{messages['layout.template.titre']}</h1>
+		<h2 style="text-align: center">#{messages['home.title']}</h2>
+
+		<rich:panel>
+			<s:div styleClass="info">
+				<p>#{messages['home.description1']}</p>
+				<p>#{messages['home.description4']}</p>
+				</s:div>
+		</rich:panel>
+
+		<rich:panel id="dernieresAnnonces" bodyClass="noPadding">
+
+			<f:facet name="header">
+				<h:outputText value="#{messages['home.dernieresAnnonces']}" />
+			</f:facet>
+			
+			<!--<rich:spacer width="100%" height="5px"/>-->
+			<fc:roundedPanel id="homeMap" imageClass="round-panel">
+			<m:map width="100%" height="500px" autoReshape="true">
+				<m:mapControl name="GLargeMapControl" />
+				<m:mapControl name="GMapTypeControl" />
+				<ui:repeat value="#{offres}" var="_currentOffre">
+					<m:marker
+						address="#{_currentOffre.lieuDepart.ville} #{_currentOffre.lieuDepart.pays.libelle}">
+						<m:htmlInformationWindow
+							htmlText="#{messages['offre']}#{messages['maps.lien1']}#{proprieteFactory.getBasePath()}.#{offreHelper.getURL(_currentOffre)}#{messages['maps.lien2']}#{offreHelper.getJSTitle(_currentOffre)}#{messages['maps.lien3']}#{messages['maps.depart']}#{messages['maps.date']} #{dateFormat.getDateFormattedShort(locale,_currentOffre.dateDebut)} #{messages['maps.lieu']} #{_currentOffre.lieuDepart.ville} (#{_currentOffre.lieuDepart.pays.libelle}) #{messages['maps.lieuFin']}" />
+						<m:icon imageURL="img/drapeauDep.png"
+							shadowImageURL="img/drapeauOmbre.png" />
+					</m:marker>
+					<m:marker
+						address="#{_currentOffre.lieuArrivee.ville} #{_currentOffre.lieuArrivee.pays.libelle}">
+						<m:htmlInformationWindow
+							htmlText="#{messages['offre']}#{messages['maps.lien1']}#{proprieteFactory.getBasePath()}.#{offreHelper.getURL(_currentOffre)}#{messages['maps.lien2']}#{offreHelper.getJSTitle(_currentOffre)}#{messages['maps.lien3']}#{messages['maps.arrivee']}#{messages['maps.date']} #{dateFormat.getDateFormattedShort(locale,_currentOffre.dateFin)} #{messages['maps.lieu']} #{_currentOffre.lieuArrivee.ville} (#{_currentOffre.lieuArrivee.pays.libelle}) #{messages['maps.lieuFin']}" />
+						<m:icon imageURL="img/drapeauDep.png"
+							shadowImageURL="img/drapeauOmbre.png" />
+					</m:marker>
+					<m:polyline lineWidth="2" hexaColor="#FF910C" geodesic="true">
+						<s:fragment
+							rendered="#{_currentOffre.lieuDepart.isRenderableOnMap()}">
+							<m:point latitude="#{_currentOffre.lieuDepart.latitude}"
+								longitude="#{_currentOffre.lieuDepart.longitude}" />
+						</s:fragment>
+						<s:fragment
+							rendered="#{_currentOffre.lieuArrivee.isRenderableOnMap()}">
+							<m:point latitude="#{_currentOffre.lieuArrivee.latitude}"
+								longitude="#{_currentOffre.lieuArrivee.longitude}" />
+						</s:fragment>
+					</m:polyline>
+				</ui:repeat>
+				<ui:repeat value="#{demandes}" var="_currentDemande">
+					<m:marker
+						address="#{_currentDemande.lieuDepart.ville} #{_currentDemande.lieuDepart.pays.libelle}">
+						<m:htmlInformationWindow
+							htmlText="#{messages['demande']}#{messages['maps.lien1']}#{proprieteFactory.getBasePath()}.#{demandeHelper.getURL(_currentDemande)}#{messages['maps.lien2']}#{demandeHelper.getJSTitle(_currentDemande)}#{messages['maps.lien3']}#{messages['maps.depart']}#{messages['maps.date']} #{dateFormat.getDateFormattedShort(locale,_currentDemande.dateDebut)} #{messages['maps.lieu']} #{_currentDemande.lieuDepart.ville} (#{_currentDemande.lieuDepart.pays.libelle}) #{messages['maps.lieuFin']}" />
+						<m:icon imageURL="img/drapeauArr.png"
+							shadowImageURL="img/drapeauOmbre.png" />
+					</m:marker>
+					<m:marker
+						address="#{_currentDemande.lieuArrivee.ville} #{_currentDemande.lieuArrivee.pays.libelle}">
+						<m:htmlInformationWindow
+							htmlText="#{messages['demande']}#{messages['maps.lien1']}#{proprieteFactory.getBasePath()}.#{demandeHelper.getURL(_currentDemande)}#{messages['maps.lien2']}#{demandeHelper.getJSTitle(_currentDemande)}#{messages['maps.lien3']}#{messages['maps.arrivee']}#{messages['maps.date']} #{dateFormat.getDateFormattedShort(locale,_currentDemande.dateFin)} #{messages['maps.lieu']} #{_currentDemande.lieuArrivee.ville} (#{_currentDemande.lieuArrivee.pays.libelle}) #{messages['maps.lieuFin']}" />
+						<m:icon imageURL="img/drapeauArr.png"
+							shadowImageURL="img/drapeauOmbre.png" />
+					</m:marker>
+					<m:polyline lineWidth="2" hexaColor="#03A5DD" geodesic="true">
+						<s:fragment
+							rendered="#{_currentDemande.lieuDepart.isRenderableOnMap()}">
+							<m:point latitude="#{_currentDemande.lieuDepart.latitude}"
+								longitude="#{_currentDemande.lieuDepart.longitude}" />
+						</s:fragment>
+						<s:fragment
+							rendered="#{_currentDemande.lieuArrivee.isRenderableOnMap()}">
+							<m:point latitude="#{_currentDemande.lieuArrivee.latitude}"
+								longitude="#{_currentDemande.lieuArrivee.longitude}" />
+						</s:fragment>
+					</m:polyline>
+				</ui:repeat>
+			</m:map>
+			</fc:roundedPanel>
+
+			<h:form>
+				<rich:dataGrid id="annoncesTable" columns="1" width="100%" border="0"
+					style="margin-top:5px;" styleClass="noBorder"
+					columnClasses="noBorder" cellspacing="0" cellpadding="0"
+					value="#{annonces}" rowKeyVar="_rowKeyVar" var="_varList">
+
+					<ui:include src="/annonce/preview/AnnoncePreviewLarge.xhtml">
+						<ui:param name="annonce" value="#{_varList}" />
+					</ui:include>
+				</rich:dataGrid>
+			</h:form>
+
+		</rich:panel>
+
+	</ui:define>
+</ui:composition>

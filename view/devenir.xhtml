@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j">
+
+
+	<div id="devenir" class="devenir">
+	<div id="skipper" class="skipper"><fc:roundedPanel
+		id="skipperRound" title="#{messages['home.boat']}" titleColor="none"
+		imageClass="round-panel-plain-orange">
+		<div style="height: 180px !important; width: 300px !important;">
+		#{messages['home.boat0']}
+		<ul>
+			<li>#{messages['home.boat1']}&#160;<s:link propagation="none" includePageParams="false" view="/utilisateur/UtilisateurEdit.xhtml"	value="#{messages['home.boat1.bis']}" rendered="#{identity.loggedIn}">
+								<f:param name="utilisateurPseudonyme" value="#{utilisateurCourant.pseudonyme}"/>
+							</s:link>
+							<h:outputText value="#{messages['home.boat1.bis']}" rendered="#{not identity.loggedIn}"/>,</li><!-- profil -->
+			<li>#{messages['home.boat2']}&#160;<s:link propagation="none" includePageParams="false"
+							 view="/bateau/BateauList.xhtml"
+							value="#{messages['home.boat2.bis']}"/>,</li><!-- bateaux -->
+			<li>#{messages['home.boat3']}&#160;<s:link propagation="none" includePageParams="false"
+							 view="/recherche/DemandeList.xhtml"
+							value="#{messages['home.boat3.bis']}"/>,</li><!-- demandes -->
+			<li>#{messages['home.boat5']}&#160;<s:link propagation="none" includePageParams="false"
+							 view="/recherche/UtilisateurList.xhtml"
+							value="#{messages['home.boat5.bis'] }"/>,</li>
+			<li>#{messages['home.boat4']}&#160;<s:link propagation="none" includePageParams="false"
+							 view="/annonce/OffreEdit.xhtml"
+							value="#{messages['home.boat4.bis']}"/>.</li>
+		</ul>
+		<s:fragment rendered="#{not identity.loggedIn}">
+			<p><b><s:link propagation="none" includePageParams="false" view="/utilisateur/compte/SEnregistrer.seam"
+				value="#{messages['home.subscribe.1']}"/><h:outputText
+				value="#{messages['home.subscribe.2']}" /></b></p>
+		</s:fragment>
+		</div>
+	</fc:roundedPanel></div>
+	<div id="equipier" class="equipier">
+	<fc:roundedPanel
+		id="equipierRound" title="#{messages['home.crew']}" titleColor="none"
+		imageClass="round-panel-plain">
+		<div style="height: 180px !important; width: 300px !important;">
+		#{messages['home.crew0']}
+		<ul>
+			<li>#{messages['home.crew1']}&#160;<s:link propagation="none" includePageParams="false" view="/utilisateur/UtilisateurEdit.xhtml"	value="#{messages['home.crew1.bis']}" rendered="#{identity.loggedIn}">
+								<f:param name="utilisateurPseudonyme" value="#{utilisateurCourant.pseudonyme}"/>
+							</s:link>
+							<h:outputText value="#{messages['home.crew1.bis']}" rendered="#{not identity.loggedIn}"/>,</li><!-- profil -->
+			<li>#{messages['home.crew2']}</li>
+			<li>#{messages['home.crew3']}&#160;<s:link propagation="none" includePageParams="false"
+							 view="/recherche/OffreList.xhtml"
+							value="#{messages['home.crew3.bis']}"/>,</li><!-- offres -->
+			<li>#{messages['home.crew5']}&#160;<s:link propagation="none" includePageParams="false"
+							 view="/recherche/UtilisateurList.xhtml"
+							value="#{messages['home.crew5.bis'] }"/>&#160;#{messages['global.et']}
+							&#160;<s:link propagation="none" includePageParams="false"
+							 view="/recherche/BateauList.xhtml"
+							value="#{messages['home.crew5.ter']}"/>,</li>				
+			<li>#{messages['home.crew4']}&#160;<s:link propagation="none" includePageParams="false"
+							 view="/annonce/DemandeEdit.xhtml"
+							value="#{messages['home.crew4.bis']}"/>.</li>
+		</ul>
+		<s:fragment rendered="#{not identity.loggedIn}">
+			<p><b><s:link propagation="none" includePageParams="false" view="/utilisateur/compte/SEnregistrer.seam"
+				value="#{messages['home.subscribe.1']}"/><h:outputText
+				value="#{messages['home.subscribe.2']}" /></b></p>
+		</s:fragment>
+		</div>
+	</fc:roundedPanel></div>
+	</div>
+
+	<rich:jQuery selector="#skipper" timing="onJScall" name="devEquipier"
+		query="fadeOut('def', function() { setTimeout('devSkipper()',10000); })" />
+
+	<rich:jQuery selector="#skipper" timing="onJScall" name="devSkipper"
+		query="fadeIn('def', function() { setTimeout('devEquipier()',10000); })" />
+
+	<script>
+			setTimeout('devEquipier()',5000);
+		</script>
+	<!--<s:fragment rendered="#{not identity.loggedIn}">
+					<p><b><s:link view="/utilisateur/compte/SEnregistrer.seam"
+						value="#{messages['home.subscribe.1']}" includePageParams="false"
+						propagation="none" /><h:outputText
+						value="#{messages['home.subscribe.2']}" /></b></p>
+					<p>#{messages['home.subscribe.required']}</p>
+					<p>#{messages['home.description1']}</p>
+				</s:fragment>
+				<s:fragment rendered="#{identity.loggedIn}">
+					<p>#{messages['home.description1.bis1']}</p>
+
+					<p>#{messages['home.description1.bis2']}</p>
+					<ul>
+
+						<li style="margin-top: 10px;"><h:outputText
+							value="#{messages['home.description1.bis.user']} " /><s:link
+							styleClass="user" view="/utilisateur/UtilisateurEdit.xhtml"
+							value="#{messages['layout.login.profil']}"
+							includePageParams="false" propagation="none" />,</li>
+
+						<li style="margin-top: 10px;"><h:outputText
+							value="#{messages['home.description1.bis.boat1']} " /><s:link
+							styleClass="bateau" view="/bateau/BateauList.xhtml"
+							value="#{messages['layout.login.bateaux']}"
+							includePageParams="false" propagation="none" /><h:outputText
+							value="#{messages['home.description1.bis.directement']} " /><s:link
+							view="/bateau/BateauEdit.xhtml"
+							value="#{messages['home.description1.bis.boat2']}"
+							includePageParams="false" propagation="none" /></li>
+
+						<li style="margin-top: 10px;"><h:outputText
+							value="#{messages['home.description1.bis.offer1']} " /><s:link
+							styleClass="offre" view="/annonce/OffreList.xhtml"
+							value="#{messages['layout.login.offres']}"
+							includePageParams="false" propagation="none" /><h:outputText
+							value="#{messages['home.description1.bis.directement']} " /> <s:link
+							view="/annonce/OffreEdit.xhtml"
+							value="#{messages['home.description1.bis.offer2']}"
+							includePageParams="false" propagation="none" /><h:outputText
+							value=" #{messages['home.description1.bis.offer3']}" /></li>
+
+						<li style="margin-top: 10px;"><h:outputText
+							value="#{messages['home.description1.bis.request1']} " /><s:link
+							styleClass="demande" view="/annonce/DemandeList.xhtml"
+							value="#{messages['layout.login.demandes']}"
+							includePageParams="false" propagation="none" /><h:outputText
+							value="#{messages['home.description1.bis.directement']} " /><s:link
+							view="/annonce/DemandeEdit.xhtml"
+							value="#{messages['home.description1.bis.request2']}"
+							includePageParams="false" propagation="none" /></li>
+					</ul>
+				</s:fragment>
+				<p><h:outputText value="#{messages['home.description2.1']} " />
+				<s:link view="/recherche/OffreList.seam"
+					value="#{messages['home.description2.2']}"
+					includePageParams="false" propagation="none" /> <h:outputText
+					value=" #{messages['home.description2.3']} " /> <s:link
+					view="/recherche/DemandeList.seam"
+					value="#{messages['home.description2.4']}"
+					includePageParams="false" propagation="none" /> <h:outputText
+					value=" #{messages['home.description2.5']}" /></p>
+				<p><h:outputText value="#{messages['home.description3.1']} " />
+				<s:link view="/recherche/UtilisateurList.seam"
+					value="#{messages['home.description3.2']}"
+					includePageParams="false" propagation="none" /> <h:outputText
+					value=" #{messages['home.description3.3']} " /> <s:link
+					view="/recherche/BateauList.seam"
+					value="#{messages['home.description3.4']}"
+					includePageParams="false" propagation="none" /> <h:outputText
+					value=" #{messages['home.description3.5']}" /></p>
+				<p>#{messages['home.description4']}</p>
+			-->
+</ui:composition>

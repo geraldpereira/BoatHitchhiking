@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="#{messages['meta.utilisateur.description']}" />
+		<meta name="abstract"
+			content="#{messages['meta.utilisateur.abstract']}" />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.utilisateur.title']} -
+		#{messages['meta.title']}</title>
+	</ui:define>
+	<ui:define name="side">
+		<ui:include src="/note.xhtml">
+  			<ui:param name="id" value="noteUtilisateur" />
+  			<ui:param name="note" value="#{utilisateurView.instance.note}" />
+  			<ui:param name="renderIndications" value="#{identity.loggedIn and utilisateurCourant.pseudonyme.equals(utilisateurView.instance.pseudonyme)}" />
+  			<ui:param name="indications" value="#{utilisateurHelper.getIndications(utilisateurView.instance)}" />
+		</ui:include>
+		
+			<fc:roundedPanel id="liens" title="#{messages['global.liens']}"
+				titleColor="none" imageClass="round-panel-plain">
+				<h:panelGrid columns="2" style="width:100%;" border="0"
+					cellpadding="0" cellspacing="3"								
+					columnClasses="panelGrid-column,panelGrid-column">
+					
+					<h:panelGroup rendered="#{utilisateurView.instance.isActif()}">
+						<h:graphicImage
+							value="#{identity.loggedIn ? '/img/contact.png' : '/img/contact_gris.png'}"
+							style="border:0;float:left;"
+							alt="#{messages['tooltip.contact']}" />
+					</h:panelGroup>
+					
+					<h:panelGroup rendered="#{utilisateurView.instance.isActif()}">
+						<s:link id="contactlink"
+							value="#{messages['utilisateur.contact']}"
+							view="/messagerie/Contact.xhtml"
+							rendered="#{identity.loggedIn}">
+							<f:param name="objectType" value="UTILISATEUR" />
+							<f:param name="toPseudo"
+								value="#{utilisateurView.instance.pseudonyme}" />
+						</s:link>
+						<s:link id="contactlinkGris"
+							value="#{messages['utilisateur.contact']}"
+							view="/utilisateur/compte/SEnregistrer.xhtml" propagation="none"
+							rendered="#{not identity.loggedIn}" />
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<h:graphicImage
+							value="/img/offre.png"
+							style="border:0;float:left;"
+							alt="#{messages['utilisateur.voirOffres']}" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:link id="lienOffres" view="/recherche/OffreList.xhtml"
+							value="#{messages['utilisateur.voirOffres']}"
+							propagation="none">
+							<f:param name="pseudonyme"
+								value="#{utilisateurView.instance.pseudonyme}" />
+						</s:link>
+					</h:panelGroup>
+					<h:panelGroup>
+						<h:graphicImage
+							value="/img/demande.png"
+							style="border:0;float:left;"
+							alt="#{messages['utilisateur.voirDemandes']}" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:link id="lienDemandes" view="/recherche/DemandeList.xhtml"
+							value="#{messages['utilisateur.voirDemandes']}"
+							propagation="none">
+							<f:param name="pseudonyme"
+								value="#{utilisateurView.instance.pseudonyme}" />
+						</s:link>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<h:graphicImage
+							value="/img/bateau.png"
+							style="border:0;float:left;"
+							alt="#{messages['utilisateur.voirBateaux']}" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:link id="lienBateaux" view="/recherche/BateauList.xhtml"
+							value="#{messages['utilisateur.voirBateaux']}"
+							propagation="none">
+							<f:param name="pseudonyme"
+								value="#{utilisateurView.instance.pseudonyme}" />
+						</s:link>
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:panelGroup>
+					<ui:include src="../components/partage.xhtml">
+						<ui:param name="helper" value="#{utilisateurHelper}" />
+						<ui:param name="instance" value="#{utilisateurView.instance}" />
+					</ui:include>
+				</h:panelGroup>
+			</fc:roundedPanel>
+	</ui:define>
+	<ui:define name="body">
+
+		<h:form id="utilisateur">
+
+			<h1>#{utilisateurView.instance.pseudonyme}</h1>
+			<rich:panel>
+				<s:decorate id="actif" template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.actif']}</ui:define>
+					<h:selectBooleanCheckbox
+						value="#{utilisateurView.instance.isActif()}" readonly="true"
+						disabled="true" />
+					</s:decorate>
+				<s:decorate id="dateInscription"
+					template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.dateInscription']}</ui:define>
+					<h:outputText value="#{utilisateurView.instance.dateInscription}">
+						<s:convertDateTime type="date" dateStyle="short" />
+					</h:outputText>
+				</s:decorate>
+				<s:decorate id="email" template="../layout/display.xhtml"
+					rendered="#{authenticator.isAdmin()}">
+					<ui:define name="label">#{messages['utilisateur.mail']}</ui:define>
+					<h:outputText value="#{utilisateurView.instance.mail}" />
+				</s:decorate>
+				<div style="clear: both" />
+			</rich:panel>
+
+
+			<rich:panel>
+				<f:facet name="header">#{messages['utilisateur.coord']}</f:facet>
+
+				<h:panelGrid columns="2" style="width:100%;" border="0"
+					cellpadding="0" cellspacing="0"
+					columnClasses="panelGrid-column width50,panelGrid-column width50">
+					<h:panelGroup>
+						<s:decorate id="nom" template="../layout/display.xhtml">
+							<ui:define name="label">#{messages['utilisateur.nom']}</ui:define>
+							<ui:param name="labelClass" value="small" />
+							<fc:outputXXX id="nomXXX"
+								value="#{utilisateurView.instance.coordonnees.nom}">
+								<h:outputText
+									value="#{utilisateurView.instance.coordonnees.nom}" />
+							</fc:outputXXX>
+						</s:decorate>
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:decorate id="prenom" template="../layout/display.xhtml">
+							<ui:define name="label">#{messages['utilisateur.prenom']}</ui:define>
+							<ui:param name="labelClass" value="small" />
+							<fc:outputXXX id="prenomXXX"
+								value="#{utilisateurView.instance.coordonnees.prenom}">
+								<h:outputText
+									value="#{utilisateurView.instance.coordonnees.prenom}" />
+							</fc:outputXXX>
+						</s:decorate>
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:decorate id="tel" template="../layout/display.xhtml">
+							<ui:define name="label">#{messages['utilisateur.telephone']}</ui:define>
+							<ui:param name="labelClass" value="small" />
+							<fc:outputXXX id="telXXX"
+								value="#{utilisateurView.instance.coordonnees.tel}">
+								<h:outputText
+									value="#{utilisateurView.instance.coordonnees.tel}" />
+							</fc:outputXXX>
+						</s:decorate>
+
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:decorate id="telBis" template="../layout/display.xhtml">
+							<ui:define name="label">#{messages['utilisateur.telephone.bis']}</ui:define>
+							<ui:param name="labelClass" value="small" />
+							<fc:outputXXX id="telBisXXX"
+								value="#{utilisateurView.instance.coordonnees.telBis}">
+								<h:outputText
+									value="#{utilisateurView.instance.coordonnees.telBis}" />
+							</fc:outputXXX>
+						</s:decorate>
+					</h:panelGroup>
+
+				</h:panelGrid>
+
+				<s:decorate id="site" template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.site']}</ui:define>
+					<ui:param name="labelClass" value="small" />
+					<fc:outputXXX id="siteXXX"
+						value="#{utilisateurView.instance.coordonnees.site}">
+						<h:outputLink target="_blank"
+							value="#{utilisateurView.instance.coordonnees.site}">
+							<h:outputText
+								value="#{utilisateurView.instance.coordonnees.site}" />
+						</h:outputLink>
+					</fc:outputXXX>
+				</s:decorate>
+
+				<div style="clear: both" />
+
+			</rich:panel>
+
+			<rich:panel>
+				<f:facet name="header">#{messages['utilisateur.infoPerso']}</f:facet>
+
+				<h:panelGrid columns="2" style="width:100%;" border="0"
+					cellpadding="0" cellspacing="0"
+					columnClasses="panelGrid-column width50,panelGrid-column width50">
+					<h:panelGroup>
+						<ui:include src="/utilisateur/PhotoInner.xhtml" />
+					</h:panelGroup>
+					<h:panelGroup>
+						<ui:include src="/LieuInner.xhtml">
+							<ui:param name="id" value="utilisateur" />
+							<ui:param name="required" value="true" />
+							<!-- <ui:param name="small" value="true" /> -->
+						</ui:include>
+						<s:decorate id="adresse" template="../layout/edit.xhtml"
+							for="adresseXXX">
+							<ui:define name="label">#{messages['utilisateur.adresse']}</ui:define>
+							<fc:outputXXX id="adresseXXX"
+								value="#{utilisateurView.instance.coordonnees.adresse}">
+								<h:outputText
+									value="#{utilisateurView.instance.coordonnees.adresse}" />
+							</fc:outputXXX>
+						</s:decorate>
+					</h:panelGroup>
+				</h:panelGrid>
+			</rich:panel>
+
+			<fc:togglePanel id="utilisateurAvance"
+				libelle="#{messages['global.avance']}" toggleClass="avance"
+				toggleBean="#{utilisateurAvance}">
+
+				<h:panelGrid columns="2" style="width:100%;" border="0"
+					cellpadding="0" cellspacing="0"
+					columnClasses="panelGrid-column width50,panelGrid-column width50">
+					<s:decorate id="sexe" template="../layout/display.xhtml">
+						<ui:define name="label">#{messages['utilisateur.sexe']}</ui:define>
+						<h:outputText
+							value="#{messages['sexe.'.concat(utilisateurView.instance.sexe.name())]}" />
+					</s:decorate>
+
+					<s:decorate id="age" template="../layout/display.xhtml">
+						<ui:define name="label">#{messages['utilisateur.age']}</ui:define>
+						<h:outputText value="#{utilisateurView.instance.dateNaissance}"
+							converter="#{ageConverter}" />
+					</s:decorate>
+
+
+				</h:panelGrid>
+
+				<ui:include src="/utilisateur/LangueInner.xhtml">
+					<ui:param name="utilisateur" value="#{utilisateurView.instance}" />
+				</ui:include>
+
+				<s:decorate id="description" template="../layout/display.xhtml" styleClass="width600">
+					<ui:define name="label">#{messages['utilisateur.description']}</ui:define>
+						<h:outputText value="#{utilisateurView.instance.description}" converter="#{HTMLConverter}" escape="false" />
+				</s:decorate>
+
+
+			</fc:togglePanel>
+
+			<rich:tabPanel switchType="client" headerSpacing="5px"
+				inactiveTabClass="tabCellInactive">
+				<rich:tab label="#{messages['utilisateur.experiences']}">
+					<s:decorate id="xpGeneraleField" template="../layout/edit.xhtml"
+						for="xpGenerale">
+						<ui:define name="label">#{messages['utilisateur.expGenerale']}</ui:define>
+						<h:outputText id="xpGenerale"
+							value="#{messages['xpGenerale.'.concat(utilisateurView.instance.xpGenerale.name())]}" />
+					</s:decorate>
+					<div style="clear: both" />
+					<ui:include src="/experience/XpInner.xhtml" />
+				</rich:tab>
+				<rich:tab label="#{messages['utilisateur.competences']}">
+					<ui:include src="/competence/CompetencesUtilisateur.xhtml" />
+				</rich:tab>
+
+			</rich:tabPanel>
+			<div style="clear: both" />
+
+			<div class="actionButtons"><s:button
+				rendered="#{authenticator.isAdmin()}"
+				view="/utilisateur/UtilisateurEdit.xhtml"
+				id="edit" value="#{messages['bouton.editer']}">
+
+			</s:button> 
+			
+				<s:button
+				action="terminer"
+				id="terminer" value="#{messages['bouton.terminer']}" />
+				
+				</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+	 	<s:decorate id="paysField#{id}" template="#{lieuTemplate}">
+ 			<ui:param name="labelClass" value="#{lieuLabelClass}" />
+			<ui:define name="label">#{messages['lieu.pays']}</ui:define>
+			<h:selectOneMenu id="pays#{id}" value="#{lieuSelectionManager.pays}"  required="#{lieuSelectionManager.required}" style="width:120px;"><!-- style="#{lieuLabelClass == 'small' ? 'width:120px;' :''}" -->
+				 <s:selectItems value="#{pays}" var="_curPays" 
+					label="#{messages['pays.'.concat(_curPays.getIdPays())]}" 
+					noSelectionLabel=" " hideNoSelectionLabel="#{lieuSelectionManager.required}"/>
+					<f:converter converterId="paysConverter"/>
+				   <a:support event="onchange" ajaxSingle="true" reRender="villePanel#{id}" action="#{lieuSelectionManager.resetVille()}" bypassUpdates="false" eventsQueue="lieuQueue" ignoreDupResponses="true"/> 
+			</h:selectOneMenu>
+		</s:decorate> 
+		<a:region renderRegionOnly="true"> 
+		<s:div id="villePanel#{id}">
+			<s:decorate id="villeField#{id}" template="#{lieuTemplate}">
+ 				<ui:param name="labelClass" value="#{lieuLabelClass}" />
+				<ui:define name="label">#{messages['lieu.ville']}</ui:define>
+				<h:inputText id="ville#{id}" value="#{lieuSelectionManager.ville}" required="#{lieuSelectionManager.required}" converter="#{majusculeConverter}"
+					autocomplete="off" disabled="#{lieuSelectionManager.pays==null and lieuSelectionManager.required==false}">
+					<a:support event="onblur" reRender="villeField#{id}" rendered="#{lieuSelectionManager.required==true}" eventsQueue="lieuQueue" ignoreDupResponses="true" requestDelay="1000"
+						bypassUpdates="false" ajaxSingle="true" />
+				</h:inputText>
+				<rich:suggestionbox id="villeSuggestionBox#{id}" for="ville#{id}" eventsQueue="villeQueue" ignoreDupResponses="true" 
+					suggestionAction="#{lieuSelectionManager.autoCompleteVille}" var="_lieu" fetchValue="#{_lieu.ville}"  
+					minChars="2">
+					<h:column>
+						<h:outputText value="#{_lieu.ville}" />
+					</h:column>
+				</rich:suggestionbox>
+			</s:decorate>
+			<rich:toolTip id="villeToolTip#{id}" rendered="#{!required}" followMouse="true"
+				disabled="#{lieuSelectionManager.pays!=null}"
+				value="#{messages['lieu.requis']}" />
+		</s:div>
+		</a:region>
+</ui:composition>

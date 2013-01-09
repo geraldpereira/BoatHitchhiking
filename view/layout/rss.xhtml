@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+		
+	<s:div>
+		<rich:modalPanel  id="tabFluxRss" autosized="true" moveable="false" resizeable="false" width="600">
+			<f:facet name="header">
+	            <h:panelGroup>  <h:graphicImage value="/img/rss.png"/> <h:outputText value="#{messages['rss']}"></h:outputText>
+	            </h:panelGroup>
+	        </f:facet>
+	        <f:facet name="controls">
+	            <h:panelGroup>
+	                <h:graphicImage value="/img/close.png" styleClass="hidelink" style="margin-right:5px;margin-top:5px;" id="hidelink"/>
+	                <rich:componentControl for="tabFluxRss" attachTo="hidelink" operation="hide" event="onclick"/>
+	            </h:panelGroup>
+	        </f:facet>
+			<h:panelGrid columns="5" width="100%" border="0" cellpadding="0"
+				cellspacing="0">
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{proprietes.get('url_ext_rss_offre_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_offreXML" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgXMLRss}" />
+					<ui:param name="msg_rss" value="#{messages['rss.nouvellesOffres']}" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseMSNRss}#{proprietes.get('url_ext_rss_offre_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_offreMSN" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgMSNRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseGoogleRss}#{proprietes.get('url_ext_rss_offre_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_offreGoogle" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgGoogleRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseYahooRss}#{proprietes.get('url_ext_rss_offre_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_offreYahoo" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgYahooRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseNetvibes}#{proprietes.get('url_ext_rss_offre_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_offreNetvibes" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgNetvibesRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				
+
+
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{proprietes.get('url_ext_rss_demande_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_demandeXML" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgXMLRss}" />
+					<ui:param name="msg_rss" value="#{messages['rss.nouvellesDemandes']}" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseMSNRss}#{proprietes.get('url_ext_rss_demande_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_demandeMSN" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgMSNRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseGoogleRss}#{proprietes.get('url_ext_rss_demande_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_demandeGoogle" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgGoogleRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseYahooRss}#{proprietes.get('url_ext_rss_demande_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_demandeYahoo" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgYahooRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseNetvibes}#{proprietes.get('url_ext_rss_demande_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_demandeNetvibes" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgNetvibesRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				
+
+
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{proprietes.get('url_ext_rss_utilisateur_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_utilisateurXML" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgXMLRss}" />
+					<ui:param name="msg_rss" value="#{messages['rss.nouveauxUtilisateurs']}" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseMSNRss}#{proprietes.get('url_ext_rss_utilisateur_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_utilisateurMSN" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgMSNRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseGoogleRss}#{proprietes.get('url_ext_rss_utilisateur_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_utilisateurGoogle" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgGoogleRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseYahooRss}#{proprietes.get('url_ext_rss_utilisateur_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_utilisateurYahoo" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgYahooRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseNetvibes}#{proprietes.get('url_ext_rss_utilisateur_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_utilisateurNetvibes" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgNetvibesRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+
+				
+
+
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{proprietes.get('url_ext_rss_tout_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_toutXML" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgXMLRss}" />
+					<ui:param name="msg_rss" value="#{messages['rss.tout']}" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseMSNRss}#{proprietes.get('url_ext_rss_tout_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_toutMSN" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgMSNRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseGoogleRss}#{proprietes.get('url_ext_rss_tout_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_toutGoogle" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgGoogleRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseYahooRss}#{proprietes.get('url_ext_rss_tout_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_toutYahoo" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgYahooRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+				<ui:include src="rssGrid.xhtml">
+					<ui:param name="url_rss" value="#{rssManager.adresseNetvibes}#{proprietes.get('url_ext_rss_tout_'.concat(locale.getLanguage().toString()))}" />
+					<ui:param name="id_rss" value="_toutNetvibes" />
+					<ui:param name="img_rss" value="#{proprieteFactory.getBasePath(locale)}img/#{rssManager.imgNetvibesRss}" />
+					<ui:param name="msg_rss" value="" />
+				</ui:include>
+			</h:panelGrid>
+				</rich:modalPanel>
+				
+				<s:div>
+				<img style="margin-right:5px;" src="#{proprieteFactory.getBasePath(locale)}img/rss.png" />
+				<h:outputLink value="#" id="fluxRss" styleClass="footer-link" >#{messages['rss']}
+					<rich:componentControl for="tabFluxRss" attachTo="fluxRss"
+						operation="show" event="onclick" />										
+				</h:outputLink>
+				</s:div>
+      	</s:div>      	
+
+</ui:composition>

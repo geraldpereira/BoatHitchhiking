@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<s:div styleClass="#{boutonStyleClass}">
+		<div id="boutonNav#{id}" class="boutonNavBS">
+			<div id="boutonOver#{id}" class="boutonOverBS #{boutonOverStyle}"/>
+			<div id="bouton#{id}" class="boutonBS #{boutonStyle}"/>
+			<div id="lien#{id}" class="lienBS">
+				<ui:insert name="bouton"/>		
+			</div>			
+		</div>
+	</s:div>
+
+	<rich:jQuery timing="immediate" selector="#menu#{id}" query="hide()" />
+
+	<rich:jQuery selector="#boutonNav#{id}"
+		query="hover( function(){
+					 jQuery('#bouton#{id}').stop(true,true).fadeOut('def');
+				},function(){
+					jQuery('#bouton#{id}').stop(true,true).fadeIn('def');							
+				})" />
+
+</ui:composition>
+

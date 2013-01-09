@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<s:decorate template="/layout/previewPanel.xhtml">
+		<ui:param name="hasPhoto" value="#{photoToolTipManager.hasPhoto(utilisateur.getPhotoUtilisateur())}" />
+		<ui:param name="hasDesc" value="#{(utilisateur.getDescription() != null and !utilisateur.getDescription().isEmpty()) or (utilisateur.getLangues() != null and !utilisateur.getLangues().isEmpty())}" />
+		<ui:param name="bodyClass" value="width590" />
+		
+		<ui:define name="titre">
+			<ui:include src="/utilisateur/preview/UtilisateurPreviewHeader.xhtml"/>		
+		</ui:define>
+		<ui:define name="infos">
+			<ui:include src="/utilisateur/preview/UtilisateurPreviewInfos.xhtml"/>
+		</ui:define>
+		<ui:define name="photos">
+			<ui:include src="/utilisateur/preview/UtilisateurPreviewPhoto.xhtml"/>
+		</ui:define>
+		<ui:define name="description">
+			<ui:include src="/utilisateur/preview/UtilisateurPreviewDesc.xhtml"/>
+		</ui:define>
+	</s:decorate>
+</ui:composition>

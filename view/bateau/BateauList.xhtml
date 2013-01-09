@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['bateau.yours.titre']} -
+		#{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<h1>#{messages['bateau.yours.titre']}</h1>
+
+		<fc:bsListEdit id="bateauList" entityList="#{bateauList}"
+			onRowClick="javascript:location.href = '..#{bateauHelper.getURL(_varList)}?cid=#{conversation.id}';"
+			view="/bateau/BateauList.xhtml">
+
+			<!--<ui:define name="menus">
+				<rich:menuItem value="View" ajaxSingle="true" icon="/img/view.png"
+					onclick="javascript:location.href = 'Bateau.seam?bateauIdBateau={_varList}#{messages['global.etURL']}rowNumber=#{_rowKeyVar}#{messages['global.etURL']}bateauFrom=bateau/BateauList#{messages['global.etURL']}cid=#{conversation.id}';" />
+				<rich:menuItem value="Edit" ajaxSingle="true" icon="/img/edit.png"
+					onclick="javascript:location.href = 'BateauEdit.seam?bateauIdBateau={_varList}#{messages['global.etURL']}bateauFrom=bateau/BateauList';" />
+				  <rich:menuItem value="Delete" ajaxSingle="true" icon="/img/delete.png" 
+                	oncomplete="#{rich:component('deleteConfirm')}.show()">
+                	</rich:menuItem>
+			</ui:define>
+			-->
+			
+			<f:facet name="header">
+				<rich:columnGroup>
+					<rich:column>
+						<h:outputText value="#{messages['global.actions']}"
+							styleClass="actionHeader" />
+					</rich:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel" value="#{messages['bateau.nom']}" />
+							<ui:param name="propertyPath" value="bateau.nom" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.marque']}" />
+							<ui:param name="propertyPath" value="bateau.marque" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.annee']}" />
+							<ui:param name="propertyPath" value="bateau.annee" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.greement']}" />
+							<ui:param name="propertyPath" value="bateau.greement" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.coque']}" />
+							<ui:param name="propertyPath" value="bateau.typeCoque" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.taille']}" />
+							<ui:param name="propertyPath" value="bateau.taille" />
+						</ui:include>
+					</h:column>
+				</rich:columnGroup>
+
+			</f:facet>
+			<rich:column>
+				<s:div styleClass="action">
+					<s:link id="viewlink" view="/bateau/Bateau.xhtml">
+						<f:param name="bateauIdBateau" value="#{_varList.idBateau}" />
+						<f:param name="urlDecorator" value="#{bateauHelper.escapeURL(_varList.nom)}" />
+						<h:graphicImage value="/img/view.png" style="border:0"
+							alt="#{messages['tooltip.view']}" />
+					</s:link>
+					<rich:toolTip for="viewlink" value="#{messages['tooltip.view']}" />
+					<rich:spacer width="5px" height="16px" />
+					<s:link id="editlink"
+						view="/bateau/BateauEdit.xhtml">
+						<f:param name="bateauIdBateau" value="#{_varList.idBateau}" />
+						<f:param name="urlDecorator" value="#{bateauHelper.escapeURL(_varList.nom)}" />
+						<h:graphicImage value="/img/edit.png" style="border:0"
+							alt="#{messages['tooltip.edit']}" />
+					</s:link>
+					<rich:toolTip for="editlink" value="#{messages['tooltip.edit']}" />
+					<rich:spacer width="5px" height="16px" />
+					<a:commandLink ajaxSingle="true" id="deletelink"
+						eventsQueue="deleteBoatQueue" ignoreDupResponses="true"
+						onclick="callNoPropagation(function(){#{rich:component('deleteConfirm')}.show();},event);">
+						<h:graphicImage value="/img/delete.png" style="border:0"
+							alt="#{messages['tooltip.delete']}" />
+						<f:setPropertyActionListener value="#{_rowKeyVar}"
+							target="#{bateauList.currentRow}" />
+					</a:commandLink>
+					<rich:toolTip for="deletelink"
+						value="#{messages['tooltip.delete']}" />
+				</s:div>
+			</rich:column>
+			<h:column>
+				<div style="overflow: hidden; width: 70px;" class="tooltiped"><h:outputText
+					value="#{_varList.nom}" id="tooltiped" /></div>
+				<rich:toolTip id="tooltip" for="tooltiped" showDelay="300"
+					followMouse="false" hideDelay="300" verticalOffset="-120"
+					horizontalOffset="-10" mode="ajax" layout="block" zorder="99"
+					style="max-width:520px;overflow:hidden;">
+					<ui:include src="/bateau/preview/BateauPreview.xhtml">
+						<ui:param name="bateau" value="#{_varList}" />
+					</ui:include>
+				</rich:toolTip>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{_varList.marque}" />
+			</h:column>
+			<h:column>
+				<h:outputText value="#{_varList.annee}" />
+			</h:column>
+			<h:column>
+				<h:outputText
+					value="#{messages['greement.'.concat(_varList.greement.name())]}" />
+			</h:column>
+			<h:column>
+				<h:outputText
+					value="#{messages['typeCoque.'.concat(_varList.typeCoque.name())]}" />
+			</h:column>
+			<h:column>
+				<h:outputText
+					value="#{_varList.taille} #{messages['bateau.taille.type']}" />
+			</h:column>
+		</fc:bsListEdit>
+
+		<s:div styleClass="actionButtons">
+			<s:button view="/bateau/BateauEdit.xhtml" id="create"
+				value="#{messages['bateau.create']}" includePageParams="false">
+			</s:button>
+		</s:div>
+
+		<fc:confirmModalPanel id="deleteConfirm" width="400">
+			<ui:define name="headerMP">
+				<h:outputText
+					value="#{messages['bateau.modalPanelSupprimer.titre']}" />
+			</ui:define>
+			<ui:define name="bodyMP">
+				<p>#{messages['bateau.modalPanelSupprimer.texte1']}</p>
+			</ui:define>
+			<ui:define name="actionMP">
+				<a:commandButton value="#{messages['bouton.confirm']}"
+					ajaxSingle="true" eventsQueue="confirmDeleteBoatQueue"
+					ignoreDupResponses="true" action="#{bateauList.remove}"
+					oncomplete="#{rich:component('deleteConfirm')}.hide();return false;"
+					reRender="bateauList,messages" />
+			</ui:define>
+		</fc:confirmModalPanel>
+	</ui:define>
+
+</ui:composition>

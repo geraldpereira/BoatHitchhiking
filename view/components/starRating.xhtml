@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+
+
+	<ui:repeat id="repeat#{id}"
+		value="#{e:newIncIntegerTab(minValue,maxValue)}" var="_currentStar">
+		<input type="radio" id="radioStar#{id}_#{_currentStar}"
+					name="#{id}"  title="#{ratingTitle != null ? ratingTitle : _currentStar}"
+					value="#{_currentStar}" style="visibility:hidden !important;display:none !important;"/>
+	</ui:repeat>
+
+	<s:fragment rendered="#{disabled == null}">
+		<div id="EtoileValue#{id}" style="visibility:hidden !important;display:none !important;">
+			<h:inputText id="inputTextDeLEtoile#{id}" value="#{value}">
+				<ui:insert />
+			</h:inputText>
+		</div>
+	</s:fragment>
+	
+	<rich:jQuery timing="immediate" selector="input[id^='radioStar#{id}_#{value}']"
+		query="attr('checked','checked')" />
+
+	<rich:jQuery timing="immediate" selector="input[id^='radioStar#{id}_']"
+		query="rating({
+				#{required != null ? 'required:true,' : ''}
+				#{disabled != null ? 'readOnly:true,' : ''}
+				callback: function(value, link){ 
+					jQuery('#EtoileValue#{id} > :input').attr('value',value).change();
+				}
+		})" />
+
+</ui:composition>
+
+

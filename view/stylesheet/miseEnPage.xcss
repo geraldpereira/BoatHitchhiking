@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:template xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http:/jsf.exadel.com/template"
+	xmlns:u="http:/jsf.exadel.com/template/util">
+
+	<u:selector name="html,body">
+		<u:style name="height" value="100%" />
+		<u:style name="margin" value="0" />
+	</u:selector>
+
+	<u:selector name="html">
+		<u:style name="background-image">
+			<f:resource f:key="/img/header_repeat.png" />
+		</u:style>
+		<u:style name="background-repeat" value="repeat-x" />
+	</u:selector>
+
+	<u:selector name="body">
+		<u:style name="font-family" skin="generalFamilyFont" />
+		<u:style name="color" skin="generalTextColor" />
+		<u:style name="font" value="80% arial, helvetica, sans-serif" />
+	</u:selector>
+	
+	<u:selector name="#all">
+		<u:style name="min-height" value="100%" /> 
+		<u:style name="width" value="100%" />
+		<u:style name="position" value="relative" />
+	</u:selector>
+	
+	<u:selector name="#global">
+		<u:style name="width" value="964px" />
+		<u:style name="margin" value="0 auto" />
+		<u:style name="position" value="relative" />
+	</u:selector>
+	
+	<u:selector name="#header">
+		<u:style name="height" value="179px" />
+		<u:style name="background-repeat" value="no-repeat" />
+	</u:selector>
+	
+	<u:selector name=".header_fr">
+		<u:style name="background-image">
+			<f:resource f:key="/img/header_fr.png" />
+		</u:style>
+	</u:selector>
+	
+	<u:selector name=".header_en">
+		<u:style name="background-image">
+			<f:resource f:key="/img/header_en.png" />
+		</u:style>
+	</u:selector>
+
+	<u:selector name="#footer">
+		<u:style name="position" value="absolute" />
+		<u:style name="width" value="100%" />
+		<u:style name="height" value="56px" />
+		<u:style name="bottom" value="0" />
+		<u:style name="text-align" value="center" />
+		<u:style name="background-image">
+			<f:resource f:key="/img/footer_repeat.png" />
+		</u:style>
+		<u:style name="background-repeat" value="repeat-x" />
+	</u:selector>
+
+	<u:selector name=".footer-link">
+		<u:style name="font-size" value="1.3em !important" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="color" value="white !important" />
+	</u:selector>
+
+	<u:selector name=".footer-link:hover">
+		<u:style name="color" skin="couleur2_imp" />
+	</u:selector>
+
+	<u:selector name="#center">
+		<u:style name="padding-bottom" value="56px" />
+		<u:style name="overflow" value="auto" />
+	</u:selector>
+
+	<u:selector name="#sidebar">
+		<u:style name="float" value="right" />
+		<u:style name="width" value="320px" />
+	</u:selector>
+
+	<u:selector name="#content">
+		<u:style name="float" value="left" />
+		<u:style name="width" value="632px" />
+	</u:selector>
+
+	<u:selector name="#navBar">
+		<u:style name="float" value="right" />
+		<u:style name="width" value="320px" />
+		<u:style name="padding-right" value="13px" />
+	</u:selector>
+
+	<u:selector name=".navBar-link">
+		<u:style name="font-size" value="0.9em !important" />
+		<u:style name="color" value="white !important" />
+	</u:selector>
+
+	<u:selector name=".navBar-link:hover">
+		<u:style name="color" skin="couleur2_imp" />
+	</u:selector>
+
+	<u:selector name="#login">
+		<u:style name="float" value="right" />
+		<u:style name="width" value="310px" />
+		<u:style name="height" value="140px" />		
+		<u:style name="overflow" value="hidden" />
+		<u:style name="margin-top" value="3px" />
+		<u:style name="margin-right" value="10px" />
+	</u:selector>
+
+	<u:selector name=".login-header">
+		<u:style name="border" value="none" />
+	</u:selector>
+	
+	<u:selector name=".login-body">		
+		<u:style name="margin-left" value="15px" />
+	</u:selector>
+	
+	<u:selector name=".login-input">
+		<u:style name="width" value="130px" />	
+		<u:style name="float" value="right" />
+	</u:selector>
+
+
+	<u:selector name="#homeLink">
+		<u:style name="position" value="absolute" />		
+		<u:style name="width" value="630px" />
+		<u:style name="height" value="120px" />
+	</u:selector>
+	
+	<u:selector name="#searchBar">
+		<u:style name="float" value="left" />
+		<u:style name="width" value="400px" />
+		<u:style name="margin-top" value="126px" />
+		<u:style name="margin-left" value="185px" />
+	</u:selector>
+
+	<!--
+		Barre de navigation
+	-->
+	<u:selector name=".menuBottom">
+		<u:style name="background-position" value="left bottom" />
+		<u:style name="background-repeat" value="no-repeat" />
+		<u:style name="width" value="121px" />
+		<u:style name="height" value="8px" />
+	</u:selector>
+
+	<u:selector name=".menu a:active,.menu a:link, .menu a:visited">
+		<u:style name="color" value="white" />
+		<u:style name="font-size" value="1.2em" />
+		<u:style name="padding-left" value="6px" />
+		<u:style name="padding-top" value="6px" />
+		<u:style name="text-decoration" value="none" />
+		<u:style name="font-weight" value="bold" />
+		<u:style name="width" value="121px" />
+		<u:style name="display" value="block" />
+	</u:selector>
+
+
+	<u:selector name=".menuEquipierBottom">
+		<u:style name="background-image">
+			<f:resource f:key="/img/menusFooter.png" />
+		</u:style>
+		<u:style name="background-position" value="0 0px" />
+	</u:selector>
+
+	<u:selector name=".menuEquipier">
+		<u:style name="background-color" skin="couleur1_clair" />
+	</u:selector>
+
+	<u:selector name=".menuEquipier a:hover">
+		<u:style name="color" skin="couleur1_fonce_imp" />
+	</u:selector>
+
+	<u:selector name=".boutonEquipier">
+		<u:style name="background-image">
+			<f:resource f:key="/img/boutonsNavigation.png" />
+		</u:style>
+	</u:selector>
+
+	<u:selector name=".boutonEquipierOver">
+		<u:style name="background-image">
+			<f:resource f:key="/img/boutonsNavigation.png" />
+		</u:style>
+		<u:style name="background-position" value="0 -38px" />
+	</u:selector>
+
+	<u:selector name=".menuSkipperBottom">
+		<u:style name="background-image">
+			<f:resource f:key="/img/menusFooter.png" />
+		</u:style>
+		<u:style name="background-position" value="0 -16px" />
+	</u:selector>
+
+	<u:selector name=".menuSkipper">
+		<u:style name="background-color" skin="couleur2_clair" />
+	</u:selector>
+
+	<u:selector name=".menuSkipper a:hover">
+		<u:style name="color" skin="couleur2_imp" />
+	</u:selector>
+
+	<u:selector name=".boutonSkipper">
+		<u:style name="background-image">
+			<f:resource f:key="/img/boutonsNavigation.png" />
+		</u:style>
+		<u:style name="background-position" value="0 -152px" />
+	</u:selector>
+
+	<u:selector name=".boutonSkipperOver">
+		<u:style name="background-image">
+			<f:resource f:key="/img/boutonsNavigation.png" />
+		</u:style>
+		<u:style name="background-position" value="0 -190px" />
+	</u:selector>
+
+	<u:selector name=".menuRechercheBottom">
+		<u:style name="background-image">
+			<f:resource f:key="/img/menusFooter.png" />
+		</u:style>
+		<u:style name="background-position" value="0 -8px" />
+	</u:selector>
+
+	<u:selector name=".menuRecherche">
+		<u:style name="background-color" skin="couleur3_clair" />
+	</u:selector>
+
+	<u:selector name=".menuRecherche a:hover">
+		<u:style name="color" skin="couleur3_imp" />
+	</u:selector>
+
+	<u:selector name=".boutonRecherche">
+		<u:style name="background-image">
+			<f:resource f:key="/img/boutonsNavigation.png" />
+		</u:style>
+		<u:style name="background-position" value="0 -76px" />
+	</u:selector>
+
+	<u:selector name=".boutonRechercheOver">
+		<u:style name="background-image">
+			<f:resource f:key="/img/boutonsNavigation.png" />
+		</u:style>
+		<u:style name="background-position" value="0 -114px" />
+	</u:selector>
+
+
+	<!-- Loading centre -->
+	<u:selector name=".loadingCentre">
+		<!--
+			<u:style name="background-image"> <f:resource
+			f:key="/img/ajax-loader-grand.gif" /> </u:style>
+		-->
+		<u:style name="background-repeat" value="no-repeat" />
+		<u:style name="background-position" value="center 180px" />
+		<u:style name="background-color" skin="couleur3_clair" />
+		<u:style name="color" value="white" />
+		<u:style name="font-size" value="2em" />
+		<u:style name="font-weight" value="bolder" />
+		<u:style name="padding-top" value="150px" />
+		<u:style name="width" value="964px !important" />
+		<u:style name="text-align" value="center !important" />
+		<!-- Putain de hack pour IE6 de merdum ! -->
+		<u:style name="height" value="9999px !important" />
+	</u:selector>
+	
+	<u:selector name=".breadcrumbs">
+		<u:style name="margin-top" value="5px" />
+		<u:style name="margin-bottom" value="10px" />
+		<u:style name="font-size" value="0.9em" />
+		<u:style name="font-style" value="italic" />
+	</u:selector>
+	
+	
+	<!--
+		Define static styles in the CDATA block below (you can also move this
+		block to the top)
+	-->
+	<f:verbatim><![CDATA[
+]]></f:verbatim>
+</f:template>

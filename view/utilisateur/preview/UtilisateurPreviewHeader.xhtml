@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<s:div>
+		
+		<s:link id="utilisateurViewlink"  style="float:left;"
+			view="/utilisateur/Utilisateur.xhtml">
+			<f:param name="utilisateurPseudonyme"
+				value="#{utilisateur.pseudonyme}" />
+			<h:outputText value="#{utilisateur.pseudonyme}"/>
+		</s:link>
+		
+		<div style="float:left;margin-left:10px;">
+			<fc:star id="noteUser" ratingTitle="#{utilisateur.note}" value="#{e:getNotePar5(utilisateur.note)}" minValue="1" maxValue="5"/>
+		</div>
+		
+		<div style="float: right;">
+		 <s:fragment
+			rendered="#{utilisateur.isActif() and not 'true'.equals(noContact)}">
+			<s:link id="contactlink"
+				rendered="#{identity.loggedIn}" view="/messagerie/Contact.xhtml">
+				<f:param name="objectType" value="#{object.objectType}" />
+				<f:param name="objectRow" value="#{row}" />
+				<f:param name="toPseudo" value="#{utilisateur.pseudonyme}" />
+				<h:graphicImage value="/img/contact.png" style="border:0;"
+					alt="#{messages['tooltip.contact']}" />
+			</s:link>
+
+			<s:link id="contactlinkGris" propagation="none"
+				view="/utilisateur/compte/SEnregistrer.xhtml"
+				rendered="#{not identity.loggedIn}">
+				<h:graphicImage value="/img/contact_gris.png" style="border:0"
+					alt="#{messages['tooltip.contact']}" />
+			</s:link>
+			<rich:spacer width="5px" height="16px" />
+		</s:fragment> 
+			<s:link id="utilisateurViewEye" 
+			view="/utilisateur/Utilisateur.xhtml">
+			<f:param name="utilisateurPseudonyme"
+				value="#{utilisateur.pseudonyme}" />
+			<h:graphicImage value="/img/view.png" style="border:0"
+				alt="#{messages['tooltip.view']}" />
+		</s:link></div>
+		<div style="clear: both;" />
+	</s:div>
+
+</ui:composition>

@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<div class="rounded-panel" style="font-size: 80%;">
+	<div class="gauche #{imageClass}">
+	<div class="droit #{imageClass}" style="padding-bottom: 10px;">
+	<div class="haut #{imageClass}">
+	<div class="hautInner #{imageClass}"></div>
+	</div>
+	<div class="title #{titleClass}"
+		style="background-color:#{titleColor};width:90% !important;">
+	<div id="Bouton#{id}" style="border: none !important;"
+		class="curseurMain toggleBouton #{shownOnLoad == 'shown'?'toggleBoutonOuvert':''} #{toggleClass}">
+	<ui:insert name="header">
+		<h:outputText value="#{libelle}" />
+	</ui:insert></div>
+	</div>
+	<s:div style="clear: both">
+		<div id="TogglePanel#{id}">
+		<table style="width: 100%; padding-right: 12px;">
+			<tr>
+				<td><ui:insert /></td>
+			</tr>
+		</table>
+		</div>
+		<div class="footer" style="background-color:#{titleColor};"><ui:insert
+			name="footer" /></div>
+	</s:div></div>
+	</div>
+	</div>
+
+	<rich:jQuery selector="#Bouton#{id}"
+		query="click(function(){#{id}slide();})" />
+
+	<rich:jQuery name="#{id}slide" timing="onJScall"
+		selector="#TogglePanel#{id}"
+		query="slideToggle('slow',function(){
+	#{id}toggleImage();
+	if (jQuery(this).css('height') == 'auto'){
+		#{id}fermerToggle();				
+	}else{
+		#{id}ouvrirToggle();
+	}
+	})" />
+
+	<rich:jQuery rendered="#{!toggleBean.toggleOuvert}" timing="immediate"
+		selector="#TogglePanel#{id}" query="hide()" />
+
+	<rich:jQuery name="#{id}toggleImage"
+		timing="#{toggleBean.toggleOuvert == true ? 'immediate': 'onJScall'}"
+		selector="#Bouton#{id}" query="toggleClass('toggleBoutonOuvert')" />
+
+	<a:region>
+		<a:jsFunction ajaxSingle="true" name="#{id}ouvrirToggle"
+			ignoreDupResponses="true" eventsQueue="toggleQueue"
+			action="#{toggleBean.setToggleOuvert(true)}" reRender="#{reRender}" />
+		<a:jsFunction ajaxSingle="true" name="#{id}fermerToggle"
+			ignoreDupResponses="true" eventsQueue="toggleQueue"
+			action="#{toggleBean.setToggleOuvert(false)}" reRender="#{reRender}" />
+	</a:region>
+
+</ui:composition>
+

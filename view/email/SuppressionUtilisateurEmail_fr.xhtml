@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BateauStop - Suppression de compte" />
+		<ui:param name="toName" value="#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom}"/>
+		<ui:param name="toMail" value="#{emailManager.utilisateur.mail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BateauStop"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="fr"/>	
+		<ui:define name="copy">
+			<m:bcc name="Admin" address="boathitchhiking@gmail.com" />
+		</ui:define>
+		
+		<ui:define name="body">
+			<p>#{emailManager.utilisateur.coordonnees.nom}
+			#{emailManager.utilisateur.coordonnees.prenom},</p>
+			
+			<p><b>La communaut&#233; <span
+				style="color: #255C9D;">BateauStop</span> vous dit "Salut, et encore merci pour le poisson" !</b></p>
+
+			<p>Ce mail fait suite &#224; la suppression de votre compte utilisateur.</p>
+			
+			<p>L'ensemble de vos informations personnelles ont &#233;t&#233; supprim&#233;es de nos bases de donn&#233;es.</p>
+			
+			<p>Merci pour votre participation &#224; la communaut&#233; BateauStop, en esp&#233;rant vous revoir prochainement,</p>
+			<p>&#224; bient&#244;t !</p>
+						
+			<p>L'&#233;quipe <a href="#{proprieteFactory.getBasePath('fr')}">BateauStop</a>.</p>
+			<f:facet name="alternative">
+#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom},
+			
+La communaut&#233; BateauStop vous dit "Salut, et encore merci pour le poisson" !
+
+Ce mail fait suite &#224; la suppression de votre compte utilisateur.			
+L'ensemble de vos informations personnelles ont &#233;t&#233; supprim&#233;es de nos bases de donn&#233;es.
+			
+Merci pour votre participation &#224; la communaut&#233; BateauStop, en esp&#233;rant vous revoir prochainement,
+&#224; bient&#244;t !
+						
+L'&#233;quipe BateauStop.
+</f:facet>
+		</ui:define>
+</ui:composition>
+
+
+

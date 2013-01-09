@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<fc:roundedPanel id="equipement" titleColor="white"
+		imageClass="round-panel-simple">
+		<ui:define name="header">#{messages['equipGeneral.equipements']}</ui:define>
+		<div class="bsTree">
+		 <rich:tree switchType="client" toggleOnClick="true" icon="" iconCollapsed="/img/flecheDroite.png" iconExpanded="/img/flecheBas.png" showConnectingLines="false" ajaxSingle="true">
+			<rich:treeNodesAdaptor id="typeEquipement" nodes="#{equipementManager.typesEquipementArbo}"
+				var="typeEquipement">
+				<rich:treeNode >
+					<span class="bsNode">#{messages['typeEquipement.'.concat(typeEquipement.idTypeEquipement)]}</span>
+				</rich:treeNode>
+	 			<rich:treeNodesAdaptor id="equipement" var="equipement"
+					nodes="#{typeEquipement.equipements}" >
+					<rich:treeNode iconLeaf="">
+						<h:outputText value="#{messages['equipement.'.concat(equipement.equipement.idEquipement)]}" style="float:left;"/>
+						<div style="float:right">
+				 			<fc:star id="equip-#{equipement.equipement.idEquipement}-ment" ratingTitle="#{equipement.nombre}" value="#{equipement.nombre}" minValue="1" maxValue="5"/> 			
+						</div>
+					</rich:treeNode>
+				</rich:treeNodesAdaptor> 
+			</rich:treeNodesAdaptor> 
+		</rich:tree>
+	</div>
+	</fc:roundedPanel>
+</ui:composition>

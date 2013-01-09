@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="Quelles sont les comp&eacute;tences requises pour se lancer dans le BateauStop." />
+		<meta name="abstract"
+			content="Quelles sont les comp&eacute;tences requises pour se lancer dans le BateauStop." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Les comp&eacute;tences requises - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Should I be experienced ?</f:facet>
+			<p>It's an advantage to have already tried sailing before trying hitch-boat, but it's not compulsory. 
+			Many hitchhikers had not experience sailing before their first crossing.</p>
+			<p>Nevertheless, it's better to have some basic knowledges before joining a sailboat as a shipmate :
+				<ul>
+					<li>knowing how to do knots such as <s:link view="/static/noeuds_en.xhtml" value="these ones" propagation="none" style="margin-left:5px;"/>,</li>
+					<li>mastering <s:link view="/static/lexique_en.xhtml" value="specific vocabulary linked to sailing" propagation="none" style="margin-left:5px;"/>,</li>
+					<!-- <li>comprendre les diff&eacute;rentes manoeuvres de base, [lien]</li> -->
+					<li>being aware of the importance of <s:link view="/static/securite_en.xhtml" value="safety  on a saiboat" propagation="none" style="margin-left:5px;"/>.</li>
+				</ul>
+			</p>
+			<p>Finally, here is also an important point to check : do you have problems with <s:link view="/static/malDeMer_en.xhtml" value="seasickness" propagation="none" style="margin-left:5px;"/> ?</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">What does a shipmate is supposed to do ?</f:facet>
+			<p>It depends on what the skipper expects. What the shipmate has to 
+			do has to be defined <b>before</b> going on board !</p>
+			<p>
+				Usually, the shipmate has to participate to navigation, to steerages, to help to clean the boat, 
+				and sometimes to cook and to do the washing-up.<br />
+				Maybe you will also help to repair various stuffs, to give advice about computer sciences, 
+				or to be a translator in marinas.
+			</p>
+			<p>As we're talking about languages : many French speakers are travelling all over seas, but it's 
+			useful to be able to speak English, as it's the most widespread language. You also have to know 
+			another language : <s:link view="/static/lexique_en.xhtml" value="the sailing language" 
+			propagation="none" style="margin-left:5px;"/>.</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">How much does it cost to be a boat-hitchhiker ?</f:facet>
+			<p>It's linked to the previous point what a shipmate is supposed to do. The price depends on the skipper.</p>
+			<p>Usually, you have at least to participate to a common till aimed at buying food (around 5&euro; per day), 
+			or if not, you have to bring your own food and water. Some boats' owners also add the fuel 
+			and the marinas' fees to the common till (which is about 25 &euro; per day).</p>
+			<p>There are also some specific cases, such as yacht delivery. In that case, you have the possibility to earn 
+			a few money, or to have food and drinking water for free.</p>
+			<p>As you've already understood, many points depend on the captain; this is why you have to define with him 
+			the conditions before leaving. Then you'll be free to decide which proposal suits you the most.</p>
+			<p>But please remember: the human interactions are the most important part of a stay on Sea!</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Which qualities are important to find a boat ?</f:facet>
+
+			<p>A sailboat is tiny,  this is why cohabiting with other shipmates is very important.</p>
+			<p>Thus, the first criterion the captain will take into account (even before your skills) 
+			is your manners and the way you behave.</p>
+			<p>You have therefore to be pleasant and in a good mood. You'll also have to be able to 
+			get along with people you didn't know before during several days (or weeks, or months), 
+			even if the life conditions are sometimes difficult.</p>
+			<p>This is why we advise you to complete your profile and your 
+				 <s:link view="/recherche/DemandeList.xhtml" value="boarding request" propagation="none" style="margin-left:5px;"/> 
+				 as much as possible.
+				Show that you're really motivated, that you're able to adapt to any situation, and most 
+				of all that you really wish to learn and to share a great experience.</p>
+			<p>This is important , all the more that the most precise requests are listed at
+			 the top of the results of a websearch.</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Except www.bateaustop.fr, are there other ways to find a boat ?</f:facet>
+
+			<p>On bateaustop.fr, you have the possibility to publish requests. Nevertheless, you also have 
+			the possibility to find a boat directly in place. Marinas are places which helps a lot in finding 
+			contacts and access to boats.  If you're interested in a boat lied at anchor, you have to use a 
+			small zodiac (or something similar) in order to meet the owners and speak to them.</p>
+			<p>In case of direct contact, it's better to have something to present. For instance, 
+			a map of the travel you wish to do, or photos of your voyage. This is a nice way to 
+			start a talk.</p>
+		</rich:panel>
+
+
+	</ui:define>
+
+
+
+</ui:composition>

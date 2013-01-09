@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:a="http://richfaces.org/a4j">
+	
+	<rich:panel>
+		<s:div id="photoEditInner">
+			<h:panelGrid columns="2" style="width:100%;" border="0"
+				cellpadding="0" cellspacing="0"
+				columnClasses="panelGrid-column width50,panelGrid-column width50">
+				<s:div style="padding-left:30px;">
+				<rich:fileUpload listWidth="186" listHeight="130"
+					fileUploadListener="#{bateauPhotoManager.listener}" onupload="showcentre();" onuploadcanceled="hidecentre();"
+					maxFilesQuantity="#{3 - bateauEdit.instance.photosBateau.size}" autoclear="true" id="upload" ajaxSingle="true"
+					immediateUpload="true" acceptedTypes="jpg, gif, png, bmp"
+					allowFlash="false" onsizerejected="alert('#{messages['fichier.taille']}');"
+					ontyperejected="alert('#{messages['fichier.type']}');"
+					addControlLabel="#{messages['bouton.ajouter']}">
+					<a:support event="onuploadcomplete" oncomplete="if(#{rich:element('scroller')}!=null){ #{rich:component('scroller')}.last();}hidecentre();" reRender="photoEditInner" eventsQueue="bateauQueue" ignoreDupResponses="true"
+						ajaxSingle="true" />
+				</rich:fileUpload>
+				</s:div>
+				<h:panelGroup>
+					<h:outputText value="#{messages['fichier.aucun']}" styleClass="messageTableVide"
+						rendered="#{bateauEdit.instance.photosBateau.size==0}" />
+
+						<fc:photoViewer rendered="#{bateauEdit.instance.photosBateau.size!=0}">
+									<a:repeat value="#{bateauEdit.instance.photosBateau}" rows="1"
+										var="_varListPhoto" id="imagesTable" rowKeyVar="_row">
+										<h:panelGrid columns="1" style="width:100%;" border="0"
+											cellpadding="0" cellspacing="0">
+											<h:graphicImage styleClass="thumb" width="130px"
+												height="130px"
+												url="#{_varListPhoto.fullPath}" />
+											<a:commandLink eventsQueue="bateauQueue" ignoreDupResponses="true"
+												action="#{bateauPhotoManager.supprimerPhotoBateau(_row)}"
+												styleClass="supprimer" reRender="photoEditInner,messages"
+												value="#{messages['bouton.supprimer']}" ajaxSingle="true" />
+										</h:panelGrid>
+									</a:repeat>
+						</fc:photoViewer>
+				</h:panelGroup>
+			</h:panelGrid>
+		</s:div>
+	</rich:panel>
+</ui:composition>

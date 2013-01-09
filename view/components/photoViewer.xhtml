@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<style type="text/css">
+		.rich-datascr-button {
+			border: 0px;
+			background-color: white;
+		}
+		
+		.dr-dscr-button {
+			border: 0px;
+			background-color: white;
+		}
+		
+		.dr-dscr-button-dsbld {
+			border: 0px;
+			background-color: white;
+		}
+		
+		.viewerTable {
+			border: 0px;
+			background-color: white;
+		}
+		
+		.viewerTable tbody td {
+			border: 0px;
+			background-color: white;
+		}
+		
+		.thumbs {
+			background-color: white;
+			border: 4px solid;
+			border-color: #D1CCAD;
+		}
+
+		.thumb {
+			padding: 5px;
+			background-color: white;
+			border: 0px;;
+		}
+	</style>
+	
+	<rich:datascroller id="scroller" lastPageMode="full" for="imagesTable"
+					reRender="imagesTable" boundaryControls="hide" stepControls="hide"
+					tableStyleClass="viewerTable" rendered="#{rendered}">
+		<f:facet name="pages">
+			<s:div styleClass="thumbs">
+				<ui:insert/>
+			</s:div>
+		</f:facet>
+		<f:facet name="fastforward">
+			<h:graphicImage value="/img/next.png" />
+		</f:facet>
+		<f:facet name="fastforward_disabled">
+			<h:graphicImage value="/img/next_gris.png" />
+		</f:facet>
+		<f:facet name="fastrewind">
+			<h:graphicImage value="/img/prev.png" />
+		</f:facet>
+		<f:facet name="fastrewind_disabled">
+			<h:graphicImage value="/img/prev_gris.png" />
+		</f:facet>
+	</rich:datascroller>
+
+</ui:composition>

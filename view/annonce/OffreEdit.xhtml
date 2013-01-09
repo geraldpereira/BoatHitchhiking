@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{offreEdit.managed ? messages['offre.modifier'] : messages['offre.ajouter']} - #{messages['meta.title']}</title>
+	</ui:define>
+	<ui:define name="side">
+		<s:fragment rendered="#{offreEdit.managed}">
+			<ui:include src="/note.xhtml">
+  				<ui:param name="id" value="noteOffre" />
+  				<ui:param name="note" value="#{offreEdit.instance.note}" />
+  				<ui:param name="renderIndications" value="#{identity.loggedIn and utilisateurCourant.pseudonyme.equals(offreEdit.instance.utilisateur.pseudonyme)}" />
+  				<ui:param name="indications" value="#{offreHelper.getIndications(offreEdit.instance)}" />
+			</ui:include>
+		</s:fragment>
+	</ui:define>	
+	<ui:define name="body">
+
+		<h:form id="offreEdit" styleClass="edit">
+			<h1>#{offreEdit.managed ? messages['offre.modifier'] : messages['offre.ajouter']}
+			</h1>
+			<rich:panel rendered="#{offreEdit.managed}">
+				<s:decorate id="dateMaj" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['annonce.maj']}</ui:define>
+					<h:outputText value="#{offreEdit.instance.dateMaj}">
+						<s:convertDateTime dateStyle="medium" type="date" />
+					</h:outputText>
+				</s:decorate>
+				<div style="clear: both" />
+			</rich:panel>
+			<rich:panel>
+				<f:facet name="header">#{messages['annonce.detail']}</f:facet>
+				<ui:include src="../annonce/OffreEditInner.xhtml">
+					<ui:param name="offre" value="#{offreEdit.instance}" />
+				</ui:include>
+			</rich:panel>
+			<fc:togglePanel id="annonceAvance"
+				libelle="#{messages['global.avance']}"
+				toggleBean="#{annonceAvance}" toggleClass="avance">
+				<fc:roundedPanel id="PersRech" titleColor="white"
+					title="#{messages['offre.personnes']}" imageClass="round-panel-simple">
+					<h:panelGrid columns="2" style="width:100%;"  border="0" cellpadding="0" cellspacing="0"
+						columnClasses="panelGrid-column width50,panelGrid-column width50">
+						<h:panelGroup>
+						<s:decorate id="nbPersonnesField" template="/layout/editAide.xhtml">
+							<ui:define name="label">#{messages['offre.nbPersonnes']}</ui:define>
+							<ui:define name="desc">#{messages['offre.nbPersonnes.desc']}</ui:define>
+							<rich:inputNumberSpinner id="nbPersonnes" minValue="1" required="false"
+								maxValue="99" inputSize="2" style="width:54px;"
+								value="#{offreEdit.instance.nbPersonnes}">
+								<a:support event="onchange" requestDelay="600" reRender="nbPersonnesField" eventsQueue="offreQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+							</rich:inputNumberSpinner>
+						</s:decorate>
+
+						<s:decorate id="postesListField" template="/layout/editAide.xhtml">
+							<ui:define name="label">#{messages['offre.posteRecherche']}</ui:define>
+							<ui:define name="desc">#{messages['global.selectionMultiple']}</ui:define>
+							<h:selectManyListbox
+								value="#{offreEdit.instance.postesRecherches}" id="typesPoste"
+								required="false">
+								<s:selectItems value="#{typePostes}" var="_varList"
+									label="#{messages['typePoste.'.concat(_varList.name())]}" />
+								<s:convertEnum />
+								<a:support event="onchange" reRender="postesListField" eventsQueue="offreQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+							</h:selectManyListbox>
+						</s:decorate>
+						</h:panelGroup>
+						<s:decorate id="competencesField" template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['offre.competences']}</ui:define>
+					<h:inputTextarea id="competences" rows="6"
+						style="width:290px!important;"
+						value="#{offreEdit.instance.competences}">
+						<a:support event="onblur" reRender="competences" eventsQueue="offreQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+					</h:inputTextarea>
+				</s:decorate>
+					</h:panelGrid>
+				</fc:roundedPanel>				
+				<s:decorate id="typeNavList" template="/layout/editAide.xhtml">
+						<ui:define name="label">#{messages['annonce.typeNav']}</ui:define>
+						<ui:define name="desc">#{messages['global.selectionMultiple']}</ui:define>
+						<h:selectManyListbox value="#{offreEdit.instance.typesNav}"
+							id="typesNav">
+							<s:selectItems value="#{typeNavs}" var="_curTypeNav"
+								label="#{messages['typeNav.'.concat(_curTypeNav.name())]}" />
+							<s:convertEnum />
+							<a:support event="onchange" reRender="typeNavList" eventsQueue="offreQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+						</h:selectManyListbox>
+				</s:decorate>
+				<s:decorate id="descriptionField" template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['annonce.description']}</ui:define>
+					<h:inputTextarea id="description" rows="10"
+						style="width:600px!important;"
+						value="#{offreEdit.instance.description}">
+						<a:support event="onblur" reRender="descriptionField" eventsQueue="offreQueue" ignoreDupResponses="true"
+									bypassUpdates="true" ajaxSingle="true" />
+					</h:inputTextarea>
+				</s:decorate>
+			</fc:togglePanel>
+
+			<rich:tabPanel id="offreTabPanelId" switchType="client" headerSpacing="5px" immediate="true"
+				inactiveTabClass="tabCellInactive" selectedTab="#{offreEdit.selectedTab}">
+				<rich:tab id="bateauTabId" name="Bateau" label="#{messages['offre.bateau']}">
+					<a:region>
+					<fc:roundedPanel id="bateau" titleColor="white"
+					imageClass="round-panel-simple">
+					<ui:define name="header">
+					<h:selectOneMenu id="bateaux" converter="#{bateauConverter}" 
+						value="#{offreEdit.instance.bateau}">
+								<s:selectItems value="#{offreEdit.bateaux}" var="_varList" 
+									label="#{_varList.nom}" />
+								<a:support event="onchange" reRender="bateauRegion"  eventsQueue="offreQueue" ignoreDupResponses="true"
+									bypassUpdates="false" ajaxSingle="false" />
+								</h:selectOneMenu>
+					</ui:define>
+					<s:div id="bateauRegion">
+					<s:fragment rendered="#{offreEdit.instance.bateau != null and offreEdit.instance.bateau.idBateau != 1}">
+					<ui:include src="/bateau/preview/BateauPreview.xhtml">
+						<ui:param name="headerClass" value="smallHeader" />
+						<ui:param name="bateau" value="#{offreEdit.instance.bateau}" />
+					</ui:include>			
+					</s:fragment>		
+					<s:fragment rendered="#{offreEdit.instance.bateau == null or offreEdit.instance.bateau.idBateau == 1}">
+						<span class="errors">
+						#{messages['offre.choisirBateau']}
+			        </span>
+					</s:fragment>
+					</s:div>
+					<ui:define name="footer">
+					<s:link id="lienAjouterBateau" styleClass="ajouter" 
+						view="/bateau/BateauEdit.xhtml"
+						value="#{messages['offre.ajouterBateau']}" includePageParams="false">
+						</s:link>
+					</ui:define>
+					</fc:roundedPanel>
+					</a:region>
+				</rich:tab>
+				<rich:tab name="Escales" label="#{messages['offre.escales']}">
+					<ui:include src="/annonce/EscaleEditInner.xhtml" />
+				</rich:tab>
+			</rich:tabPanel>
+
+			<div style="clear: both"><span class="required">*</span>
+			#{messages['global.champsRequis']}</div>
+
+			<div class="actionButtons">
+			<h:commandButton id="save"
+				value="#{messages['bouton.save']}" action="#{offreEdit.persist}"
+				rendered="#{!offreEdit.managed}" /> 
+				
+				<h:commandButton id="update"
+				value="#{messages['bouton.modifier']}" action="#{offreEdit.update}"
+				rendered="#{offreEdit.managed}" />
+				
+				 <h:commandButton id="delete"
+				value="#{messages['bouton.supprimer']}"
+				onclick="#{rich:component('deleteConfirm')}.show();return false;"
+				rendered="#{offreEdit.managed}" /> 
+				
+				<s:button
+				action="terminer"
+				id="cancel" value="#{messages['bouton.annuler']}"/>	
+				</div>
+
+		</h:form>
+
+		<s:fragment rendered="#{offreEdit.managed}">
+			<fc:confirmModalPanel id="deleteConfirm" width="400">
+				<ui:define name="headerMP">
+					<h:outputText
+						value="#{messages['offre.modalPanelSupprimer.titre']}" />
+				</ui:define>
+				<ui:define name="bodyMP">
+					<p>#{messages['offre.modalPanelSupprimer.texte1']}</p>
+				</ui:define>
+				<ui:define name="actionMP">
+					<h:commandButton id="confirmer"
+						value="#{messages['bouton.confirm']}" action="#{offreEdit.remove}" />
+				</ui:define>
+			</fc:confirmModalPanel>
+		</s:fragment>
+	</ui:define>
+
+</ui:composition>

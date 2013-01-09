@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{bateauEdit.managed ? messages['bateau.modifier'] : messages['bateau.ajouter']} - #{messages['meta.title']}</title>
+	</ui:define>
+	<ui:define name="side">
+		<s:fragment rendered="#{bateauEdit.managed}">
+			<ui:include src="/note.xhtml">
+  				<ui:param name="id" value="noteBateau" />
+  				<ui:param name="note" value="#{bateauEdit.instance.note}" />
+  				<ui:param name="renderIndications" value="#{identity.loggedIn and utilisateurCourant.pseudonyme.equals(bateauEdit.instance.utilisateur.pseudonyme)}" />
+  				<ui:param name="indications" value="#{bateauHelper.getIndications(bateauEdit.instance)}" />
+			</ui:include>
+		</s:fragment>
+	</ui:define>
+	<ui:define name="body">
+
+		<h1>#{bateauEdit.managed ? messages['bateau.modifier'] : messages['bateau.ajouter']}</h1>
+
+		<h:form id="bateau" styleClass="edit">
+
+
+			<rich:panel>
+				<f:facet name="header">#{messages['bateau']}</f:facet>
+				<ui:include src="../bateau/BateauEditInner.xhtml">
+					<ui:param name="bateau" value="#{bateauEdit.instance}" />
+				</ui:include>
+						
+				<div style="clear: both" />
+				<h:panelGrid columns="2" style="width:100%;" border="0"
+					styleClass="noBorder" cellpadding="0" cellspacing="0"
+					columnClasses="panelGrid-column width50 noBorder,panelGrid-column width50 noBorder">
+					<h:panelGroup>
+						<s:decorate id="coque" template="/layout/edit.xhtml">
+							<ui:define name="label">#{messages['bateau.coque']}</ui:define>
+							<h:selectOneMenu id="coqueField"
+								value="#{bateauEdit.instance.typeCoque}">
+								<s:selectItems value="#{typeCoques}" var="_curCoque"
+									label="#{messages['typeCoque.'.concat(_curCoque.name())]}"
+									noSelectionLabel=" " />
+								<s:convertEnum />
+							</h:selectOneMenu>
+						</s:decorate>
+						<s:decorate id="greement" template="/layout/edit.xhtml">
+							<ui:define name="label">#{messages['bateau.greement']}</ui:define>
+							<h:selectOneMenu id="sexe"
+								value="#{bateauEdit.instance.greement}">
+								<s:selectItems value="#{greements}" var="_curGreement"
+									label="#{messages['greement.'.concat(_curGreement.name())]}"
+									noSelectionLabel=" " />
+								<s:convertEnum />
+							</h:selectOneMenu>
+						</s:decorate>
+					</h:panelGroup>
+					<h:panelGroup>
+						<s:decorate id="voilesField" template="/layout/editAide.xhtml">
+							<ui:define name="label">#{messages['bateau.voiles']}</ui:define>
+							<ui:define name="desc">#{messages['global.selectionMultiple']}</ui:define>
+							<h:selectManyListbox id="voiles"
+								value="#{bateauEdit.instance.voiles}">
+								<s:selectItems value="#{voiles}" var="_curVoile"
+									label="#{messages['voile.'.concat(_curVoile.name())]}"
+									hideNoSelectionLabel="no" />
+								<s:convertEnum />
+							</h:selectManyListbox>
+						</s:decorate>
+						
+					</h:panelGroup>
+				</h:panelGrid>
+
+				<s:decorate id="infoField" template="/layout/edit.xhtml">
+					<ui:define name="label">#{messages['bateau.infos']}</ui:define>
+					<h:inputTextarea id="info" rows="10" style="width:600px!important;"
+						value="#{bateauEdit.instance.info}">
+						<a:support event="onblur" reRender="infoField" bypassUpdates="true" eventsQueue="bateauQueue" ignoreDupResponses="true"
+							ajaxSingle="true" />
+					</h:inputTextarea>
+				</s:decorate>
+
+
+			</rich:panel>
+			
+			<div style="clear: both" />
+			
+			<ui:include src="/bateau/PhotosBateauEditInner.xhtml" />
+
+			<ui:include src="/bateau/EquipGeneralEditInner.xhtml" />
+
+			<div style="clear: both"><span class="required">*</span>
+				#{messages['global.champsRequis']}</div>
+
+			<div class="actionButtons">
+
+				<h:commandButton id="save"
+				value="#{messages['bouton.save']}" action="#{bateauEdit.persist}"
+				rendered="#{!bateauEdit.managed}" /> 
+				
+				<h:commandButton id="update"
+				value="#{messages['bouton.modifier']}" action="#{bateauEdit.update}"
+				rendered="#{bateauEdit.managed}" /> 
+				
+				<h:commandButton
+				id="delete" value="#{messages['bouton.supprimer']}"
+				onclick="#{rich:component('deleteConfirm')}.show();return false;"
+				rendered="#{bateauEdit.managed}" /> 
+				
+				
+				<s:button id="cancelEdit"
+					value="#{messages['bouton.annuler']}"
+					action="#{bateauEdit.cancel()}"					
+					/> 
+					
+				</div>
+		</h:form>
+		
+		<s:fragment rendered="#{bateauEdit.managed}">
+			<fc:confirmModalPanel id="deleteConfirm" width="400">
+		<ui:define name="headerMP">
+			<h:outputText value="#{messages['bateau.modalPanelSupprimer.titre']}" />
+		</ui:define>
+		<ui:define name="bodyMP">
+			<p>#{messages['bateau.modalPanelSupprimer.texte1']}</p>
+		</ui:define>
+		<ui:define name="actionMP">
+			<h:commandButton id="confirmer" value="#{messages['bouton.confirm']}"
+				action="#{bateauEdit.remove}" immediate="true" />
+		</ui:define>
+	</fc:confirmModalPanel>
+		</s:fragment>
+	</ui:define>
+
+</ui:composition>

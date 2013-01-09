@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<rich:panel headerClass="#{headerClass}" bodyClass="#{bodyClass}" style="width:100%;">
+		<f:facet name="header">
+			<ui:insert name="titre"/>
+		</f:facet>
+	
+		<s:div style="text-align:center;float:left;" rendered="#{hasPhoto}">
+			<ui:insert name="photos" />
+		</s:div> 
+		<s:div style="float:left;#{(hasDesc and not hasPhoto)? 'width:50%;' : ''}" >
+			<ui:insert name="infos" />
+		</s:div>
+		<s:div style="#{hasPhoto ? 'clear:both;float:left;' : 'float:right;width:50%;'}" rendered="#{hasDesc}">
+			<ui:insert name="description"/>
+		</s:div>
+		<div style="clear:both;"/>
+	
+		<ui:insert name="more" />
+		
+	</rich:panel>
+</ui:composition>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<table> 
+	<tr><td><fc:boutonNavigation id="Skipper" menuStyle="menu menuSkipper"
+				menuBottomStyle="menuBottom menuSkipperBottom"
+				boutonStyle="boutonSkipper" boutonOverStyle="boutonSkipperOver">
+				<ui:define name="bouton">
+					<s:link id="lienRechercheOffres" view="/recherche/OffreList.xhtml" includePageParams="false"
+						value="#{messages['layout.menuNav.offres']}" propagation="none">
+					</s:link>
+				</ui:define>
+			</fc:boutonNavigation></td><td><fc:boutonNavigation id="Equipier" menuStyle="menu menuEquipier"
+				menuBottomStyle="menuBottom menuEquipierBottom"
+				boutonStyle="boutonEquipier" boutonOverStyle="boutonEquipierOver">
+				<ui:define name="bouton">
+					<s:link id="lienRechercheDemandes" includePageParams="false"
+						view="/recherche/DemandeList.xhtml"
+						value="#{messages['layout.menuNav.demandes']}" propagation="none">
+					</s:link>
+				</ui:define>
+			</fc:boutonNavigation></td><td><fc:menuNavigation id="Recherche" menuStyle="menu menuRecherche"
+				menuBottomStyle="menuBottom menuRechercheBottom"
+				boutonStyle="boutonRecherche" boutonOverStyle="boutonRechercheOver">
+				<ui:define name="bouton">
+					<h:outputText value="#{messages['layout.menuNav.recherche']}" />
+				</ui:define>
+				<ui:define name="menu">
+					<h:panelGrid columns="1"  border="0" cellpadding="0" cellspacing="0">
+						<s:div>
+							<s:link id="lienRechercheUtilisateurs" includePageParams="false"
+								view="/recherche/UtilisateurList.xhtml"
+								value="#{messages['layout.menuNav.utilisateurs']}" 
+								propagation="none">
+							</s:link>
+						</s:div>
+						<s:div>
+							<s:link id="lienRechercheBateaux" includePageParams="false"
+								view="/recherche/BateauList.xhtml"
+								value="#{messages['layout.menuNav.bateaux']}" propagation="none">
+							</s:link>
+						</s:div>	
+						<s:div>
+							<s:link id="lienConseils" includePageParams="false"
+								view="/static/conseils_#{locale.getLanguage().toString()}.xhtml"
+								value="#{messages['layout.menuNav.conseils']}" propagation="none">
+							</s:link>
+						</s:div>						
+					</h:panelGrid>
+				</ui:define>
+			</fc:menuNavigation></td></tr>
+	</table>
+
+</ui:composition>

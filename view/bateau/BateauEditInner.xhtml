@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+
+	<s:decorate id="nomFieldBateau" template="/layout/edit.xhtml">
+		<ui:define name="label">#{messages['bateau.nom']}</ui:define>
+		<h:inputText id="nomBateau" required="true" size="30" maxlength="30"
+			converter="#{majusculeConverter}" value="#{bateau.nom}">
+			<a:support event="onblur" reRender="nomFieldBateau" bypassUpdates="true" eventsQueue="bateauQueue" ignoreDupResponses="true"
+				ajaxSingle="true" />
+		</h:inputText>
+	</s:decorate>
+	<s:decorate id="marqueField" template="/layout/edit.xhtml">
+		<ui:define name="label">#{messages['bateau.marque']}</ui:define>
+		<h:inputText id="marque" required="true" size="20" maxlength="20"
+			converter="#{trimConverter}" value="#{bateau.marque}">
+			<a:support event="onblur" reRender="marqueField" bypassUpdates="true" eventsQueue="bateauQueue" ignoreDupResponses="true"
+				ajaxSingle="true" />
+		</h:inputText>
+	</s:decorate>
+
+	<s:decorate id="anneeField" template="/layout/edit.xhtml">
+		<ui:define name="label">#{messages['bateau.annee']}</ui:define>
+		<rich:inputNumberSpinner id="annee" minValue="1700" maxValue="2100"
+			inputSize="4" style="width:66px;" required="true"
+			value="#{bateau.annee}">
+			<a:support event="onblur" reRender="anneeField" bypassUpdates="true" eventsQueue="bateauQueue" ignoreDupResponses="true"
+				ajaxSingle="true" /> 
+		</rich:inputNumberSpinner>
+	</s:decorate>
+
+	<s:decorate id="tailleField" template="/layout/edit.xhtml">
+		<ui:define name="label">#{messages['bateau.taille']}</ui:define>
+		<rich:inputNumberSpinner id="taille" minValue="0" maxValue="100"
+			inputSize="3" style="width:60px;" required="true"
+			value="#{bateau.taille}">
+			<a:support event="onblur" reRender="tailleField" bypassUpdates="true" eventsQueue="bateauQueue" ignoreDupResponses="true"
+				ajaxSingle="true" />
+		</rich:inputNumberSpinner>
+		<ui:define name="type">#{messages['bateau.taille.type']}</ui:define>
+	</s:decorate>
+
+
+</ui:composition>

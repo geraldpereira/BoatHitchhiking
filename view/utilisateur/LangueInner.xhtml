@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+	<s:div id="languesUtilisateur">
+        	<fc:roundedPanel id="Xp" title="#{messages['utilisateur.langues']}" titleColor="white" imageClass="round-panel-simple">
+        	<h:outputText
+					value="#{messages['utilisateur.langue.aucuneLangue']}"
+					styleClass="messageTableVide"
+					rendered="#{empty utilisateur.langues}" />  
+				
+			<s:div rendered="#{not empty utilisateur.langues}">
+				 <rich:dataTable width="100%" value="#{utilisateur.langues}" border="0" cellpadding="0" cellspacing="0" var="_current" styleClass="noBorder" columnClasses="noBorder"  
+					rowKeyVar="_index">
+					<h:column>
+						<h:outputText id="langue#{_index}"
+						value="#{messages['langue.'.concat(_current.langue)]}" />
+					</h:column>
+					<h:column>
+						<rich:spacer width="20px" height="5px" />
+					</h:column>
+					<h:column>
+						<fc:star id="niveau#{_index}" value="#{_current.niveau}" ratingTitle="#{_current.niveau}" minValue="1" maxValue="5"/>
+					</h:column>
+				</rich:dataTable>
+			</s:div>
+			</fc:roundedPanel>
+		</s:div>
+	<div style="clear: both" />
+	<rich:spacer width="100%" height="5px" />
+</ui:composition>

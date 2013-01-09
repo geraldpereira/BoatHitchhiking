@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['utilisateur.ActivationEnvoiEmail.titre']} - #{messages['meta.title']}</title>
+	</ui:define>
+	<ui:define name="body">
+	
+		<h1>#{messages['utilisateur.ActivationEnvoiEmail.titre']}</h1>
+	
+		<rich:panel>
+		<f:facet name="header"><!-- Dummy ! --></f:facet>
+		<s:div styleClass="info">
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte1']}"/>
+		<!-- <s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte2']}"/> -->
+		<br/>
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte3']}"/>
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte4']}"/>
+		<br/>
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte5']}"/>
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte6']}"/>
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte7']}"/>
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte8']}"/>
+		<br/>
+		<s:formattedText value="#{messages['utilisateur.ActivationEnvoiEmail.texte9']}"/>
+		</s:div>
+		</rich:panel>
+	</ui:define>
+
+</ui:composition>

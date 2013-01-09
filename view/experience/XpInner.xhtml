@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+	
+		<fc:roundedPanel id="Xp" title="#{messages['utilisateur.experiences']}" titleColor="white" imageClass="round-panel-simple">
+	<s:div id="experiencesUtilisateur">
+		<h:outputText  styleClass="messageTableVide"
+				value="#{messages['experience.aucuneXP']}"
+				rendered="#{empty xpManager.xpsUtilisateur}"/> 
+	
+		<s:div rendered="#{not empty xpManager.xpsUtilisateur}">
+		<rich:dataTable value="#{xpManager.xpsUtilisateur}" border="0" var="_current" styleClass="noBorder" columnClasses="noBorder" 
+			rowKeyVar="_index">
+			<rich:column>
+				<div id="xpTogglePanel#{_index}">
+						<s:decorate id="titreField" template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['experience.titre']}</ui:define>
+					<h:outputText value="#{_current.titre}"/>
+				</s:decorate>
+				<div style="clear: both"/>
+				<h:panelGrid columns="2"  border="0" cellpadding="0" cellspacing="0" width="100%"
+					columnClasses="panelGrid-column width50,panelGrid-column width50">
+				<s:decorate id="typePosteField" template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['experience.typePoste']}</ui:define>
+					<h:outputText value="#{messages['typePoste.'.concat(_current.typePoste.name())]}"/>
+				</s:decorate>
+				<s:decorate id="typeXPField" template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['experience.typeXp']}</ui:define>
+					<h:outputText value="#{messages['typeXp.'.concat(_current.typeXp.name())]}"/>
+				</s:decorate>
+				<s:decorate id="dureeField" template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['experience.duree']}</ui:define>
+					<h:outputText value="#{_current.duree}"/>
+					<ui:define name="type">#{messages['typeDuree.'.concat(_current.typeDuree.name())]}</ui:define>
+				</s:decorate>
+				<s:decorate id="typeCoqueField" template="../layout/display.xhtml">
+					<ui:define name="label">#{messages['experience.typeCoque']}</ui:define>
+					<h:outputText value="#{messages['typeCoque.'.concat(_current.typeCoque.name())]}"/>
+				</s:decorate>
+
+				</h:panelGrid>
+				<div style="clear: both"/>
+				<s:decorate id="xpDescriptionField" template="../layout/display.xhtml" styleClass="width600">
+					<ui:define name="label">#{messages['experience.description']}</ui:define>
+					<h:outputText value="#{_current.description}" converter="#{HTMLConverter}" escape="false"/>
+				</s:decorate>
+				<div style="clear: both"/>
+				<rich:separator width="100%" height="1px" rendered="#{(xpManager.xpsUtilisateur.size() -1)!= _index}"/>
+				</div>
+			</rich:column>
+		</rich:dataTable>
+		</s:div>
+	</s:div>
+</fc:roundedPanel>
+</ui:composition>

@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+			
+	<div id="Bouton#{id}"
+			class="curseurMain toggleBouton #{shownOnLoad == 'shown'?'toggleBoutonOuvert':''} #{toggleClass}"><h:outputText
+			value="#{libelle}" /></div>
+	<rich:panel id="Panel#{id}" bodyClass="togglePanel"
+		styleClass="togglePanel">
+		<rich:spacer width="100%" height="5px"/>
+		<div id="TogglePanel#{id}"><ui:insert /></div>
+
+		<rich:jQuery selector="#Bouton#{id}"
+			query="click(function(){#{id}slide();})" />
+
+		<rich:jQuery name="#{id}slide" timing="onJScall"
+			selector="#TogglePanel#{id}"
+			query="slideToggle('slow',function(){
+			#{id}toggleImage();
+			if (jQuery(this).css('height') == 'auto'){
+				#{id}fermerToggle();				
+			}else{
+				#{id}ouvrirToggle();
+			}
+			})" />
+
+		<rich:jQuery rendered="#{!toggleBean.toggleOuvert}" timing="immediate" selector="#TogglePanel#{id}"
+			query="hide()" />
+
+		<rich:jQuery name="#{id}toggleImage" timing="#{toggleBean.toggleOuvert == true ? 'immediate': 'onJScall'}"
+			selector="#Bouton#{id}" query="toggleClass('toggleBoutonOuvert')" />
+
+		<div style="clear: left" />
+	</rich:panel>
+	<a:region>
+	<a:jsFunction ajaxSingle="true" name="#{id}ouvrirToggle"
+		action="#{toggleBean.setToggleOuvert(true)}" reRender="#{reRender}" />
+	<a:jsFunction ajaxSingle="true" name="#{id}fermerToggle"
+		action="#{toggleBean.setToggleOuvert(false)}" reRender="#{reRender}"/>
+	</a:region>
+
+	<div style="clear: both" />
+</ui:composition>
+
+

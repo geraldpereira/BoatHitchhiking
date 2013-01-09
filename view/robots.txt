@@ -1,0 +1,8 @@
+User-agent: *
+Sitemap : http://www.bateaustop.fr/sitemap.xml
+
+User-agent: *
+Disallow: *.seam
+Disallow: res.bateaustop.fr/
+Disallow: img.bateaustop.fr/
+Allow: /

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="Quelles sont les compétences requises pour se lancer dans le BateauStop." />
+		<meta name="abstract"
+			content="Quelles sont les compétences requises pour se lancer dans le BateauStop." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Les compétences requises - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Dois-je avoir de l'expérience ?</f:facet>
+			<p>Avoir une première expérience de la voile avant de s'essayer
+				au bateau-stop est un plus, mais ce n'est pas obligatoire. Bon
+				nombre de bateau-stoppeurs n'avaient aucune expérience de la voile
+				avant leur première traversée.</p>
+			<p>
+				Toutefois, il est préférable de connaître quelques notions de base
+				avant de s'engager en tant qu'équiper sur un voilier :
+				<ul>
+					<li>savoir faire ces quelques <s:link view="/static/noeuds_fr.xhtml" value="noeuds marins" propagation="none" style="margin-left:5px;"/>,</li>
+					<li>maîtriser le <s:link view="/static/lexique_fr.xhtml" value="vocabulaire propre à la voile" propagation="none" style="margin-left:5px;"/>,</li>
+					<!-- <li>comprendre les différentes manoeuvres de base, [lien]</li> -->
+					<li>être conscient de l'importance de la <s:link view="/static/securite_fr.xhtml" value="sécurité sur un
+						bateau" propagation="none" style="margin-left:5px;"/>.</li>
+				</ul>
+			</p>
+			<p>Enfin, un dernier point très important à vérifier, êtes vous
+				sujet au  <s:link view="/static/malDeMer_fr.xhtml" value="mal de mer" propagation="none" style="margin-left:5px;"/> ?</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">En quoi consiste le travail d'équipier ?</f:facet>
+			<p>Le travail d'équipier dépend de ce qu'attend le skipper. Les
+				activités à effectuer sont à discuter <b>avant</b> l'embarquement !</p>
+			<p>
+				Généralement il s'agit d'aider à la navigation et aux manoeuvres, de
+				laver le bateau de temps à autre, de faire la vaisselle, la cuisine.<br />
+				Vous pourrez être mis à contribution pour aider aux réparations,
+				pour des soucis d'informatique, ou encore pour servir de traducteur
+				dans les marinas.
+			</p>
+			<p>Au sujet des langues, de nombreux francophones parcourent les
+				mers, mais il est utile de parler Anglais, langue la plus répandue.
+				Une autre langue à maîtriser, est <s:link view="/static/lexique_fr.xhtml" value="celle particulière à la
+				voile" propagation="none" style="margin-left:5px;"/>.</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Quel tarif pour le bateau-stoppeur ?</f:facet>
+			<p>Tout comme le travail demandé, le tarif dépends du skipper.</p>
+			<p>D'une manière générale, le minimum est une participation à une
+				caisse commune pour la nourriture (environs 5€ par jour), ou à
+				défaut l'apport de sa propre nourriture et eau. Certains
+				propriétaires de bateaux ajoutent les frais de carburant et de
+				marina à la caisse de bord (soit en tout environs 25€ par jour).</p>
+			<p>Dans le cas particulier du convoyage, il est possible de
+				toucher un petit salaire, ou encore de se faire payer les frais de
+				nourriture et eau douce.</p>
+			<p>Vous l'aurez compris, beaucoup de facteurs dépendent du
+				capitaine, le tout étant à négocier avant le départ. Libre au
+				bateau-stoppeur de choisir la proposition la plus adéquate.</p>
+			<p>Gardez toutefois en tête un point important lors d'un séjours
+				en mer : le coté relationnel !</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Quelles qualités sont importantes pour trouver une embarcation ?</f:facet>
+
+			<p>Un voilier est un endroit exigu, la cohabitation entre les
+				différents membres d'équipages en donc très importante.</p>
+			<p>Ainsi le premier critère qu'un capitaine prendra en compte,
+				peut être même avant vos compétences, est votre savoir vivre et
+				votre savoir être.</p>
+			<p>Il faut donc être souriant, agréable, et surtout pouvoir
+				s'entendre pendant plusieurs jours (voir des semaines ou mois) avec
+				des inconnus, dans des conditions pas toujours agréables.</p>
+			<p>Nous vous conseillons donc de proposer un profil et des
+				 <s:link view="/recherche/DemandeList.xhtml" value="demandes d'embarquement" propagation="none" style="margin-left:5px;"/> aussi complets que possible. Mettez
+				en avant votre motivation, votre capacité d'adaptation et surtout
+				votre envie de partager et d'apprendre.</p>
+			<p>Cela est d'autant plus important que les annonces les plus
+				complètes sont mises en avant dans les résultats de recherche.</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Quels autres moyens que bateau-stop.fr ?</f:facet>
+
+			<p>Outre la publication d'annonces sur bateaustop.fr, vous
+				pourrez trouver une embarcation en vous rendant sur place. Les
+				marinas facilitent le contact et l'accès aux embarcations. Pour les
+				bateaux au mouillage, il vous faut trouver un petit zodiac (ou
+				annexe) pour aller parler aux propriétaires.</p>
+			<p>Dans le cas d'un contact direct, avoir quelque chose à montrer
+				est préférable. Comme par exemple une carte de votre voyage ou
+				encore des photos de votre périple. Cela permet d'engager la
+				discussion.</p>
+			<p>Cela est d'autant plus important que les annonces les plus
+				complètes sont mises en avant dans les résultats de recherche.</p>
+		</rich:panel>
+
+
+	</ui:define>
+
+
+
+</ui:composition>

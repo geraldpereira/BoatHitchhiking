@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+	<description>#{messages['breadcrumbs.offre.view']} #{offreView.instance.titre}</description>
+	
+	<action execute="#{offreView.wire}" on-postback="false" />
+	<action execute="#{escaleManager.wire(offreView)}" on-postback="false" />
+
+	<param name="offreNumAnnonce" value="#{offreView.offreNumAnnonce}" />
+	<param name="urlDecorator" value="#{offreView.urlDecorator}" />
+
+</page>

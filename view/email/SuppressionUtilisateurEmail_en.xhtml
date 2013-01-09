@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BoatHitchhiking - Account removal" />
+		<ui:param name="toName" value="#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom}"/>
+		<ui:param name="toMail" value="#{emailManager.utilisateur.mail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BoatHitchhiking"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="en"/>
+		<ui:define name="copy">
+			<m:bcc name="Admin" address="boathitchhiking@gmail.com" />
+		</ui:define>
+		
+		<ui:define name="body">
+			<p>#{emailManager.utilisateur.coordonnees.nom}
+			#{emailManager.utilisateur.coordonnees.prenom},</p>
+			
+			<p><b>The <span
+				style="color: #255C9D;">BoatHitchhiking</span> community says to you "So long, and thanks for all the fish"!</b></p>
+
+			<p>This email follows up on your account removal.</p>
+			
+			<p>All your personnal informations have been deleted from our database.</p>
+			
+			<p>Thanks for your participation in	the BoatHichhiking community, we hope to see you again soon,</p>
+			<p>good bye!</p>
+						
+			<p>The <a href="#{proprieteFactory.getBasePath('en')}">BoatHitchhiking</a> team.</p>
+			<f:facet name="alternative">
+#{emailManager.utilisateur.coordonnees.nom}	#{emailManager.utilisateur.coordonnees.prenom},
+			
+The BoatHitchhiking community says to you "So long, and thanks for all the fish"!
+
+This email follows up on your account removal.
+All your personnal informations have been deleted from our database.
+			
+Thanks for your participation in the BoatHichhiking community, we hope to see you again soon,
+good bye!
+						
+The BoatHitchhiking team.
+</f:facet>
+		</ui:define>
+</ui:composition>
+
+
+

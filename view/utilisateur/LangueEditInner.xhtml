@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+
+	<s:div id="languesUtilisateur">
+		<a:region>
+		<fc:roundedPanel id="Xp" title="#{messages['utilisateur.langues']}"
+			titleColor="white" imageClass="round-panel-simple">
+			<h:outputText
+				value="#{messages['utilisateur.langue.aucuneLangue']}"
+				styleClass="messageTableVide"
+				rendered="#{empty langueManager.languesUtilisateur}" />
+
+			<s:div style="width:100%;"
+				rendered="#{not empty langueManager.languesUtilisateur}">
+				<div style="float: left"><rich:dataTable
+					id="languesUtilisateurList" width="100%"
+					value="#{langueManager.languesUtilisateur}" border="0"
+					cellpadding="0" cellspacing="0" var="_current"
+					styleClass="noBorder" columnClasses="noBorder" rowKeyVar="_index">
+					<h:column>
+						<h:selectOneMenu id="langue#{_index}" value="#{_current.langue}"
+							required="true">
+							<s:selectItems value="#{langues}" var="_curLangue"
+								label="#{messages['langue.'.concat(_curLangue)]}"
+								hideNoSelectionLabel="#{messages['utilisateur.langue.selectLangue']}" />
+							<f:converter converterId="langueConverter" />
+							<a:support event="onchange" bypassUpdates="false" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+								action="#{langueManager.validerLangues()}"
+								reRender="languesMessagesField,languesLabel" ajaxSingle="true" />
+						</h:selectOneMenu>
+					</h:column>
+					<h:column>
+						<rich:spacer width="20px" height="5px" />
+					</h:column>
+					<h:column>
+						<fc:starRating id="niveau#{_index}" value="#{_current.niveau}"
+							minValue="1" maxValue="5" required="true">
+							<a:support event="onchange" bypassUpdates="false" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+								ajaxSingle="true" />
+						</fc:starRating>
+					</h:column>
+					<h:column>
+						<a:commandLink action="#{langueManager.supprimerLangue(_index)}" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+							styleClass="supprimer"
+							reRender="languesUtilisateur,languesMessagesField,languesLabel"
+							value="#{messages['bouton.supprimer']}" ajaxSingle="true" />
+					</h:column>
+				</rich:dataTable></div>
+				<div style="float: right"><a:outputPanel
+					id="languesMessagesField" ajaxRendered="true" styleClass="error">
+					<span class="error"> <h:graphicImage value="/img/error.png"
+						rendered="#{langueManager.validerLangueResultat!= null}"
+						styleClass="errors" /> <h:outputText id="languesUtilisateurMSG"
+						styleClass="errors" value="#{langueManager.validerLangueResultat}" />
+					</span>
+				</a:outputPanel></div>
+			</s:div>
+			<ui:define name="footer">
+				<a:commandLink action="#{langueManager.ajouterLangue()}" eventsQueue="utilisateurQueue" ignoreDupResponses="true"
+					styleClass="ajouter"
+					reRender="languesUtilisateur,languesMessagesField,languesLabel"
+					value="#{messages['utilisateur.langue.ajoutLangue']}"
+					ajaxSingle="true" bypassUpdates="true" />
+			</ui:define>
+		</fc:roundedPanel>
+		</a:region>
+	</s:div>
+	<div style="clear: both" />
+
+</ui:composition>

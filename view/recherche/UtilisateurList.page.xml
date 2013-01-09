@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+		      <description>#{messages['breadcrumbs.utilisateur.list']}</description>
+
+	<!-- BeginJoin obligatoire a chaque acces pour la gestion de la pagination et des resultats de recherche --><!--
+
+conversation="su"
+	<begin-conversation join="true" flush-mode="MANUAL" />
+
+	--><action execute="#{utilisateurList.setMaxResults(20)}"
+		on-postback="false" />
+	<action execute="#{utilisateurList.setPagesDisplayed(7)}"
+		on-postback="false" />
+	<action execute="#{utilisateurList.doFilterResultList()}"
+		on-postback="false" />
+
+	<param name="firstResult" value="#{utilisateurList.firstResult}" />
+	<param name="sort" value="#{utilisateurList.orderColumn}" />
+	<param name="dir" value="#{utilisateurList.orderDirection}" />
+
+	<param name="pseudonyme" value="#{utilisateurList.filters.pseudonyme}" converter="#{trimConverter}"/>
+	<param name="nom" value="#{utilisateurList.filters.nom}" converter="#{trimConverter}"/>
+	<param name="prenom" value="#{utilisateurList.filters.prenom}" converter="#{trimConverter}"/>
+	<param name="inscritFrom" value="#{utilisateurList.filters.inscritFrom}" converter="#{dateConverter}"/>
+	<param name="inscritTo" value="#{utilisateurList.filters.inscritTo}" converter="#{dateConverter}"/>
+	<param name="ageFrom" value="#{utilisateurList.filters.ageFrom}" converter="#{trimConverter}"/>
+	<param name="ageTo" value="#{utilisateurList.filters.ageTo}" converter="#{trimConverter}"/>
+	<param name="sexe" value="#{utilisateurList.filters.sexe}" converter="#{sexeConverter}"/>
+	<param name="xpGenerale" value="#{utilisateurList.filters.xpGenerale}" converter="#{xpGeneraleConverter}"/>
+	<param name="actif" value="#{utilisateurList.filters.actif}" converter="#{bsBooleanConverter}" />
+	<param name="avecPhoto" value="#{utilisateurList.filters.avecPhoto}" converter="#{bsBooleanConverter}" />
+	<param name="avecXP" value="#{utilisateurList.filters.avecXP}" converter="#{bsBooleanConverter}" />
+	<param name="avecCompetence" value="#{utilisateurList.filters.avecCompetence}" converter="#{bsBooleanConverter}" />
+	
+	<!-- WARNING : DO NOT USE pays or ville here, it causes a bug ! -->
+	<param name="paysRes" value="#{utilisateurList.filters.pays}" converter="#{paysConverter}"/>
+	<param name="villeRes" value="#{utilisateurList.filters.ville}" converter="#{trimConverter}"/>
+
+	<param name="from" />
+</page> 

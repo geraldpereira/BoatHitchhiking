@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+	
+	<ui:define name="meta">		
+		<meta name="description" content="#{messages['meta.faq.description']}"/>
+		<meta name="abstract" content="#{messages['meta.faq.abstract']}"/>
+		<meta name="robots" content="#{messages['meta.robots.follow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.faq.title']} - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="side">
+		<fc:roundedPanel id="needHelp" title="#{messages['faq.help']}"
+			titleColor="none" imageClass="round-panel-plain">
+			<s:formattedText value="#{messages['faq.help.text']}" />
+		</fc:roundedPanel>
+	</ui:define>
+	<ui:define name="body">
+		<h1>#{messages['faq.title']}</h1>
+
+		<!-- 
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['faq.general']}"/></f:facet>
+			<h:outputText styleClass="name" value="#{messages['faq.general.calendar.question']}" />
+			<s:formattedText value="#{messages['faq.general.calendar.answer']}" />
+		</rich:panel>
+		 -->
+		 
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['faq.notation']}"/></f:facet>
+			<h:outputText styleClass="name" value="#{messages['faq.notation.pourquoi.question']}" />
+			<s:formattedText value="#{messages['faq.notation.pourquoi.answer']}" />
+			<h:outputText styleClass="name" value="#{messages['faq.notation.sur.question']}" />
+			<s:formattedText value="#{messages['faq.notation.sur.answer']}" />
+			<h:outputText styleClass="name" value="#{messages['faq.notation.calcul.question']}" />
+			<s:formattedText value="#{messages['faq.notation.calcul.answer']}" />
+		</rich:panel>
+	
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['faq.msg']}"/></f:facet>
+			<s:formattedText value="#{messages['faq.msg.description']}" />
+			<h:outputText styleClass="name" value="#{messages['faq.msg.mode.question']}" />
+			<s:formattedText value="#{messages['faq.msg.mode.answer']}" />
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['faq.cal']}"/></f:facet>
+			<h:outputText styleClass="name" value="#{messages['faq.cal.mode.question']}" />
+			<s:formattedText value="#{messages['faq.cal.mode.answer']}" />
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['faq.recherche']}"/></f:facet>
+			<h:outputText styleClass="name" value="#{messages['faq.recherche.tl.question']}" />
+			<s:formattedText value="#{messages['faq.recherche.tl.answer']}" />					
+			<h:outputText styleClass="name" value="#{messages['faq.recherche.tri.question']}" />
+			<s:formattedText value="#{messages['faq.recherche.tri.answer']}" />
+			<h:outputText styleClass="name" value="#{messages['faq.recherche.critere.question']}" />
+			<s:formattedText value="#{messages['faq.recherche.critere.answer']}" />
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['faq.carte']}"/></f:facet>
+			<s:formattedText value="#{messages['faq.carte.description']}" />
+			<h:outputText styleClass="name" value="#{messages['faq.carte.accueil.question']}" />
+			<s:formattedText value="#{messages['faq.carte.accueil.answer']}" />
+		</rich:panel>
+		
+	</ui:define>
+</ui:composition>

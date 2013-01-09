@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+	<description>#{messages['breadcrumbs.demande.list']}</description>
+
+	<action execute="#{demandeList.setMaxResults(20)}" on-postback="false" />
+	<action execute="#{demandeList.setPagesDisplayed(7)}"
+		on-postback="false" />
+	<action execute="#{demandeList.doFilterResultList()}"
+		on-postback="false" />
+
+	<param name="firstResult" value="#{demandeList.firstResult}" />
+	<param name="sort" value="#{demandeList.orderColumn}" />
+	<param name="dir" value="#{demandeList.orderDirection}" />
+
+	<param name="pseudonyme" value="#{demandeList.filters.pseudonyme}"
+		converter="#{trimConverter}" />
+	<param name="titre" value="#{demandeList.filters.titre}"
+		converter="#{trimConverter}" />
+
+	<param name="dateDebutFrom" value="#{demandeList.filters.dateDebutFrom}"
+		converter="#{dateConverter}" />
+	<param name="dateDebutTo" value="#{demandeList.filters.dateDebutTo}"
+		converter="#{dateConverter}" />
+	<param name="paysDepart" value="#{demandeList.filters.paysDepart}"
+		converter="#{paysConverter}" />
+	<param name="villeDepart" value="#{demandeList.filters.villeDepart}"
+		converter="#{trimConverter}" />
+
+	<param name="dateFinFrom" value="#{demandeList.filters.dateFinFrom}"
+		converter="#{dateConverter}" />
+	<param name="dateFinTo" value="#{demandeList.filters.dateFinTo}"
+		converter="#{dateConverter}" />
+	<param name="paysArrivee" value="#{demandeList.filters.paysArrivee}"
+		converter="#{paysConverter}" />
+	<param name="villeArrivee" value="#{demandeList.filters.villeArrivee}"
+		converter="#{trimConverter}" />
+
+	<param name="typePaiement" value="#{demandeList.filters.typePaiement}"
+		converter="#{typePaiementConverter}" />
+	<param name="montantMax" value="#{demandeList.filters.montantMax}"
+		converter="#{trimConverter}" />
+
+	<param name="ageFrom" value="#{demandeList.filters.ageFrom}"
+		converter="#{trimConverter}" />
+	<param name="ageTo" value="#{demandeList.filters.ageTo}"
+		converter="#{trimConverter}" />
+	<param name="sexe" value="#{demandeList.filters.sexe}" converter="#{sexeConverter}" />
+	<param name="xpGenerale" value="#{demandeList.filters.xpGenerale}"
+		converter="#{xpGeneraleConverter}" />
+	<param name="avecPhoto" value="#{demandeList.filters.avecPhoto}"
+		converter="#{bsBooleanConverter}" />
+
+</page>

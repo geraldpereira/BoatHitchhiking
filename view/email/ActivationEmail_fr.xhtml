@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BateauStop - Informations d'enregistrement" />
+		<ui:param name="toName" value="#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom}"/>
+		<ui:param name="toMail" value="#{emailManager.utilisateur.mail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BateauStop"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="fr"/>
+		<ui:define name="copy">
+			<m:bcc name="Admin" address="boathitchhiking@gmail.com" />
+		</ui:define>
+		
+		<ui:define name="body">
+
+			<p>#{emailManager.utilisateur.coordonnees.nom}
+			#{emailManager.utilisateur.coordonnees.prenom},</p>
+			<p><b>Bienvenue dans la communaut&#233; <span
+				style="color: #255C9D;">BateauStop</span> !</b></p>
+
+			<p>Merci de vous &#234;tre enregistr&#233;. L'&#233;quipe et tous les autres membres attendent avec
+			impatience votre participation &#224; la communaut&#233; BateauStop.</p>
+			
+			<p>Ci-dessous se trouvent vos informations de compte utilisateur.
+			Merci de les conserver :</p>
+			<ul>
+				<li>Pseudonyme : #{emailManager.utilisateur.pseudonyme}</li>
+				<li>Mot de passe: <i>*encryt&#233; dans notre base de donn&#233;es*</i></li>
+			</ul>
+			<p>Vous devez activer votre compte utilisateur pour pouvoir vous connecter, et <b>pour que vos annonces soient visibles par les autres utilisateurs</b>.
+			</p>
+			<p>Pour cela, merci de cliquer sur le lien ci-dessous :</p> 
+			<p><a href="#{proprieteFactory.getBasePath('fr')}Activation/RetourCode?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;codeActivation=#{emailManager.utilisateur.getActif()}">#{proprieteFactory.getBasePath('fr')}Activation/RetourCode?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;codeActivation=#{emailManager.utilisateur.getActif()}</a></p>
+						
+			<p>Une fois connect&#233;, vous pourrez <b>compl&#233;ter votre profil</b> (avec une photo, vos comp&#233;tences et exp&#233;riences, les langues que vous parlez, etc.).
+			<br/>Vos annonces peuvent elles-aussi &#234;tre compl&#233;t&#233;es pour donner de plus amples d&#233;tails sur ce que vous attendez de vos &#233;quipiers, ou sur le type de navigations auxquelles vous souhaitez participer.
+			<br/>Gardez &#224; l'esprit que <b>plus vous donnerez de d&#233;tails</b> sur vous, vos annonces et votre bateau et <b>plus vos offres et demandes d'embarquement seront susceptibles d'int&#233;resser</b> les autres utilisateurs.
+			<br/>De plus, votre profil et vos annonces sont soumis &#224; un <b>syst&#232;me de notation</b> expliqu&#233; dans la FAQ. En les compl&#233;tant au maximum vous serez mieux not&#233; et vous apparaitrez ainsi en meilleur position dans les recherches.</p>
+			
+			<p>L'&#233;quipe <a href="#{proprieteFactory.getBasePath('fr')}">BateauStop</a>.</p>
+			
+			<f:facet name="alternative">
+#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom},
+
+Bienvenue dans la communaut&#233; BateauStop !
+
+Merci de vous &#234;tre enregistr&#233;. L'&#233;quipe et tous les autres membres attendent avec
+impatience votre participation &#224; la communaut&#233; BateauStop.
+
+Ci-dessous se trouvent vos informations :
+Pseudonyme : #{emailManager.utilisateur.pseudonyme} 
+Mot de passe: *encryt&#233; dans notre base de donn&#233;es*
+
+Vous devez activer votre compte utilisateur pour pouvoir vous connecter, et pour que vos annonces soient visibles par les autres utilisateurs.
+Pour cela, merci de cliquer sur le lien ci-dessous :
+#{proprieteFactory.getBasePath('fr')}Activation/RetourCode?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;codeActivation=#{emailManager.utilisateur.getActif()}
+
+Une fois connect&#233;, vous pourrez compl&#233;ter votre profil (avec une photo, vos comp&#233;tences et exp&#233;riences, les langues que vous parlez, etc.).
+Vos annonces peuvent elles-aussi &#234;tre compl&#233;t&#233;es pour donner de plus amples d&#233;tails sur ce que vous attendez de vos &#233;quipiers, ou sur le type de navigations auxquelles vous souhaitez participer.
+Gardez &#224; l'esprit que plus vous donnerez de d&#233;tails sur vous, vos annonces et votre bateau et plus vos offres et demandes d'embarquement seront susceptibles d'int&#233;resser les autres utilisateurs.
+			
+
+L'&#233;quipe BateauStop.
+</f:facet>
+
+		</ui:define>
+</ui:composition>
+
+
+

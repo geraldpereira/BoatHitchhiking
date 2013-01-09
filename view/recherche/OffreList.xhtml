@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="#{messages['meta.offre.recherche.description']}" />
+		<meta name="abstract"
+			content="#{messages['meta.offre.recherche.abstract']}" />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.offre.recherche.title']} -
+		#{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="side">
+		<h:form id="offreSearch" styleClass="edit">
+			<fc:roundedTogglePanel id="offreListAvance"
+				libelle="#{messages['recherche.filtre']}" titleColor="none"
+				imageClass="round-panel-plain" toggleBean="#{offreListRecherche}">
+
+				<ui:include src="AnnonceFiltresGeneraux.xhtml">
+					<ui:param name="curAnnonceList" value="#{offreList}" />
+				</ui:include>
+			</fc:roundedTogglePanel>
+
+			<fc:roundedTogglePanel id="offreListUser"
+				libelle="#{messages['offre.offrant']}" titleColor="none"
+				imageClass="round-panel-plain" toggleBean="#{offreListUtilisateur}">
+
+				<ui:include src="AnnonceFiltresUtilisateur.xhtml">
+					<ui:param name="curAnnonceList" value="#{offreList}" />
+				</ui:include>
+
+			</fc:roundedTogglePanel>
+
+			<fc:roundedTogglePanel id="offreListBateau"
+				libelle="#{messages['bateau']}" titleColor="none"
+				imageClass="round-panel-plain" toggleBean="#{offreListBateau}">
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.marque']}</ui:define>
+					<h:inputText id="marque" converter="#{trimConverter}"
+						value="#{offreList.filters.marque}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.coque']} </ui:define>
+					<h:selectOneMenu id="coqueField"
+						value="#{offreList.filters.typeCoque}">
+						<s:selectItems value="#{typeCoques}" var="_curCoque"
+							label="#{messages['typeCoque.'.concat(_curCoque.name())]}"
+							noSelectionLabel=" " />
+						<s:convertEnum />
+					</h:selectOneMenu>
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.greement']} </ui:define>
+					<h:selectOneMenu id="greement"
+						value="#{offreList.filters.greement}">
+						<s:selectItems value="#{greements}" var="_curGreement"
+							label="#{messages['greement.'.concat(_curGreement.name())]}"
+							noSelectionLabel=" " />
+						<s:convertEnum />
+					</h:selectOneMenu>
+				</s:decorate>
+				<s:decorate id="avecPhotoB" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.recherche.avecPhoto']}</ui:define>
+					<h:selectBooleanCheckbox value="#{offreList.filters.avecPhotoB}" />
+				</s:decorate>
+			</fc:roundedTogglePanel>
+
+			<div class="actionButtons"><h:commandButton id="search"
+				actionListener="#{offreList.doFilterResultList}"
+				value="#{messages['bouton.search']}"
+				action="/recherche/OffreList.xhtml" /> <s:button
+				action="#{offreList.reset}" id="reset"
+				value="#{messages['bouton.reset']}" includePageParams="false" /></div>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<h1>#{messages['offre.recherche.titre']}</h1>
+
+		<fc:bsList id="offreList"
+			labelTitre="#{messages['offre.offreList.resultat']}"
+			labelTitreCount="#{messages['offre.offreList.resultatCount']}"
+			labelNoResult="#{messages['offre.offreList.noResult']}"
+			entityList="#{offreList}" view="/recherche/OffreList.xhtml"
+			onRowClick="javascript:location.href = '..#{offreHelper.getURL(_varList)}?cid=#{conversation.id}';">
+
+			<ui:define name="listPreview">
+				<ui:include src="/annonce/preview/AnnoncePreviewList.xhtml">
+					<ui:param name="annonce" value="#{_varList}" />
+				</ui:include>
+			</ui:define>
+
+			<f:facet name="header">
+				<rich:columnGroup>
+					<rich:column rowspan="2">
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{offreList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['offre.offrant']}" />
+							<ui:param name="propertyPath"
+								value="offre.utilisateur.pseudonyme" />
+						</ui:include>
+					</rich:column>
+					<rich:column rowspan="2">
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{offreList}" />
+							<ui:param name="propertyLabel" value="#{messages['bateau']}" />
+							<ui:param name="propertyPath" value="offre.bateau.nom" />
+						</ui:include>
+					</rich:column>
+					<rich:column rowspan="2">
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{offreList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['annonce.titre']}" />
+							<ui:param name="propertyPath" value="offre.titre" />
+						</ui:include>
+					</rich:column>
+					<rich:column colspan="2">
+						<h:outputText value="#{messages['annonce.depart']}" />
+					</rich:column>
+					<rich:column colspan="2">
+						<h:outputText value="#{messages['annonce.arrivee']}" />
+					</rich:column>
+					<rich:column colspan="2">
+						<h:outputText value="#{messages['annonce.financement']}" />
+					</rich:column>
+					<rich:column breakBefore="true">
+						<s:div>
+							<ui:include src="/layout/sort.xhtml">
+								<ui:param name="entityList" value="#{offreList}" />
+								<ui:param name="propertyLabel" value="#{messages['lieu.pays']}" />
+								<ui:param name="propertyPath"
+									value="offre.lieuDepart.pays.libelle" />
+							</ui:include>
+							<rich:spacer width="5" />
+							<ui:include src="/layout/sort.xhtml">
+								<ui:param name="entityList" value="#{offreList}" />
+								<ui:param name="propertyLabel" value="#{messages['lieu.ville']}" />
+								<ui:param name="propertyPath" value="offre.lieuDepart.ville" />
+							</ui:include>
+						</s:div>
+					</rich:column>
+					<rich:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{offreList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['annonce.date']}" />
+							<ui:param name="propertyPath" value="offre.dateDebut" />
+						</ui:include>
+					</rich:column>
+					<rich:column>
+						<s:div>
+							<ui:include src="/layout/sort.xhtml">
+								<ui:param name="entityList" value="#{offreList}" />
+								<ui:param name="propertyLabel" value="#{messages['lieu.pays']}" />
+								<ui:param name="propertyPath"
+									value="offre.lieuArrivee.pays.libelle" />
+							</ui:include>
+							<rich:spacer width="5" />
+							<ui:include src="/layout/sort.xhtml">
+								<ui:param name="entityList" value="#{offreList}" />
+								<ui:param name="propertyLabel" value="#{messages['lieu.ville']}" />
+								<ui:param name="propertyPath" value="offre.lieuArrivee.ville" />
+							</ui:include>
+						</s:div>
+					</rich:column>
+					<rich:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{offreList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['annonce.date']}" />
+							<ui:param name="propertyPath" value="offre.dateFin" />
+						</ui:include>
+					</rich:column>
+					<rich:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{offreList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['annonce.modePaiement']}" />
+							<ui:param name="propertyPath"
+								value="offre.contribFin.typePaiement" />
+						</ui:include>
+					</rich:column>
+					<rich:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{offreList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['annonce.montant']}" />
+							<ui:param name="propertyPath" value="offre.contribFin.montant" />
+						</ui:include>
+					</rich:column>
+				</rich:columnGroup>
+			</f:facet>
+			<rich:column>
+				<div style="overflow: hidden; width: 70px;"><s:link
+					styleClass="tooltiped" id="tooltiped"
+					view="/utilisateur/Utilisateur.xhtml"
+					value="#{_varList.utilisateur.pseudonyme}">
+					<f:param name="utilisateurPseudonyme"
+						value="#{_varList.utilisateur.pseudonyme}" />
+				</s:link></div>
+
+				<rich:toolTip id="tooltip" for="tooltiped" showDelay="300"
+					followMouse="false" verticalOffset="-120" horizontalOffset="-10"
+					mode="ajax" style="max-width:520px;overflow:hidden;" layout="block"
+					zorder="99">
+					<ui:include src="/utilisateur/preview/UtilisateurPreview.xhtml">
+						<ui:param name="utilisateur" value="#{_varList.utilisateur}" />
+						<ui:param name="object" value="#{_varList}" />
+					</ui:include>
+				</rich:toolTip>
+			</rich:column>
+			<rich:column>
+				<div style="overflow: hidden; width: 70px;"><s:link
+					styleClass="tooltiped" id="tooltiped3" view="/bateau/Bateau.xhtml"
+					value="#{_varList.bateau.nom}">
+					<f:param name="bateauIdBateau" value="#{_varList.bateau.idBateau}" />
+				</s:link></div>
+
+				<rich:toolTip id="tooltip3" for="tooltiped3" showDelay="300"
+					followMouse="false" hideDelay="300" verticalOffset="-120"
+					horizontalOffset="-10" mode="ajax" layout="block" zorder="99">
+					<ui:include src="/bateau/preview/BateauPreview.xhtml">
+						<ui:param name="bateau" value="#{_varList.bateau}" />
+					</ui:include>
+				</rich:toolTip>
+			</rich:column>
+			<rich:column>
+				<div style="overflow: hidden; width: 80px;"><s:link
+					styleClass="tooltiped" id="tooltiped2" view="/annonce/Offre.xhtml">
+					<f:param name="offreNumAnnonce" value="#{_varList.numAnnonce}" />
+					<h:outputText converter="trimTitreConverter"
+						value="#{_varList.titre}" />
+				</s:link></div>
+
+				<rich:toolTip id="tooltip2" for="tooltiped2" showDelay="300"
+					style="max-width:520px;overflow:hidden;" followMouse="false"
+					hideDelay="300" verticalOffset="-120" horizontalOffset="-10"
+					mode="ajax" layout="block" zorder="99">
+					<ui:include src="/annonce/preview/AnnoncePreview.xhtml">
+						<ui:param name="annonce" value="#{_varList}" />
+					</ui:include>
+				</rich:toolTip>
+			</rich:column>
+			<rich:column>
+				<ui:include src="/LieuPreview.xhtml">
+					<ui:param name="lieu" value="#{_varList.lieuDepart}" />
+				</ui:include>
+			</rich:column>
+			<rich:column>
+				<h:outputText value="#{_varList.dateDebut}">
+					<s:convertDateTime dateStyle="short" type="date" />
+				</h:outputText>
+			</rich:column>
+			<rich:column>
+				<ui:include src="/LieuPreview.xhtml">
+					<ui:param name="lieu" value="#{_varList.lieuArrivee}" />
+				</ui:include>
+			</rich:column>
+			<rich:column>
+				<h:outputText value="#{_varList.dateFin}">
+					<s:convertDateTime dateStyle="short" type="date" />
+				</h:outputText>
+			</rich:column>
+			<rich:column>
+				<h:outputText
+					value="#{messages['typePaiement.'.concat(_varList.contribFin.typePaiement.name())]}" />
+			</rich:column>
+			<rich:column>
+				<h:outputText
+					value="#{_varList.contribFin.montant} #{_varList.contribFin.monnaie.libelle}" />
+			</rich:column>
+		</fc:bsList>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc">
+
+<fc:cachingSet var="_hasPhoto" value="#{bateau.getPhotosBateau() != null and not bateau.getPhotosBateau().isEmpty()}">
+<fc:cachingSet var="_hasDesc" value="#{(bateau.getInfo() != null and not bateau.getInfo().isEmpty()) or not empty bateau.voiles}">
+
+	<s:decorate template="/layout/previewPanel.xhtml">
+		<ui:param name="hasPhoto" value="#{_hasPhoto}" />
+		<ui:param name="hasDesc" value="#{_hasDesc}" />
+		<ui:param name="bodyClass" value="width590" />
+		
+		<ui:define name="titre">
+			<ui:include src="/bateau/preview/BateauPreviewHeader.xhtml" />
+		</ui:define>
+		<ui:define name="infos">
+			<ui:include src="/bateau/preview/BateauPreviewInfos.xhtml">
+				<!--
+				Si pas de photo, prendre peu de place en hauteur
+				Si pas de photo et une description, prendre peu de place en largeur
+				-->
+				<ui:param name="infosAllClass" value="#{_hasPhoto ? '' : 'smallInfos'}" />
+				<ui:param name="infosLabelClass" value="#{(not _hasPhoto and _hasDesc ) ? 'small' : ''}" />
+			</ui:include>
+		</ui:define>
+		<ui:define name="photos">
+			<ui:include src="/bateau/preview/BateauPreviewPhotos.xhtml" />
+		</ui:define>
+		<ui:define name="description">
+			<ui:include src="/bateau/preview/BateauPreviewDesc.xhtml">
+			<!--
+			Dans tous les cas, prendre peu de place en hauteur
+			Si pas de photo : prendre peu de place en largeur
+		-->
+				<ui:param name="infosAllClass" value="smallInfos" />
+				<ui:param name="infosLabelClass" value="#{ _hasPhoto ? '' : 'small'}" />
+			</ui:include>
+		</ui:define>
+	</s:decorate>
+	</fc:cachingSet>
+	</fc:cachingSet>
+
+</ui:composition>
+

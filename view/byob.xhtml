@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+	
+	<ui:define name="meta">		
+		<meta name="description" content="#{messages['meta.byob.description']}"/>
+		<meta name="abstract" content="#{messages['meta.byob.abstract']}"/>
+		<meta name="robots" content="#{messages['meta.robots.follow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.byob.title']} - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="body">
+		<h1>#{messages['byob.title']}</h1>
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['byob.equipe']}"/></f:facet>
+			<s:formattedText value="#{messages['byob.equipe.text']}" />
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['byob.site']}"/></f:facet>
+			<s:formattedText value="#{messages['byob.site.text']}" />
+		</rich:panel>
+		<!-- <rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['byob.pub']}"/></f:facet>
+			<s:formattedText value="#{messages['byob.pub.text']}" />
+		</rich:panel> -->
+		<rich:panel>
+			<f:facet name="header"><h:outputText value="#{messages['byob.contact']}"/></f:facet>
+			<s:formattedText value="#{messages['byob.contact.text']}" />
+		</rich:panel>
+	</ui:define>
+</ui:composition>

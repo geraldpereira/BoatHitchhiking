@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+
+<facelet-taglib>
+ 	<namespace>http://www.bateaustop.fr/facescomponents</namespace>
+	<tag>
+		<tag-name>inputEntier</tag-name>
+		<source>../components/inputEntier.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>togglePanel</tag-name>
+		<source>../components/togglePanel.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>loadingScreen</tag-name>
+		<source>../components/loadingScreen.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>pageSelector</tag-name>
+		<source>../components/pageSelector.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>confirmModalPanel</tag-name>
+		<source>../components/confirmModalPanel.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>boutonNavigation</tag-name>
+		<source>../components/boutonNavigation.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>menuNavigation</tag-name>
+		<source>../components/menuNavigation.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>starRating</tag-name>
+		<source>../components/starRating.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>star</tag-name>
+		<source>../components/star.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>bsList</tag-name>
+		<source>../components/bsList.xhtml</source>
+	</tag>
+	
+	<tag>
+		<tag-name>bsListEdit</tag-name>
+		<source>../components/bsListEdit.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>roundedPanel</tag-name>
+		<source>../components/roundedPanel.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>outputXXX</tag-name>
+		<source>../components/outputXXX.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>photoViewer</tag-name>
+		<source>../components/photoViewer.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>roundedTogglePanel</tag-name>
+		<source>../components/roundedTogglePanel.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>morePanel</tag-name>
+		<source>../components/morePanel.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>boutonTerminer</tag-name>
+		<source>../components/boutonTerminer.xhtml</source>
+	</tag>
+	
+    <tag>
+        <tag-name>cachingSet</tag-name>
+        <component>
+            <component-type>cachingSet</component-type>
+        </component>
+    </tag>
+</facelet-taglib>

@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:c="http://java.sun.com/jstl/core" template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="#{messages['meta.utilisateur.recherche.description']}" />
+		<meta name="abstract"
+			content="#{messages['meta.utilisateur.recherche.abstract']}" />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.utilisateur.recherche.title']} -
+		#{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="side">
+		<h:form id="utilisateurSearch" styleClass="edit">
+			<fc:roundedTogglePanel id="utilisateurListAvance"
+				libelle="#{messages['recherche.filtre']}" titleColor="none"
+				imageClass="round-panel-plain"
+				toggleBean="#{utilisateurListRecherche}">
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.pseudonyme']}</ui:define>
+					<h:inputText id="pseudonyme" converter="#{trimConverter}"
+						value="#{utilisateurList.filters.pseudonyme}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.inscrit'].concat(' ').concat(messages['global.entre'])}</ui:define>
+					<rich:calendar value="#{utilisateurList.filters.inscritFrom}"
+						datePattern="#{dateFormat.getDateFormatShort(locale)}"
+						locale="#{locale}" popup="true" showApplyButton="false" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">
+						<h:outputText value="#{messages['global.et']}"
+							style="margin-left:10px;" />
+					</ui:define>
+					<rich:calendar value="#{utilisateurList.filters.inscritTo}"
+						datePattern="#{dateFormat.getDateFormatShort(locale)}"
+						locale="#{locale}" popup="true" showApplyButton="false" />
+				</s:decorate>
+				<s:decorate id="estActif" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.recherche.actif']}</ui:define>
+					<h:selectBooleanCheckbox value="#{utilisateurList.filters.actif}" />
+				</s:decorate>
+			</fc:roundedTogglePanel>
+			<fc:roundedTogglePanel id="utilisateurListCivilite"
+				libelle="#{messages['utilisateur.recherche.civilite']}"
+				titleColor="none" imageClass="round-panel-plain"
+				toggleBean="#{utilisateurListCivilite}">
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.nom']}</ui:define>
+					<h:inputText id="nom" disabled="#{not identity.loggedIn}"
+						converter="#{trimConverter}"
+						value="#{utilisateurList.filters.nom}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.prenom']}</ui:define>
+					<h:inputText id="prenom" disabled="#{not identity.loggedIn}"
+						converter="#{trimConverter}"
+						value="#{utilisateurList.filters.prenom}" />
+				</s:decorate>
+				<ui:include src="../LieuEditInner.xhtml">
+					<ui:param name="idForm" value="utilisateurSearch" />
+					<ui:param name="id" value="utilisateurList" />
+					<ui:param name="lieuTemplate" value="/layout/display.xhtml" />
+					<ui:param name="lieuSelectionManager"
+						value="#{utilisateurList.lieuSelectionManager}" />
+				</ui:include>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.age'].concat(' ').concat(messages['global.entre'])}</ui:define>
+					<rich:inputNumberSpinner inputSize="3" minValue="0" maxValue="150"
+						style="width:60px;" value="#{utilisateurList.filters.ageFrom}"
+						converter="#{trimConverter}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">
+						<h:outputText value="#{messages['global.et']}"
+							style="margin-left:10px;" />
+					</ui:define>
+					<rich:inputNumberSpinner inputSize="3" minValue="0" maxValue="150"
+						style="width:60px;" value="#{utilisateurList.filters.ageTo}"
+						converter="#{trimConverter}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.sexe']} </ui:define>
+					<h:selectOneMenu id="sexe" value="#{utilisateurList.filters.sexe}">
+						<s:selectItems value="#{sexes}" var="_curSexe"
+							label="#{messages['sexe.'.concat(_curSexe.name())]}"
+							noSelectionLabel=" " />
+						<s:convertEnum />
+					</h:selectOneMenu>
+				</s:decorate>
+				<s:decorate id="avecPhoto" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.recherche.avecPhoto']}</ui:define>
+					<h:selectBooleanCheckbox
+						value="#{utilisateurList.filters.avecPhoto}" />
+				</s:decorate>
+
+			</fc:roundedTogglePanel>
+			<fc:roundedTogglePanel id="utilisateurListXP"
+				libelle="#{messages['utilisateur.recherche.XP']}" titleColor="none"
+				imageClass="round-panel-plain" toggleBean="#{utilisateurListXP}">
+
+				<s:decorate template="/layout/displayAide.xhtml">
+					<ui:define name="label">#{messages['utilisateur.expGenerale']} </ui:define>
+					<ui:define name="desc">#{messages['global.selectionMultiple']}</ui:define>
+					<h:selectManyListbox id="xpGenerale"
+						value="#{utilisateurList.filters.xpGenerale}">
+						<s:selectItems value="#{experiencesGenerales}"
+							var="_curXpGenerale"
+							label="#{messages['xpGenerale.'.concat(_curXpGenerale.name())]}"
+							hideNoSelectionLabel="no" />
+						<s:convertEnum />
+					</h:selectManyListbox>
+				</s:decorate>
+				<s:decorate id="avecXP" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.recherche.avecXP']}</ui:define>
+					<h:selectBooleanCheckbox value="#{utilisateurList.filters.avecXP}" />
+				</s:decorate>
+				<s:decorate id="avecCompetence" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['utilisateur.recherche.avecCompetence']}</ui:define>
+					<h:selectBooleanCheckbox
+						value="#{utilisateurList.filters.avecCompetence}" />
+				</s:decorate>
+
+			</fc:roundedTogglePanel>
+
+			<div class="actionButtons"><h:commandButton id="search"
+				actionListener="#{utilisateurList.doFilterResultList}"
+				value="#{messages['bouton.search']}"
+				action="/recherche/UtilisateurList.xhtml" /> <s:button
+				action="#{utilisateurList.reset}" id="reset"
+				value="#{messages['bouton.reset']}" includePageParams="false" /></div>
+
+		</h:form>
+	</ui:define>
+
+
+	<ui:define name="body">
+		<h1>#{messages['utilisateur.recherche.titre']}</h1>
+
+		<fc:bsList id="utilisateurList" entityList="#{utilisateurList}"
+			onRowClick="javascript:location.href = '..#{utilisateurHelper.getURL(_varList)}?rowNumber=#{_rowKeyVar}#{messages['global.etURL']}cid=#{conversation.id}';"
+			view="/recherche/UtilisateurList.xhtml">
+
+			<ui:define name="listPreview">
+				<ui:include src="/utilisateur/preview/UtilisateurPreviewList.xhtml">
+					<ui:param name="utilisateur" value="#{_varList}" />
+					<ui:param name="object" value="#{_varList}" />
+					<ui:param name="headerClass" value="smallHeader" />
+				</ui:include>
+			</ui:define>
+
+			<f:facet name="header">
+				<rich:columnGroup>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{utilisateurList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['utilisateur.pseudonyme']}" />
+							<ui:param name="propertyPath" value="utilisateur.pseudonyme" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<s:div>
+							<ui:include src="/layout/sort.xhtml">
+								<ui:param name="entityList" value="#{utilisateurList}" />
+								<ui:param name="propertyLabel"
+									value="#{messages['utilisateur.nom']}" />
+								<ui:param name="propertyPath"
+									value="utilisateur.coordonnees.nom" />
+							</ui:include>
+							<rich:spacer width="5" />
+							<ui:include src="/layout/sort.xhtml">
+								<ui:param name="entityList" value="#{utilisateurList}" />
+								<ui:param name="propertyLabel"
+									value="#{messages['utilisateur.prenom']}" />
+								<ui:param name="propertyPath"
+									value="utilisateur.coordonnees.prenom" />
+							</ui:include>
+						</s:div>
+					</h:column>
+
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{utilisateurList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['utilisateur.sexe']}" />
+							<ui:param name="propertyPath" value="utilisateur.sexe" />
+						</ui:include>
+					</h:column>
+
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{utilisateurList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['utilisateur.age']}" />
+							<ui:param name="propertyPath" value="utilisateur.dateNaissance" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<h:outputText value="#{messages['utilisateur.actif']}"
+							styleClass="actionHeader" />
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{utilisateurList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['utilisateur.dateInscription']}" />
+							<ui:param name="propertyPath" value="utilisateur.dateInscription" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{utilisateurList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['utilisateur.expGenerale']}" />
+							<ui:param name="propertyPath" value="utilisateur.xpGenerale" />
+						</ui:include>
+					</h:column>
+				</rich:columnGroup>
+			</f:facet>
+
+			<h:column>
+				<div style="overflow: hidden; width: 70px;"><s:link
+					styleClass="tooltiped" id="tooltiped"
+					view="/utilisateur/Utilisateur.xhtml" value="#{_varList.pseudonyme}">
+					<f:param name="utilisateurPseudonyme" value="#{_varList.pseudonyme}" />
+					<f:param name="rowNumber" value="#{_rowKeyVar}" />
+					<f:param name="cid" value="#{conversation.id}" />
+				</s:link></div>
+				<rich:toolTip id="tooltip" for="tooltiped" showDelay="300"
+					style="max-width:520px;overflow:hidden;" followMouse="false"
+					hideDelay="300" verticalOffset="-120" horizontalOffset="-10"
+					mode="ajax" layout="block" zorder="99">
+					<ui:include src="/utilisateur/preview/UtilisateurPreview.xhtml">
+						<ui:param name="utilisateur" value="#{_varList}" />
+						<ui:param name="object" value="#{_varList}" />
+					</ui:include>
+				</rich:toolTip>
+			</h:column>
+
+			<h:column>
+				<div style="overflow: hidden; width: 100px;"><fc:outputXXX
+					value="#{_varList.coordonnees.nom} #{_varList.coordonnees.prenom}">
+					<h:outputText
+						value="#{_varList.coordonnees.nom} #{_varList.coordonnees.prenom}" />
+				</fc:outputXXX></div>
+			</h:column>
+
+			<h:column>
+				<h:outputText
+					value="#{messages['sexe.'.concat(_varList.sexe.name())]}" />
+			</h:column>
+
+			<h:column>
+				<h:outputText value="#{_varList.dateNaissance}"
+					converter="#{ageConverter}" />
+			</h:column>
+			<h:column>
+				<h:selectBooleanCheckbox value="#{_varList.isActif()}" readonly="true"
+					disabled="true" />
+			</h:column>
+			<h:column>
+				<h:outputText value="#{_varList.dateInscription}">
+					<s:convertDateTime dateStyle="medium" type="date" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<h:outputText
+					value="#{messages['xpGenerale.'.concat(_varList.xpGenerale.name())]}" />
+			</h:column>
+		</fc:bsList>
+
+	</ui:define>
+</ui:composition>
+

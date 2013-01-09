@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+	
+	<ui:define name="meta">		
+		<meta name="description" content="#{messages['meta.presse.description']}"/>
+		<meta name="abstract" content="#{messages['meta.presse.abstract']}"/>
+		<meta name="robots" content="#{messages['meta.robots.follow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.presse.title']} - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="body">
+		<h1>#{messages['presse']}</h1>
+		<rich:panel>
+			<f:facet name="header">#{messages['presse.they']}</f:facet>
+			<ul>
+				<li>
+					<h:outputLink target="_blank" value="http://www.newswinch.com/6-salons/une-journee-aux-nauticales-la-ciotat-3776">#{messages['presse.newswinch.titre']}</h:outputLink>
+					<s:formattedText  value="#{messages['presse.newswinch.texte']}"/>
+				</li>				
+			</ul>						
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">#{messages['presse.kit']}</f:facet>
+			<h:graphicImage value="#{proprietes.get('res_url')}Banniere_en.png" width="610" />
+			<h:graphicImage value="#{proprietes.get('res_url')}Banniere_fr.png" width="610" />
+		</rich:panel>
+	</ui:define>
+</ui:composition>

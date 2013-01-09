@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd"
+	no-conversation-view-id="/annonce/DemandeList.xhtml" login-required="true">
+
+	<description>#{demandeEdit.managed ? messages['breadcrumbs.demande.edit'].concat(' ').concat(demandeEdit.instance.titre) : messages['breadcrumbs.demande.new']}</description>
+
+	<action execute="#{demandeEdit.wire}" on-postback="false" />
+	<action execute="#{demandeEdit.validerAuthorisation}" />
+
+	<param name="demandeNumAnnonce" value="#{demandeEdit.demandeNumAnnonce}" />
+	<param name="urlDecorator" value="#{demandeEdit.urlDecorator}" />
+
+	<navigation from-action="#{demandeEdit.persist}">
+		<rule if-outcome="persisted">
+			<end-conversation before-redirect="true" />
+			<redirect view-id="#{conversationUtils.getPreviousPage(viewFrom)}" />
+		</rule>
+	</navigation>
+
+	<navigation from-action="#{demandeEdit.update}">
+		<rule if-outcome="updated">
+			<end-conversation before-redirect="true" />
+			<redirect view-id="#{conversationUtils.getPreviousPage(viewFrom)}" />
+		</rule>
+	</navigation>
+
+	<navigation from-action="#{demandeEdit.remove}">
+		<rule if-outcome="removed">
+			<end-conversation before-redirect="true" />
+			<redirect view-id="/annonce/DemandeList.xhtml" />
+		</rule>
+	</navigation>
+</page>

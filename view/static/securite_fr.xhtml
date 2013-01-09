@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description" content="La sécurité et le BateauStop." />
+		<meta name="abstract" content="La sécurité en mer." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>La sécurité - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Les règles de base</f:facet>
+			<p>Le capitaine doit avoir suffisamment d'expérience pour mener
+				son embarcation à bon port.</p>
+			<p>Il est responsable non seulement de sa propre sécurité, mais
+				aussi de celle de tous les passagers du bateau.</p>
+			<p>Le plus important est d'éviter de tomber à l'eau. Gardez
+				toujours à l'esprit la règle du "Une main pour toi une main pour le
+				bateau". Si vous êtes seul sur le pont, de nuit, ou encore lorsque
+				les conditions se gâtent, tenez vous toujours au bateau. Le mieux
+				reste d'attacher son harnais aux lignes de vie ou a tout point fixe
+				de l'embarcation.</p>
+			<p>En tant que bateau-stoppeur, veillez à n'embarquer qu'a bord
+				d'un navire en bon état, muni du matériel de sécurité réglementaire
+				...</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Le matériel</f:facet>
+			<p>
+				Voici une liste non exhaustive du matériel requis pour la navigation
+				a moins de 5 milles d'un abri :
+				<ul>
+					<li>un jeu de voiles permettant de faire route,</li>
+					<li>un jeu de manoeuvres courantes complet,</li>
+					<li>un tourmentin,</li>
+					<li>un dispositif de réduction de voilure,</li>
+					<li>une gaffe,</li>
+					<li>un canot de sauvetage ainsi que deux pagaies,</li>
+					<li>un filin pour remorquage.</li>
+				</ul>
+			</p>
+
+			<p>
+				Ci dessous la liste du matériel de sécurité obligatoire :
+
+				<ul>
+					<li>une ou deux lignes de mouillage,</li>
+					<li>un miroir de signalisation,</li>
+					<li>les pavillons N et C,</li>
+					<li>une lampe étanche,</li>
+					<li>une corne de brume,</li>
+					<li>trois feux rouges automatiques à main,</li>
+					<li>une bouée de sauvetage,</li>
+					<li>un gilet de sécurité pour chaque personne embarquée,</li>
+					<li>une trousse de secours.</li>
+				</ul>
+			</p>
+
+			<p>
+				De plus, les équipements suivants sont des indispensables :
+				<ul>
+					<li>une ancre de rechange,</li>
+					<li>des cordages supplémentaires,</li>
+					<li>des filières (protection sur le pourtour du pont évitant
+						de passer par dessus bord),</li>
+					<li>des défenses ou parre-batages,</li>
+					<li>une radio VHF,</li>
+					<li>un GPS,</li>
+					<li>un harnais de sécurité, pour travailler sur le mât,</li>
+					<li>de l'eau potable et de la nourriture en quantité
+						suffisante,</li>
+					<li>une pompe de vidange de l'eau de cale.</li>
+				</ul>
+			</p>
+
+			<p>Pensez aussi à prendre de la crème solaire, des lunettes de
+				soleil, des vêtements de rechange et si possible des livres !</p>
+		</rich:panel>
+
+		<rich:panel>
+			<f:facet name="header">Et enfin ...</f:facet>
+			<p>Avant de prendre le large veillez à informer vos proches du
+				trajet que vous allez effectuer, sur quelle période et à bord de
+				quel bateau.</p>
+		</rich:panel>
+	</ui:define>
+
+
+
+
+
+
+
+
+
+
+</ui:composition>

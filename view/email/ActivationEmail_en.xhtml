@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+                
+		<ui:param name="sujet"
+			value="BoatHitchhiking - Registration Information" />
+		<ui:param name="toName" value="#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom}"/>
+		<ui:param name="toMail" value="#{emailManager.utilisateur.mail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BoatHitchhiking"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="en"/>
+		<ui:define name="copy">
+			<m:bcc name="Admin" address="boathitchhiking@gmail.com" />
+		</ui:define>
+		<ui:define name="body">
+
+			<p>#{emailManager.utilisateur.coordonnees.nom}
+			#{emailManager.utilisateur.coordonnees.prenom},</p>
+			<p><b>Welcome to the <span style="color: #255C9D;">BoatHitchhiking</span>
+			community !</b></p>
+
+			<p>Thank you for registering. The team and all the other members, look forward to your participation in
+			the BoatHitchhiking community.</p>
+			<p>Below is your account information. Please keep it for your
+			records :</p>
+			<ul>
+				<li>Username : #{emailManager.utilisateur.pseudonyme}</li>				
+				<li>Password : <i>*encrypted in our database*</i></li>
+			</ul>
+			<p>You must activate your user account to connect, and <b>so that your ads can be viewed by other users</b>.</p>
+			<p>Please click on the link below :</p> 
+			<p><a href="#{proprieteFactory.getBasePath('en')}Activation/RetourCode?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;codeActivation=#{emailManager.utilisateur.getActif()}">#{proprieteFactory.getBasePath('en')}Activation/RetourCode?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;codeActivation=#{emailManager.utilisateur.getActif()}</a></p>
+			
+			<p>Once connected, you will be able to <b>complete your profile</b> (with your picture, your skills and experience, the languages you speak, and more).
+			<br/>Your ads can also be completed to give more details about what you expect from your crew members or what kind of navigation you are hopping to.
+			<br/>Keep in mind that <b>the more details you give</b> in your profile, in yours ads or about your boat, <b>the more your boarding offers and requests will be attractive</b>.
+			<br/>Furthermore, your profile and your ads are subject to a <b>scoring system</b> explained in the FAQ. By supplementing at  maximum you'll be better rated and you will appear at better position in search pages.</p>
+			
+			<p>The <a href="#{proprieteFactory.getBasePath( 'en')}">BoatHitchhiking</a> team.</p>
+
+			<f:facet name="alternative">
+#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom},
+
+Welcome to the BoatHitchhiking community! 
+Thank you for registering. The team and all the other members, look forward to your participation in
+the BoatHitchhiking community.
+
+Below is your account information. Please keep it for your records :
+Username : #{emailManager.utilisateur.pseudonyme}
+Password : *encrypted in our database*
+
+You must activate your user account to connect, and so that your ads can be viewed by other users.
+Please click on the link below :
+#{proprieteFactory.getBasePath('en')}Activation/RetourCode?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;codeActivation=#{emailManager.utilisateur.getActif()}
+
+Once connected, you will be able to complete your profile (with your picture, your skills and experience, the languages you speak, and more).
+Your ads can also be completed to give more details about what you expect from your crew members or what kind of navigation you are hopping to.
+Keep in mind that the more details you give in your profile, in yours ads or about your boat, the more your boarding offers and requests will be attractive.
+
+The BoatHitchhiking team.
+</f:facet>
+
+		</ui:define>
+</ui:composition>
+
+
+

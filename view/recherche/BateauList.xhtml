@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="#{messages['meta.bateau.recherche.description']}" />
+		<meta name="abstract"
+			content="#{messages['meta.bateau.recherche.abstract']}" />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['meta.bateau.recherche.title']} -
+		#{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="side">
+		<h:form id="bateauSearch" styleClass="edit">
+			<fc:roundedTogglePanel id="bateauListRecherche"
+				libelle="#{messages['recherche.filtre']}" titleColor="none"
+				imageClass="round-panel-plain" toggleBean="#{bateauListRecherche}">
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.nom']}</ui:define>
+					<h:inputText id="nom" converter="#{trimConverter}"
+						value="#{bateauList.filters.nom}" />
+				</s:decorate>
+				<s:decorate id="avecPhoto" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.recherche.avecPhoto']}</ui:define>
+					<h:selectBooleanCheckbox value="#{bateauList.filters.avecPhoto}" />
+				</s:decorate>
+			</fc:roundedTogglePanel>
+			<fc:roundedTogglePanel id="bateauListModele"
+				libelle="#{messages['bateau.recherche.modele']}" titleColor="none"
+				imageClass="round-panel-plain" toggleBean="#{bateauListModele}">
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.marque']}</ui:define>
+					<h:inputText id="marque" converter="#{trimConverter}"
+						value="#{bateauList.filters.marque}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.annee'].concat(' ').concat(messages['global.entre'])}</ui:define>
+					<rich:inputNumberSpinner minValue="1700" maxValue="2100"
+						inputSize="4" style="width:66px;"
+						value="#{bateauList.filters.anneeFrom}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">
+						<h:outputText value="#{messages['global.et']}"
+							style="margin-left:10px;" />
+					</ui:define>
+					<rich:inputNumberSpinner minValue="1700" maxValue="2100"
+						inputSize="4" style="width:66px;"
+						value="#{bateauList.filters.anneeTo}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.taille'].concat(' ').concat(messages['global.entre'])}</ui:define>
+					<rich:inputNumberSpinner minValue="0" maxValue="100" inputSize="3"
+						style="width:60px;" value="#{bateauList.filters.tailleFrom}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">
+						<h:outputText value="#{messages['global.et']}"
+							style="margin-left:10px;" />
+					</ui:define>
+					<rich:inputNumberSpinner minValue="0" maxValue="100" inputSize="3"
+						style="width:60px;" value="#{bateauList.filters.tailleTo}" />
+					<ui:define name="type">#{messages['bateau.taille.type']}</ui:define>
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.coque']} </ui:define>
+					<h:selectOneMenu id="coqueField"
+						value="#{bateauList.filters.typeCoque}">
+						<s:selectItems value="#{typeCoques}" var="_curCoque"
+							label="#{messages['typeCoque.'.concat(_curCoque.name())]}"
+							noSelectionLabel=" " />
+						<s:convertEnum />
+					</h:selectOneMenu>
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.greement']} </ui:define>
+					<h:selectOneMenu id="greement"
+						value="#{bateauList.filters.greement}">
+						<s:selectItems value="#{greements}" var="_curGreement"
+							label="#{messages['greement.'.concat(_curGreement.name())]}"
+							noSelectionLabel=" " />
+						<s:convertEnum />
+					</h:selectOneMenu>
+				</s:decorate>
+			</fc:roundedTogglePanel>
+			<fc:roundedTogglePanel id="bateauListEquipement"
+				libelle="#{messages['bateau.recherche.equipement']}"
+				titleColor="none" imageClass="round-panel-plain"
+				toggleBean="#{bateauListEquipement}">
+
+				<s:decorate id="nbCabines" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.nbCabines']}</ui:define>
+					<rich:inputNumberSpinner minValue="0" maxValue="10" inputSize="2"
+						style="width:54px;" value="#{bateauList.filters.nbCabine}">
+					</rich:inputNumberSpinner>
+				</s:decorate>
+				<s:decorate id="nbDouches" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.nbDouches']}</ui:define>
+					<rich:inputNumberSpinner minValue="0" maxValue="10" inputSize="2"
+						style="width:54px;" value="#{bateauList.filters.nbSDB}">
+					</rich:inputNumberSpinner>
+				</s:decorate>
+				<s:decorate id="nbWC" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.nbWC']}</ui:define>
+					<rich:inputNumberSpinner minValue="0" maxValue="10" inputSize="2"
+						style="width:54px;" value="#{bateauList.filters.nbWC}">
+					</rich:inputNumberSpinner>
+				</s:decorate>
+				<s:decorate id="avecAnnexe" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.recherche.avecAnnexe']}</ui:define>
+					<h:selectBooleanCheckbox value="#{bateauList.filters.avecAnnexe}" />
+				</s:decorate>
+				<s:decorate id="avecEquipement" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['bateau.recherche.avecEquipement']}</ui:define>
+					<h:selectBooleanCheckbox
+						value="#{bateauList.filters.avecEquipement}" />
+				</s:decorate>
+			</fc:roundedTogglePanel>
+
+			<div class="actionButtons"><h:commandButton id="search"
+				actionListener="#{bateauList.doFilterResultList}"
+				value="#{messages['bouton.search']}"
+				action="/recherche/BateauList.xhtml" /> <s:button
+				action="#{bateauList.reset}" id="reset"
+				value="#{messages['bouton.reset']}" includePageParams="false" /></div>
+
+		</h:form>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<h1>#{messages['bateau.recherche.titre']}</h1>
+
+		<fc:bsList id="bateauList" entityList="#{bateauList}"
+			onRowClick="javascript:location.href = '..#{bateauHelper.getURL(_varList)}?cid=#{conversation.id}';"
+			view="/recherche/BateauList.xhtml">
+
+			<ui:define name="listPreview">
+				<ui:include src="/bateau/preview/BateauPreviewList.xhtml">
+					<ui:param name="bateau" value="#{_varList}" />
+					<ui:param name="headerClass" value="smallHeader" />
+				</ui:include>
+			</ui:define>
+
+			<f:facet name="header">
+				<rich:columnGroup>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.proprio']}" />
+							<ui:param name="propertyPath"
+								value="bateau.utilisateur.pseudonyme" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel" value="#{messages['bateau.nom']}" />
+							<ui:param name="propertyPath" value="bateau.nom" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.marque']}" />
+							<ui:param name="propertyPath" value="bateau.marque" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.annee']}" />
+							<ui:param name="propertyPath" value="bateau.annee" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.greement']}" />
+							<ui:param name="propertyPath" value="bateau.greement" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.coque']}" />
+							<ui:param name="propertyPath" value="bateau.typeCoque" />
+						</ui:include>
+					</h:column>
+					<h:column>
+						<ui:include src="/layout/sort.xhtml">
+							<ui:param name="entityList" value="#{bateauList}" />
+							<ui:param name="propertyLabel"
+								value="#{messages['bateau.taille']}" />
+							<ui:param name="propertyPath" value="bateau.taille" />
+						</ui:include>
+					</h:column>
+				</rich:columnGroup>
+			</f:facet>
+
+			<h:column>
+				<div style="overflow: hidden; width: 70px;"><s:link
+					styleClass="tooltiped" id="tooltiped2"
+					view="/utilisateur/Utilisateur.xhtml"
+					value="#{_varList.utilisateur.pseudonyme}">
+					<f:param name="utilisateurPseudonyme"
+						value="#{_varList.utilisateur.pseudonyme}" />
+				</s:link></div>
+				<rich:toolTip id="tooltip2" for="tooltiped2" showDelay="300"
+					followMouse="false" hideDelay="300" verticalOffset="-120"
+					horizontalOffset="-10" mode="ajax" layout="block" zorder="99"
+					style="max-width:520px;overflow:hidden;">
+					<ui:include src="/utilisateur/preview/UtilisateurPreview.xhtml">
+						<ui:param name="utilisateur" value="#{_varList.utilisateur}" />
+						<ui:param name="object" value="#{_varList}" />
+					</ui:include>
+				</rich:toolTip>
+			</h:column>
+			<h:column>
+				<div style="overflow: hidden; width: 70px;"><s:link
+					styleClass="tooltiped" id="tooltiped" view="/bateau/Bateau.xhtml"
+					value="#{_varList.nom}">
+					<f:param name="bateauIdBateau" value="#{_varList.idBateau}" />
+				</s:link></div>
+
+				<rich:toolTip id="tooltip" for="tooltiped" showDelay="300"
+					followMouse="false" hideDelay="300" verticalOffset="-120"
+					horizontalOffset="-10" mode="ajax" layout="block" zorder="99">
+					<ui:include src="/bateau/preview/BateauPreview.xhtml">
+						<ui:param name="bateau" value="#{_varList}" />
+					</ui:include>
+				</rich:toolTip>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{_varList.marque}" />
+			</h:column>
+			<h:column>
+				<h:outputText value="#{_varList.annee}" />
+			</h:column>
+			<h:column>
+				<h:outputText
+					value="#{messages['greement.'.concat(_varList.greement.name())]}" />
+			</h:column>
+			<h:column>
+				<h:outputText
+					value="#{messages['typeCoque.'.concat(_varList.typeCoque.name())]}" />
+			</h:column>
+			<h:column>
+				<h:outputText
+					value="#{_varList.taille} #{messages['bateau.taille.type']}" />
+			</h:column>
+		</fc:bsList>
+
+	</ui:define>
+
+</ui:composition>

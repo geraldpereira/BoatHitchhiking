@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="Comment éviter le mal de mer en BateauStop." />
+		<meta name="abstract"
+			content="Comment éviter le mal de mer en BateauStop." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Le mal de mer - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Comment éviter le mal de mer ?</f:facet>
+
+			<p>Pour les marins acclimatés, le mal de mer n'est pas un
+				problème. Pour tous les autres, il peut complètement gâcher un
+				séjour en mer !</p>
+
+			<p>
+				Voici une liste de conseils à suivre pour le contrer :
+				<ul>
+					<li>Soyez reposé,</li>
+					<li>Evitez l'alcool,</li>
+					<li>Evitez les nourritures riches et grasses,</li>
+					<li>Fixez l'horizon, 15 minutes ou une heure s'il le faut,
+						cela permet de retrouver ses repères,</li>
+					<li>Ayez toujours des aliments solides dans le ventre, comme
+						par exemple du pain ou des chips,</li>
+					<li>Avalez de petites quantités de boissons gazeuses,</li>
+					<li>Restez sur le pont, au grand air et surtout loin des
+						fumées d'échappement sur un bateau à moteur.</li>
+				</ul>
+			</p>
+			<p>De plus, vous pouvez consulter votre pharmacien ou votre
+				médecin pour obtenir des médicaments prévenant le mal de mer. Les
+				médicaments homéopathiques ont l'avantage de ne pas provoquer de
+				somnolence. Vous pouvez aussi essayer les bracelets d'acuponcture ou
+				le gingembre.</p>
+			<p>Si avec tout cela vous êtes tout de même sujet au mal de mer,
+				une bonne sieste le ventre plein est la meilleurs chose à faire.</p>
+			<p>En cas de vomissements essayez de le faire par dessus bord en
+				prenant garde au sens du vent !</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">Comment savoir si j'ai le mal de mer ?</f:facet>
+			<p>La seule solution pour vous éprouver : montez a bord d'un
+				petit bateau pour une journée. Vous pouvez par exemple louer une
+				embarcation ou faire fonctionner votre réseau familial ou vos
+				cercles d'amis pour trouver une âme charitable.</p>
+			<p>Nous avions pour notre part l'habitude de prendre des
+				embarcations à moteur dans le cadre de plongées sous-marines. Bien
+				que jamais sujet au mal de mer pour ces trajets bien souvent
+				mouvementés sur des bateaux sentant le gasoil, cela fut bien plus
+				compliqué lors d'une traversée de l'atlantique, une fois au large
+				sans côte visible.</p>
+			<p>Dans tous les cas, il est important d'être sincère avec votre
+				capitaine et vos futurs coéquipiers. Ne dites donc pas y être
+				insensible sans en être sûr.</p>
+
+		</rich:panel>
+
+	</ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents">
+
+		<h:panelGrid columns="2" width="100%"  border="0" cellpadding="0" cellspacing="0"
+			columnClasses="panelGrid-column,panelGrid-column">
+			<h:panelGroup>
+				<h:outputText value="#{messages['annonce.depart']}" styleClass="title"/>
+				<s:decorate id="dateDebut" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['annonce.date']}</ui:define>
+					<ui:param name="labelClass" value="small" />
+					<h:outputText value="#{annonce.dateDebut}">
+						<s:convertDateTime dateStyle="medium" type="date" />
+					</h:outputText>
+				</s:decorate>
+				<s:decorate id="lieuDepart" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['annonce.lieu']}</ui:define>
+					<ui:param name="labelClass" value="small" />
+					<ui:include src="/LieuPreview.xhtml">
+						<ui:param name="lieu" value="#{annonce.lieuDepart}" />
+					</ui:include>
+				</s:decorate>
+			</h:panelGroup>
+			<h:panelGroup>
+				<h:outputText value="#{messages['annonce.arrivee']}" styleClass="title"/>
+				<s:decorate id="dateFin" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['annonce.date']}</ui:define>
+					<ui:param name="labelClass" value="small" />
+					<h:outputText value="#{annonce.dateFin}">
+						<s:convertDateTime dateStyle="medium" type="date" />
+					</h:outputText>
+				</s:decorate>
+				<s:decorate id="lieuArrivee" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['annonce.lieu']}</ui:define>
+					<ui:param name="labelClass" value="small" />
+					<ui:include src="/LieuPreview.xhtml">
+						<ui:param name="lieu" value="#{annonce.lieuArrivee}" />
+					</ui:include>
+				</s:decorate>
+			</h:panelGroup>
+			<h:outputText value="#{messages['annonce.financement']}" styleClass="title"/>
+			<h:panelGroup/>
+			<s:decorate id="modePaiement" template="/layout/display.xhtml">
+				<ui:param name="labelClass" value="small" />
+				<ui:define name="label">#{messages['annonce.modePaiement']}</ui:define>
+				<h:outputText
+					value="#{messages['typePaiement.'.concat(annonce.contribFin.typePaiement.name())]}" />
+			</s:decorate>
+			<s:decorate id="montant" template="/layout/display.xhtml">
+				<ui:param name="labelClass" value="small" />
+				<ui:define name="label">#{messages['annonce.montant']}</ui:define>
+				<h:outputText value="#{annonce.contribFin.montant} " />
+				<ui:define name="type">
+					<h:outputText
+						value="#{messages['monnaie.'.concat(annonce.contribFin.monnaie.idMonnaie)]} (#{annonce.contribFin.monnaie.code})" />
+				</ui:define>
+			</s:decorate>
+		</h:panelGrid>
+
+</ui:composition>

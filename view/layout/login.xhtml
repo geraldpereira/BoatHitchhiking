@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:rich="http://richfaces.org/rich">
+	
+	<s:fragment rendered="#{not identity.loggedIn}">
+		<a:form id="login">
+			<rich:panel headerClass="login-header" bodyClass="login-body">
+				<f:facet name="header">
+					<s:div style="margin-left:10px;">
+						<h:outputText value="#{messages['layout.est.dejaInscrit']}" />
+						<h:commandButton  value="#{messages['bouton.login']}" style="float:right;margin-top:0;padding-top:0;" action="#{authenticator.login}" />
+					</s:div>
+				</f:facet>
+				<s:div>
+					<h:panelGrid columns="2" border="0" cellpadding="2" cellspacing="0"
+						width="100%">
+						<h:outputLabel for="username">#{messages['layout.login.identifiant']}</h:outputLabel>
+						<h:inputText id="username" value="#{credentials.username}"
+							styleClass="login-input"/>
+						
+						<h:outputLabel for="password">#{messages['layout.login.motDePasse']}</h:outputLabel>
+						<h:inputSecret id="password" value="#{credentials.password}"
+							styleClass="login-input" />
+					</h:panelGrid>
+						
+						<h:panelGrid columns="2" cellpadding="2" cellspacing="0">
+							<h:selectBooleanCheckbox id="rememberMe"
+								value="#{identity.rememberMe}" styleClass="rememberMe" />
+							<h:outputLabel for="rememberMe" style="margin-left:10px;">#{messages['layout.login.seSouvenir']}</h:outputLabel>
+						</h:panelGrid>
+						
+					<h:panelGrid columns="2" border="0" cellpadding="0" cellspacing="0" style="margin-top:10px;"
+						width="100%">
+						
+						<h:panelGroup>
+						<a:commandLink value="#{messages['layout.login.passwordOublie']}"
+							eventsQueue="forgottenPasswordQueue" ignoreDupResponses="true"
+							id="passwordOublieLien" styleClass="contact"
+							style="height:32px;"
+							onclick="afficherRecupererMDPModalPanel();">
+						</a:commandLink>
+						</h:panelGroup>
+						<h:panelGroup>
+						<s:link view="/utilisateur/compte/SEnregistrer.xhtml"
+								styleClass="key" 
+								value="#{messages['layout.login.senregistrer']}"
+								includePageParams="false" propagation="none" />
+						
+						</h:panelGroup>
+					</h:panelGrid>
+				</s:div>
+				<div style="clear:both;"/>
+				
+			</rich:panel>
+		</a:form>
+
+
+		<rich:componentControl for="recupererMDPModalPanel" operation="hide"
+			name="masquerRecupererMDPModalPanel" />
+
+		<rich:componentControl for="recupererMDPModalPanel"
+			name="afficherRecupererMDPModalPanel" operation="show" />
+
+		<fc:confirmModalPanel id="recupererMDPModalPanel" width="400">
+			<ui:define name="headerMP">
+				<h:outputText value="#{messages['utilisateur.recupMDP.titre']}" />
+			</ui:define>
+			<ui:define name="bodyMP">
+				<p>#{messages['utilisateur.recupMDP.texte1']}</p>
+				<p>#{messages['utilisateur.recupMDP.texte2']}</p>
+				<s:decorate id="recupMDPField" template="edit.xhtml">
+					<ui:define name="label">#{messages['utilisateur.recupMDP.label']}</ui:define>
+					<h:inputText id="recupMDP" required="true" redisplay="true"
+						value="#{recupMDPManager.recupMDP}">
+						<a:support event="onblur" reRender="recupMDPField,confirmer"
+							eventsQueue="forgottenPasswordQueue" ignoreDupResponses="true"
+							action="#{recupMDPManager.validerRecupMDP}" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+			</ui:define>
+			<ui:define name="actionMP">
+				<a:commandButton id="confirmer" value="Confirmer"
+					eventsQueue="forgottenPasswordQueue" ignoreDupResponses="true"
+					action="#{recupMDPManager.recupererMDP}"
+					oncomplete="#{recupMDPManager.recupMDPModalPanelAffiche == false ? 'masquerRecupererMDPModalPanel();' : 'return false;'  }" />
+			</ui:define>
+		</fc:confirmModalPanel>
+
+	</s:fragment>
+
+	<rich:panel rendered="#{identity.loggedIn}" headerClass="login-header" bodyClass="login-body">
+		<f:facet name="header">
+			<s:div>
+				<h:outputText value="#{utilisateurCourant.pseudonyme}" />
+				<s:button style="float:right;margin-top:0;padding-top:0;margin-right:15px;"
+					view="/home.xhtml" action="#{authenticator.logout}"
+					value="#{messages['layout.login.deconnexion']}" propagation="none" />
+			</s:div>
+			
+		</f:facet>
+		<!-- <h:outputText value="#{messages['layout.login.bienvenue']}," /> -->
+		<h:panelGrid columns="2" border="0" cellpadding="0" cellspacing="6"
+			width="100%">
+			<s:link styleClass="user" view="/utilisateur/UtilisateurEdit.xhtml"
+				value="#{messages['layout.login.profil']}"
+				includePageParams="false" propagation="none">
+				<f:param name="utilisateurPseudonyme"
+					value="#{utilisateurCourant.pseudonyme}" />
+			</s:link>
+			<s:link styleClass="bateau" view="/bateau/BateauList.xhtml"
+				value="#{messages['layout.login.bateaux']}"
+				includePageParams="false" propagation="none" />
+			<s:link styleClass="contact" view="/messagerie/MPList.xhtml"
+				value="#{messages['layout.login.messages']}"
+				includePageParams="false" propagation="none" />
+			<s:link styleClass="offre" view="/annonce/OffreList.xhtml"
+				value="#{messages['layout.login.offres']}" includePageParams="false"
+				propagation="none" />
+			<h:panelGroup>
+				<s:link styleClass="key" view="/Admin.xhtml" rendered="#{authenticator.isAdmin()}"
+					value="#{messages['layout.login.admin']}"
+					includePageParams="false" propagation="none">
+				</s:link>
+			</h:panelGroup>
+			<s:link styleClass="demande" view="/annonce/DemandeList.xhtml"
+				value="#{messages['layout.login.demandes']}"
+				includePageParams="false" propagation="none" />
+		</h:panelGrid>
+	</rich:panel>
+</ui:composition>

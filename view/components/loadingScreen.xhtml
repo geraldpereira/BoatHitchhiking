@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div id="#{id}loadingScreen" class="loadingScreen">
+		<div id="#{id}upper">
+			<div class="upper #{styleClass != null ? styleClass : ''}">
+				<h:outputText value="#{text}" />
+			</div>
+		</div>
+		<div id="#{id}insert" class="insert opaque">
+			<ui:insert />
+		</div>
+	</div>
+	<rich:jQuery timing="#{timing}" name="hide#{id}" selector="##{id}insert" query="removeClass('opaque');
+		jQuery('##{id}loadingScreen').css('overflow','visible');
+		jQuery('##{id}upper').hide();
+	"/>
+	
+	<rich:jQuery timing="onJScall" name="show#{id}" selector="##{id}insert" query="addClass('opaque');
+		jQuery('##{id}loadingScreen').css('overflow','hidden');
+		jQuery('##{id}upper').show();
+	"/>
+	
+</ui:composition>
+
+

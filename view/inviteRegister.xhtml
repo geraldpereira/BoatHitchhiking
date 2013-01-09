@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="robots" content="#{messages['meta.robots.noFollow']}"/>
+	</ui:define>
+	<ui:define name="title">
+		<s:fragment>
+			<title>#{messages['connexion.title']} - #{messages['meta.title']}</title>
+		</s:fragment>
+	</ui:define>
+
+	<ui:define name="side">
+		<s:fragment rendered="#{utilisateurEdit.managed}">
+			<ui:include src="/note.xhtml">
+  				<ui:param name="id" value="noteUtilisateur" />
+  				<ui:param name="note" value="#{utilisateurEdit.instance.note}" />
+  				<ui:param name="renderIndications" value="#{identity.loggedIn and utilisateurCourant.pseudonyme.equals(utilisateurEdit.instance.pseudonyme)}" />
+  				<ui:param name="indications" value="#{utilisateurHelper.getIndications(utilisateurEdit.instance)}" />
+			</ui:include>
+		</s:fragment>
+	</ui:define>
+	<ui:define name="body">
+		<h1>#{messages['connexion.title']}</h1>
+		<s:formattedText value="#{messages['connexion.text1']}"/>
+		<span style="font-weight: bold;font-size: 1.1em;">#{messages['connexion.text2']}<s:link id="lienRegister" propagation="none" view="/utilisateur/compte/SEnregistrer.xhtml" value="#{messages['connexion.text3']}"/>.</span>
+		<s:formattedText value="#{messages['connexion.text4']}"/>
+		
+	</ui:define>
+</ui:composition>
+

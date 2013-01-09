@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+
+	<!--
+
+		Configuration file for UrlRewriteFilter http://tuckey.org/urlrewrite/
+	-->
+<urlrewrite>
+
+	<!-- HOME -->
+	<rule>
+		<from>^/$</from>
+		<to>/home.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/home.seam</from>
+		<to>/</to>
+	</outbound-rule>
+	
+	<!-- HOME -->
+	<rule>
+		<from>/BYOB$</from>
+		<to>/byob.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/byob.seam</from>
+		<to>/BYOB</to>
+	</outbound-rule>
+
+	<!-- SITEMAP -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/PlanDuSite</from>
+		<to>/sitemap.seam</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/sitemap.seam</from>
+		<to>/PlanDuSite</to>
+	</outbound-rule>
+
+	<!-- FAQ -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/FoireAuxQuestions</from>
+		<to>/faq.seam</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/faq.seam</from>
+		<to>/FoireAuxQuestions</to>
+	</outbound-rule>
+
+	<!-- PRESSE -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Presse</from>
+		<to>/presse.seam</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/presse.seam</from>
+		<to>/Presse</to>
+	</outbound-rule>
+
+	<!-- ANNUAIRE -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Annuaire</from>
+		<to>/annuaire.seam</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/annuaire.seam</from>
+		<to>/Annuaire</to>
+	</outbound-rule>
+
+	<!-- CND UTILISATION (pas de condition pour celles la !) -->
+	<rule>
+		<from>/ConditionsDUtilisation</from>
+		<to>/conditionsUtilisation_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/conditionsUtilisation_fr.seam</from>
+		<to>/ConditionsDUtilisation</to>
+	</outbound-rule>
+
+	<rule>
+		<from>/TermsOfUse</from>
+		<to>/conditionsUtilisation_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/conditionsUtilisation_en.seam</from>
+		<to>/TermsOfUse</to>
+	</outbound-rule>
+
+
+	<!-- Competences requises -->
+	<rule>
+		<from>/CompetencesRequises</from>
+		<to>/static/compRequises_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/compRequises_fr.seam</from>
+		<to>/CompetencesRequises</to>
+	</outbound-rule>
+	<rule>
+		<from>/RequiredCompetences</from>
+		<to>/static/compRequises_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/compRequises_en.seam</from>
+		<to>/RequiredCompetences</to>
+	</outbound-rule>
+	
+	<!-- Dates et lieux -->
+	<rule>
+		<from>/DatesEtLieux</from>
+		<to>/static/datesEtLieux_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/datesEtLieux_fr.seam</from>
+		<to>/DatesEtLieux</to>
+	</outbound-rule>
+	<rule>
+		<from>/DatesAndPlaces</from>
+		<to>/static/datesEtLieux_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/datesEtLieux_en.seam</from>
+		<to>/DatesAndPlaces</to>
+	</outbound-rule>
+	
+	<!-- Différents types de bateaux -->
+	<rule>
+		<from>/DifferentsTypesDeBateaux</from>
+		<to>/static/diffBateaux_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/diffBateaux_fr.seam</from>
+		<to>/DifferentsTypesDeBateaux</to>
+	</outbound-rule>
+	<rule>
+		<from>/DifferentKindsOfBoats</from>
+		<to>/static/diffBateaux_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/diffBateaux_en.seam</from>
+		<to>/DifferentKindsOfBoats</to>
+	</outbound-rule>
+
+	<!-- Lexique -->
+	<rule>
+		<from>/Lexique</from>
+		<to>/static/lexique_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/lexique_fr.seam</from>
+		<to>/Lexique</to>
+	</outbound-rule>
+	<rule>
+		<from>/Glossary</from>
+		<to>/static/lexique_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/lexique_en.seam</from>
+		<to>/Glossary</to>
+	</outbound-rule>
+	
+	<!-- Mal de mer -->
+	<rule>
+		<from>/MalDeMer</from>
+		<to>/static/malDeMer_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/malDeMer_fr.seam</from>
+		<to>/MalDeMer</to>
+	</outbound-rule>
+	<rule>
+		<from>/Seasickness</from>
+		<to>/static/malDeMer_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/malDeMer_en.seam</from>
+		<to>/Seasickness</to>
+	</outbound-rule>
+	
+	<!--Noeuds -->
+	<rule>
+		<from>/NoeudsMarins</from>
+		<to>/static/noeuds_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/noeuds_fr.seam</from>
+		<to>/NoeudsMarins</to>
+	</outbound-rule>
+	<rule>
+		<from>/Knots</from>
+		<to>/static/noeuds_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/noeuds_en.seam</from>
+		<to>/Knots</to>
+	</outbound-rule>
+	
+	<!--Securité -->
+	<rule>
+		<from>/Securite</from>
+		<to>/static/securite_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/securite_fr.seam</from>
+		<to>/Securite</to>
+	</outbound-rule>
+	<rule>
+		<from>/Security</from>
+		<to>/static/securite_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/securite_en.seam</from>
+		<to>/Security</to>
+	</outbound-rule>
+	
+	<!--Trouvé -->
+	<rule>
+		<from>/UneFoisLeBateauTrouve</from>
+		<to>/static/trouve_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/trouve_fr.seam</from>
+		<to>/UneFoisLeBateauTrouve</to>
+	</outbound-rule>
+	<rule>
+		<from>/OnceTheBoatFound</from>
+		<to>/static/trouve_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/trouve_en.seam</from>
+		<to>/OnceTheBoatFound</to>
+	</outbound-rule>
+	
+	<!--Conseils -->
+	<rule>
+		<from>/Conseils</from>
+		<to>/static/conseils_fr.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/conseils_fr.seam</from>
+		<to>/Conseils</to>
+	</outbound-rule>
+	<rule>
+		<from>/Advices</from>
+		<to>/static/conseils_en.seam</to>
+	</rule>
+	<outbound-rule>
+		<from>/static/conseils_en.seam</from>
+		<to>/Advices</to>
+	</outbound-rule>
+	
+	<!--
+		******************************************** UTILISATEUR ********************************************
+	-->
+	<!-- inviteRegister -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/ConnexionRequise(.*)</from>
+		<to>/inviteRegister.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/inviteRegister.seam(.*)</from>
+		<to>/ConnexionRequise$1</to>
+	</outbound-rule>
+
+	<!-- Activation envoi mail -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Activation/EnvoyerEmail(.*)</from>
+		<to>/utilisateur/compte/ActivationEnvoiEmail.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/utilisateur/compte/ActivationEnvoiEmail.seam(.*)</from>
+		<to>/Activation/EnvoyerEmail$1</to>
+	</outbound-rule>
+
+
+	<!-- Activation retour code-->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Activation/RetourCode(.*)</from>
+		<to>/utilisateur/compte/ActivationRetourCode.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/utilisateur/compte/ActivationRetourCode.seam(.*)</from>
+		<to>/Activation/RetourCode$1</to>
+	</outbound-rule>
+
+	<!-- Modif MDP-->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/RecupererMotDePasse(.*)</from>
+		<to>/utilisateur/compte/ModificationMDP.seam?$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/utilisateur/compte/ModificationMDP.seam(.*)</from>
+		<to>/RecupererMotDePasse$1</to>
+	</outbound-rule>
+
+
+	<!-- S'Enregistrer-->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/SEnregistrer(.*)</from>
+		<to>/utilisateur/compte/SEnregistrer.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/utilisateur/compte/SEnregistrer.seam(.*)</from>
+		<to>/SEnregistrer$1</to>
+	</outbound-rule>
+
+
+	<!-- Edition utilisateur -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Utilisateur/Editer/(\w+)(?:\?)?([^/]*)</from>
+		<to>/utilisateur/UtilisateurEdit.seam\?utilisateurPseudonyme=$1&amp;$2</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/utilisateur/UtilisateurEdit.seam\?(.*)??utilisateurPseudonyme=(\w+)(?:\&amp;(.*)){1}</from>
+        <to>/Utilisateur/Editer/$2?$1$3</to>
+    </outbound-rule>
+    <outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/utilisateur/UtilisateurEdit.seam\?utilisateurPseudonyme=(\w+)</from>
+        <to>/Utilisateur/Editer/$1</to>
+    </outbound-rule>
+    
+    
+	<!-- Visualisation utilisateur -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Utilisateur/(\w+)(?:\?)?([^/]*)</from>
+		<to>/utilisateur/Utilisateur.seam\?utilisateurPseudonyme=$1&amp;$2</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/utilisateur/Utilisateur.seam\?(.*)??utilisateurPseudonyme=(\w+)(?:\&amp;(.*))?</from>
+        <to>/Utilisateur/$2?$1$3</to>
+    </outbound-rule>
+    
+    <!--
+		********************************* Messagerie ******************************************
+	-->
+	
+	<!-- Acces messagerie -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/MesMessages(.*)</from>
+		<to>/messagerie/MPList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/messagerie/MPList.seam(.*)</from>
+		<to>/MesMessages$1</to>
+	</outbound-rule>
+
+    <!-- Contact -->
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/EnvoyerMessage/(\w+)(?:\?)?([^/]*)</from>
+		<to>/messagerie/Contact.seam\?toPseudo=$1&amp;$2</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/messagerie/Contact.seam\?(.*)??toPseudo=(\w+)(?:\&amp;(.*))?</from>
+        <to>/EnvoyerMessage/$2?$1$3</to>
+    </outbound-rule>
+    
+    <!--
+		********************************* Bateau ******************************************
+	-->
+    
+    <!-- Creation bateau -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Bateau/Creer</from>
+		<to>/bateau/BateauEdit.seam</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>		
+        <from casesensitive="true">/bateau/BateauEdit.seam(\?cid=\d*)?+$</from>
+        <to>/Bateau/Creer$1</to>
+    </outbound-rule>
+    
+    <!-- Edition bateau -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Bateau/Editer/([^-]+)-([^&amp;]+)(&amp;cid=\d*)?+</from>
+		<to>/bateau/BateauEdit.seam\?bateauIdBateau=$1&amp;urlDecorator=$2$3</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/bateau/BateauEdit.seam\?bateauIdBateau=([^&amp;]+)&amp;urlDecorator=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Bateau/Editer/$1-$2?$3</to>
+    </outbound-rule>
+    <outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/bateau/BateauEdit.seam\?urlDecorator=([^&amp;]+)&amp;bateauIdBateau=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Bateau/Editer/$2-$1?$3</to>
+    </outbound-rule>
+
+	<!-- Visu bateau -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Bateau/([^-]+)-([^&amp;]+)(&amp;cid=\d*)?+</from>
+		<to>/bateau/Bateau.seam\?bateauIdBateau=$1&amp;urlDecorator=$2$3</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/bateau/Bateau.seam\?bateauIdBateau=([^&amp;]+)&amp;urlDecorator=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Bateau/$1-$2?$3</to>
+    </outbound-rule>
+    <outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/bateau/Bateau.seam\?urlDecorator=([^&amp;]+)&amp;bateauIdBateau=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Bateau/$2-$1?$3</to>
+    </outbound-rule>
+
+     
+       <!--
+		********************************* Offre ******************************************
+	-->
+    
+    <!-- Creation offre -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Offre/Creer</from>
+		<to>/annonce/OffreEdit.seam</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>		
+        <from casesensitive="true">/annonce/OffreEdit.seam(\?cid=\d*)?+$</from>
+        <to>/Offre/Creer$1</to>
+    </outbound-rule>
+    
+    
+    <!-- Edition offre -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Offre/Editer/([^-]+)-([^&amp;]+)(&amp;cid=\d*)?+</from>
+		<to>/annonce/OffreEdit.seam\?offreNumAnnonce=$1&amp;urlDecorator=$2$3</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/OffreEdit.seam\?offreNumAnnonce=([^&amp;]+)&amp;urlDecorator=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Offre/Editer/$1-$2?$3</to>
+    </outbound-rule>
+    <outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/OffreEdit.seam\?urlDecorator=([^&amp;]+)&amp;offreNumAnnonce=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Offre/Editer/$2-$1?$3</to>
+    </outbound-rule>
+
+	<!-- Visu offre -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Offre/([^-]+)-([^&amp;]+)(&amp;cid=\d*)?+</from>
+		<to>/annonce/Offre.seam\?offreNumAnnonce=$1&amp;urlDecorator=$2$3</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/Offre.seam\?offreNumAnnonce=([^&amp;]+)&amp;urlDecorator=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Offre/$1-$2?$3</to>
+    </outbound-rule>
+    <outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/Offre.seam\?urlDecorator=([^&amp;]+)&amp;offreNumAnnonce=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Offre/$2-$1?$3</to>
+    </outbound-rule>
+
+      <!--
+		********************************* Demande ******************************************
+	-->
+    
+    <!-- Creation demande -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Demande/Creer</from>
+		<to>/annonce/DemandeEdit.seam</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>		
+        <from casesensitive="true">/annonce/DemandeEdit.seam(\?cid=\d*)?+$</from>
+        <to>/Demande/Creer$1</to>
+    </outbound-rule>
+    
+    <!-- Edition demande -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Demande/Editer/([^-]+)-([^&amp;]+)(&amp;cid=\d*)?+</from>
+		<to>/annonce/DemandeEdit.seam\?demandeNumAnnonce=$1&amp;urlDecorator=$2$3</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/DemandeEdit.seam\?demandeNumAnnonce=([^&amp;]+)&amp;urlDecorator=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Demande/Editer/$1-$2?$3</to>
+    </outbound-rule>
+    <outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/DemandeEdit.seam\?urlDecorator=([^&amp;]+)&amp;demandeNumAnnonce=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Demande/Editer/$2-$1?$3</to>
+    </outbound-rule>
+
+	<!-- Visu demande -->
+    
+    <rule>
+    	<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from casesensitive="true">/Demande/([^-]+)-([^&amp;]+)(&amp;cid=\d*)?+</from>
+		<to>/annonce/Demande.seam\?demandeNumAnnonce=$1&amp;urlDecorator=$2$3</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/Demande.seam\?demandeNumAnnonce=([^&amp;]+)&amp;urlDecorator=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Demande/$1-$2?$3</to>
+    </outbound-rule>
+    <outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from casesensitive="true">/annonce/Demande.seam\?urlDecorator=([^&amp;]+)&amp;demandeNumAnnonce=([^&amp;]+)(?:&amp;(cid=\d*))?+</from>
+        <to>/Demande/$2-$1?$3</to>
+    </outbound-rule>
+
+    <!--
+		********************************* Listes ******************************************
+	-->
+    
+     <!-- Liste bateau -->
+     <rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Liste/Bateaux(.*)</from>
+		<to>/bateau/BateauList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from>/bateau/BateauList.seam(.*)</from>
+        <to>/Liste/Bateaux$1</to>
+    </outbound-rule>
+    
+    <!-- Liste demande -->
+    <rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Liste/Demandes(.*)</from>
+		<to>/annonce/DemandeList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from>/annonce/DemandeList.seam(.*)</from>
+        <to>/Liste/Demandes$1</to>
+    </outbound-rule>
+    
+    <!-- Liste offre -->
+    <rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Liste/Offres(.*)</from>
+		<to>/annonce/OffreList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from>/annonce/OffreList.seam(.*)</from>
+        <to>/Liste/Offres$1</to>
+    </outbound-rule>
+    
+    <!--
+		********************************* Recherche ******************************************
+	-->
+    <!-- Recherche bateau -->
+     <rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Recherche/Bateaux(.*)</from>
+		<to>/recherche/BateauList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from>/recherche/BateauList.seam(.*)</from>
+        <to>/Recherche/Bateaux$1</to>
+    </outbound-rule>
+    
+    <!-- Recherche demande -->
+    <rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Recherche/Demandes(.*)</from>
+		<to>/recherche/DemandeList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from>/recherche/DemandeList.seam(.*)</from>
+        <to>/Recherche/Demandes$1</to>
+    </outbound-rule>
+    
+    <!-- Recherche offre -->
+    <rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Recherche/Offres(.*)</from>
+		<to>/recherche/OffreList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from>/recherche/OffreList.seam(.*)</from>
+        <to>/Recherche/Offres$1</to>
+    </outbound-rule>
+    
+    <!-- Recherche utilisateurs -->
+	<rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+		<from>/Recherche/Utilisateurs(.*)</from>
+		<to>/recherche/UtilisateurList.seam$1</to>
+	</rule>
+	<outbound-rule>
+		<condition name="host" next="or">^.+\.bateaustop\.fr$</condition>
+		<condition name="host">^localhost$</condition>
+        <from>/recherche/UtilisateurList.seam(.*)</from>
+        <to>/Recherche/Utilisateurs$1</to>
+    </outbound-rule>
+
+	<!--
+		********************************* GOOGLE BOT ******************************************
+		Recommenter si pb
+	-->
+	<rule>
+		<condition next="and" name="user-agent">Googlebot</condition>
+		<condition type="parameter" name="cid">.+</condition>
+		<from>.*</from>
+		<set type="status">404</set>
+		<to>null</to>
+	</rule>
+
+	<rule>
+		<condition next="and" name="user-agent">Googlebot</condition>
+		<condition type="parameter" name="actionMethod">.+</condition>
+		<from>.*</from>
+		<set type="status">404</set>
+		<to>null</to>
+	</rule>
+
+	<outbound-rule>
+		<name>Strip URL Session IDs</name>
+		<condition name="user-agent">googlebot</condition>
+		<from>(.*?)(?:\;jsessionid=[^\?#]*)?(\?[^#]*)?(#.*)?</from>
+		<to>$1$2$3</to>
+	</outbound-rule>
+
+</urlrewrite>
+

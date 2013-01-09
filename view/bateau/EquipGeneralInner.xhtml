@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<div style="clear: both" />
+	<fc:togglePanel id="equipGeneral"
+		libelle="#{messages['equipGeneral']}"
+		toggleBean="#{bateauAvance}">
+
+		<h:panelGrid columns="2" style="width:100%;" border="0"
+			styleClass="noBorder" cellpadding="0" cellspacing="0"
+			columnClasses="panelGrid-column width50 noBorder,panelGrid-column width50 noBorder">
+			<h:panelGroup>
+			<s:decorate id="contenanceEauField" template="/layout/display.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.contenanceEau']}</ui:define>
+				<h:outputText id="contenanceEau" 
+					value="#{bateauView.instance.equipGeneral.contenanceEau}"/>
+				<ui:define name="type">#{messages['equipGeneral.contenanceEau.type']}</ui:define>
+			</s:decorate>
+			<s:decorate id="nbCabinesField" template="/layout/display.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.nbCabines']}</ui:define>
+				<h:outputText id="nbCabines" 
+					value="#{bateauView.instance.equipGeneral.nbCabines}"/>
+			</s:decorate>
+			<s:decorate id="nbDouchesField" template="/layout/display.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.nbDouches']}</ui:define>
+				<h:outputText id="nbDouches"
+					value="#{bateauView.instance.equipGeneral.nbDouches}"/>
+			</s:decorate>
+			<s:decorate id="nbWCField" template="/layout/display.xhtml">
+				<ui:define name="label">#{messages['equipGeneral.nbWC']}</ui:define>
+				<h:outputText id="nbWC" 
+					value="#{bateauView.instance.equipGeneral.nbWC}"/>
+			</s:decorate>
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<s:decorate id="annexeField" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.annexe']}</ui:define>
+					<h:selectBooleanCheckbox id="annexe" readonly="true" disabled="true"
+						value="#{bateauView.instance.equipGeneral.annexe}" />
+				</s:decorate>
+				<div id ="moteursDiv">
+				<s:decorate id="nbMoteursField" template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.nbMoteurs']}</ui:define>
+					<h:outputText id="nbMoteurs" 
+						value="#{bateauView.instance.equipGeneral.nbMoteurs}"/>
+				</s:decorate>
+				</div>
+				<div style="clear: both" />
+				<div id ="puissanceDiv">
+				<s:decorate id="puissanceField"
+					template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.puissance']}</ui:define>
+					<h:outputText id="puissance" 
+						value="#{bateauView.instance.equipGeneral.puissance}"/>
+					<ui:define name="type">#{messages['equipGeneral.puissance.type']}</ui:define>
+				</s:decorate> 
+				<s:decorate id="contenanceGazoilField"
+					template="/layout/display.xhtml">
+					<ui:define name="label">#{messages['equipGeneral.contenanceGazoil']}</ui:define>
+					<h:outputText id="contenanceGazoil" 
+						value="#{bateauView.instance.equipGeneral.contenanceGazoil}"/>
+					<ui:define name="type">#{messages['equipGeneral.contenanceGazoil.type']}</ui:define>
+				</s:decorate>
+				</div>
+				<rich:jQuery rendered="#{bateauView.instance.equipGeneral.nbMoteurs == null or bateauView.instance.equipGeneral.nbMoteurs == 0}" timing="immediate" selector="#puissanceDiv"
+					query="hide()" />
+
+			</h:panelGroup>
+		</h:panelGrid>
+
+		<div style="clear: both" />
+		
+		<ui:include src="/bateau/EquipementsInner.xhtml" />
+		
+		<s:decorate id="autresField" template="/layout/display.xhtml" styleClass="width600">
+			<ui:define name="label">#{messages['equipGeneral.autres']}</ui:define>
+			<h:outputText id="autres" value="#{bateauView.instance.equipGeneral.autres}" converter="#{HTMLConverter}" escape="false"/>
+		</s:decorate>
+
+	</fc:togglePanel>
+
+</ui:composition>

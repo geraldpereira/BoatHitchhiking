@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description"
+			content="Les dates et lieux de départ en BateauStop." />
+		<meta name="abstract" content="Les dates et lieux de départ en BateauStop." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Dates et lieux de départ - #{messages['meta.title']}</title>
+	</ui:define>
+	
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Où et quand chercher un bateau ?</f:facet>
+
+			<p>Ces deux questions sont les plus importantes lorsqu'il s'agit de chercher un bateau sur lequel embarquer.</p>
+			<p>En effet pour toute traversée en voilier, il faut prendre en compte la direction des courants marins et des vents dominants. Les voiliers se positionnent sur les périodes et lieux les plus favorables. Pour maximiser vos chances de trouver une embarcation, il vous faut donc être au bon endroit, au bon moment.</p>
+
+			<p>La carte suivante montre les différents lieux de passages. Pour chaque point, les destinations et périodes sont indiquées.</p>
+
+			<iframe width="615" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.fr/maps/ms?msa=0&amp;msid=213269559098686121159.0004aaa5bedc534aebcaa&amp;ie=UTF8&amp;ll=4.136827,-119.884958&amp;spn=93.767678,319.794331&amp;vpsrc=6&amp;output=embed"></iframe><br /><small>Afficher <a href="http://maps.google.fr/maps/ms?msa=0&amp;msid=213269559098686121159.0004aaa5bedc534aebcaa&amp;ie=UTF8&amp;ll=4.136827,-119.884958&amp;spn=93.767678,319.794331&amp;vpsrc=6&amp;source=embed" style="color:#0000FF;text-align:left">CrusingRoutes</a> sur une carte plus grande</small>
+		
+			<p>Pour utiliser la carte, cliquez sur un indicateur bleu. La légende vous affiche alors les destinations possibles et sur quelle période (un interval de mois).</p>
+		</rich:panel>
+		<rich:panel>
+			<f:facet name="header">Dans quel sens traverser ?</f:facet>
+			<p>La majorité des voiliers voyageant d'Est en Ouest, cette direction est préférable.<br/> L'inverse n'étant pas impossible, il vaux mieux vaut chercher à traverser l'Atlantique depuis l'Europe ou l'Afrique et le Pacifique depuis l'Amérique.</p>
+		</rich:panel>
+		
+		<rich:panel>
+			<f:facet name="header">Combien de temps prévoir pour une traversée ?</f:facet>
+			<p>Bien que cela dépende du temps passé à chaque escale, il faut compter entre2 et 3 semaines pour travers l'Atlantique et de 2 à 6 mois pour le Pacifique.</p>
+			<p>Pour information, un voilier avance en moyenne à enrirons 5 noeuds (9 Km/h). Vous pouvez donc, à partir de la distance à parcourir, estimer le temps necessaire.<br/> Pensez a prendre en compte le fait que le bateau navigue de nuit ou non.</p>
+		</rich:panel>
+		
+	</ui:define>
+
+</ui:composition>

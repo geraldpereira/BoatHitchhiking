@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	template="#{e:getTemplate()}">
+
+	<ui:define name="meta">
+		<meta name="robots" content="noindex,nofollow" />
+	</ui:define>
+	<ui:define name="title">
+		<title>#{messages['mp.title']} - #{messages['meta.title']}</title>
+	</ui:define>
+	<ui:define name="body">
+		<h1>#{messages['mp.title']}</h1>
+
+		<rich:tabPanel switchType="client" headerSpacing="5px"
+			inactiveTabClass="tabCellInactive" selectedTab="InboxTab" contentStyle="margin:0;padding:0;background-color:red;">
+			<rich:tab name="InboxTab" label="#{messages['mp.inbox']}"> 
+				<ui:include src="/messagerie/ConversationList.xhtml">
+					<ui:param name="conversationListHandler"
+						value="#{mpManager.inbox}" />
+					<ui:param name="idList" value="Inbox" />
+				</ui:include>
+			</rich:tab>
+			<rich:tab name="SentTab" label="#{messages['mp.sent']}">
+				<ui:include src="/messagerie/ConversationList.xhtml">
+					<ui:param name="conversationListHandler"
+						value="#{mpManager.sent}" />
+					<ui:param name="idList" value="Sent" />
+				</ui:include>
+			</rich:tab>
+		</rich:tabPanel>
+	</ui:define>
+</ui:composition>

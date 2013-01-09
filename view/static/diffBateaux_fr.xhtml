@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fc="http://www.bateaustop.fr/facescomponents"
+	xmlns:e="http://www.bateaustop.fr/SeamFunc"
+	xmlns:a="http://richfaces.org/a4j" template="#{e:getTemplate()}">
+
+
+	<ui:define name="meta">
+		<meta name="description" content="Les différents types de bateaux pouvant embarquer un bateau-stoppeur." />
+		<meta name="abstract" content="Les différents types de bateaux pouvant embarquer un bateau-stoppeur." />
+		<meta name="robots" content="#{messages['meta.robots.follow']}" />
+	</ui:define>
+	<ui:define name="title">
+		<title>Les différents types de bateaux - #{messages['meta.title']}</title>
+	</ui:define>
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">Sur quel type de bateau traverser ? </f:facet>
+			<p>BateauStop.fr se focalise sur un seul type de bateaux :  <s:link view="/recherche/BateauList.xhtml" value="les voiliers" propagation="none" style="margin-left:5px;"/>. En effet, ce sont les
+				embarcations les plus courantes.</p>
+			<p>Des <s:link view="/recherche/OffreList.xhtml" value="offres d’embarquement" propagation="none" style="margin-left:5px;"/> peuvent
+				être publiées dans différents contextes :</p>
+			<p>
+				- Par des plaisanciers<br /> Les plaisanciers sont souvent à la fois
+				propriétaires de bateau et skipper. Voyageant par plaisir ils font
+				régulièrement appel à des équipiers pour les aider lors des étages
+				longues ou difficiles.
+			</p>
+			<p>
+				- A l’occasion de convoyages<br /> Certains propriétaires de bateaux
+				confient à un skipper le soin de livrer leur embarcation en un lieu
+				précis. Le skipper emploie alors des équipiers pour l’aider dans sa
+				tache. Ce travail peut être rémunéré pour des équipiers qualifiés.
+
+			</p>
+			<p>
+				- Dans le cadre de charters<br /> Le charter est un bateau loué à
+				plusieurs personnes pour une période donnée (en général une
+				semaine). Ces trajets sont l’occasion de vacances pour les
+				passagers, qui profitent bien souvent des services d’un skipper et
+				d’une hôtesse. La place sur ce type d’offre est donc payante. Il est
+				toutefois possible d’être embauché pour de telles traversées (en
+				tant que serveur, cuistôt, ...)
+			</p>
+
+			<p>
+				Les autres possibilités d’embarquement sont les cargos et bateaux à
+				moteur.<br /> Les bateaux de marchandises n’offrent pas de places
+				aux bateaux stoppeurs non qualifiés. Des cabines passagers sont
+				toutefois aménagées sur certains cargos, mais coûtent environs 100€
+				par jour ! Cela n’est donc envisageable que pour de courts trajets,
+				hors des périodes / lieux propices à la navigation à la voile. Quand
+				aux bateaux à moteurs, très rares sont ceux qui effectuent de
+				longues traversées.
+			</p>
+		</rich:panel>
+
+	</ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:m="http://jboss.com/products/seam/mail"
+                template="/email/EmailTemplate.xhtml" importance="normal">
+
+		<ui:param name="sujet"
+			value="BateauStop - R&#233;initialisation de votre mot de passe" />
+		<ui:param name="toName" value="#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom}"/>
+		<ui:param name="toMail" value="#{emailManager.utilisateur.mail}"/>
+		<ui:param name="replyTo" value="noreply@bateaustop.fr"/>
+		<ui:param name="fromName" value="BateauStop"/>
+		<ui:param name="fromMail" value="noreply@bateaustop.fr"/>
+		<ui:param name="userLocale" value="fr"/>
+		<ui:define name="copy">
+			<m:bcc name="Admin" address="boathitchhiking@gmail.com" />
+		</ui:define>
+		
+		<ui:define name="body">
+
+			<p>#{emailManager.utilisateur.coordonnees.nom}
+			#{emailManager.utilisateur.coordonnees.prenom},</p>
+
+			<p>Cet email fait suite &#224; votre demande de r&#233;cup&#233;ration de compte ou de mot de passe.</p>
+			
+			<p>Votre identifiant de connexion est : <b>#{emailManager.utilisateur.pseudonyme}</b>.</p>
+			
+			<p>Votre mot de passe &#233;tant crypt&#233; dans notre base de donn&#233;e, il faut le r&#233;initialiser.</p>
+			
+			<p>Pour cela, merci de cliquer sur le lien suivant (vous serez alors redirig&#233; vers une page de saisie de votre nouveau mot de passe) :</p>
+		 
+			<p><a href="#{proprieteFactory.getBasePath('fr')}RecupererMotDePasse?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;hash=#{emailManager.getHashMail()}">#{proprieteFactory.getBasePath('fr')}RecupererMotDePasse?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;hash=#{emailManager.getHashMail()}</a></p>
+			<p>L'&#233;quipe <a href="#{proprieteFactory.getBasePath('fr')}">BateauStop</a>.</p>
+
+			<f:facet name="alternative">
+#{emailManager.utilisateur.coordonnees.nom} #{emailManager.utilisateur.coordonnees.prenom},
+
+Cet email fait suite &#224; votre demande de r&#233;cup&#233;ration de compte ou de mot de passe.
+Votre identifiant de connexion est : #{emailManager.utilisateur.pseudonyme}.
+Votre mot de passe &#233;tant crypt&#233; dans notre base de donn&#233;e, il faut le r&#233;initialiser.
+			
+Pour cela, merci de cliquer sur le lien suivant (vous serez alors redirig&#233; vers une page de saisie de votre nouveau mot de passe) :
+#{proprieteFactory.getBasePath('fr')}RecupererMotDePasse?utilisateurPseudonyme=#{emailManager.utilisateur.pseudonyme}&amp;hash=#{emailManager.getHashMail()}
+
+L'&#233;quipe BateauStop.
+</f:facet>
+
+		</ui:define>
+</ui:composition>
+
+
+
